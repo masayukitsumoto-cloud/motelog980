@@ -54,7 +54,10 @@ async function generateReview(data) {
     body: JSON.stringify({ inputs: {}, query: prompt, response_mode: 'blocking', conversation_id: '', user: 'motelog980' }),
   });
   if (!res.ok) { console.error('Dify error:', await res.text()); return null; }
-  return (await res.json()).answer?.trim() || null;
+  const answer = (await res.json()).answer || '';
+  // <think>...</think>タグを除去
+  const cleaned = answer.replace(/<think>[\s\S]*?<\/think>/g, '').trim();
+  return cleaned || null;
 }
 
 async function notifyDiscord(data, reviewText) { return; // Discord無効化
