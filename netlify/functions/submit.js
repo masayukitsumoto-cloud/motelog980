@@ -1,4 +1,5 @@
 const NOTION_TOKEN    = process.env.NOTION_TOKEN;
+const NOTION_980_DB_ID = process.env.NOTION_980_DB_ID;
 const DIFY_API_KEY    = process.env.MOTELOG980_DIFY_KEY;
 const DISCORD_WEBHOOK = process.env.MOTELOG980_DISCORD_WEBHOOK;
 
@@ -56,7 +57,7 @@ async function generateReview(data) {
   return (await res.json()).answer?.trim() || null;
 }
 
-async function notifyDiscord(data, reviewText) {
+async function notifyDiscord(data, reviewText) { return; // Discord無効化
   const stars = n => '★'.repeat(Number(n)) + '☆'.repeat(5-Number(n));
   const lines = [
     `## 🍽️ 新しい口コミが届きました！【${data.shopName}】`,
@@ -93,7 +94,8 @@ export const handler = async (event) => {
   if (!data.service || !data.atmosphere) return { statusCode: 400, headers: cors, body: JSON.stringify({ error: '必須項目不足' }) };
 
   try {
-    if (data.notionDbId) await saveToNotion(data.notionDbId, data);
+    const dbId = data.notionDbId || NOTION_980_DB_ID;
+    if (dbId) await saveToNotion(dbId, data);
     const reviewText = await generateReview(data);
     if (DISCORD_WEBHOOK) await notifyDiscord(data, reviewText);
 
