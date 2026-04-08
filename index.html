@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChatGPT×グーペ ホームページ作成ワークショップ 事前アンケート</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <style>
+        .section-bg-1 { background-color: #f8fafc; }
+        .section-bg-2 { background-color: #f1f5f9; }
+        .section-bg-3 { background-color: #f0f9ff; }
+        .section-bg-4 { background-color: #f0fdf4; }
+        .section-bg-5 { background-color: #fffbeb; }
+        .section-bg-6 { background-color: #fef2f2; }
+        .section-bg-7 { background-color: #f5f3ff; }
+        .section-bg-8 { background-color: #fdf2f8; }
+        .required::after { content: " *"; color: #ef4444; font-weight: bold; }
+        @media print {
+            body { -webkit-print-color-adjust: exact; color-adjust: exact; }
+            .no-print { display: none !important; }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans">
+    <div class="max-w-4xl mx-auto bg-white shadow-lg">
+        <!-- Header -->
+        <div class="bg-gradient-to-r from-blue-600 to-indigo-600 text-white p-8 text-center">
+            <div class="flex items-center justify-center mb-4">
+                <i class="fas fa-laptop-code text-3xl mr-3"></i>
+                <h1 class="text-3xl font-bold">ChatGPT×グーペ ホームページ作成ワークショップ</h1>
+            </div>
+            <h2 class="text-xl font-semibold">事前アンケート</h2>
+        </div>
+
+        <!-- Introduction -->
+        <div class="p-8 bg-blue-50 border-l-4 border-blue-500">
+            <div class="flex items-start">
+                <i class="fas fa-info-circle text-blue-500 text-xl mr-3 mt-1"></i>
+                <div>
+                    <p class="text-gray-700 mb-4">
+                        この度は「ChatGPTを活用したグーペで作るホームページ作成セミナー」にお申し込みいただき、誠にありがとうございます。
+                    </p>
+                    <p class="text-gray-700 mb-4">
+                        当日のワークショップをより効果的に進めるため、事前に以下のアンケートにご回答ください。<br>
+                        <strong>回答所要時間：約10~15分</strong>
+                    </p>
+                    <p class="text-gray-700">
+                        ご記入いただいた内容は、当日の実践ワークでそのまま活用いただけます。<br>
+                        準備万端で当日を迎えましょう！
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Progress Bar -->
+        <div class="bg-white p-4 border-b">
+            <div class="flex items-center justify-center space-x-2 text-sm">
+                <div class="flex items-center space-x-8">
+                    <span class="flex items-center"><span class="w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center text-xs font-bold mr-1">1</span>基本情報</span>
+                    <span class="flex items-center"><span class="w-6 h-6 bg-gray-300 text-gray-600 rounded-full flex items-center justify-center text-xs font-bold mr-1">2</span>目的・ターゲット</span>
+                    <span class="flex items-center"><span class="w-6 h-6 bg-gray-300 text-gray-600 rounded-full flex items-center justify-center text-xs font-bold mr-1">3</span>強み・特徴</span>
+                    <span class="flex items-center"><span class="w-6 h-6 bg-gray-300 text-gray-600 rounded-full flex items-center justify-center text-xs font-bold mr-1">4</span>掲載内容</span>
+                    <span class="flex items-center"><span class="w-6 h-6 bg-gray-300 text-gray-600 rounded-full flex items-center justify-center text-xs font-bold mr-1">5</span>素材準備</span>
+                    <span class="flex items-center"><span class="w-6 h-6 bg-gray-300 text-gray-600 rounded-full flex items-center justify-center text-xs font-bold mr-1">6</span>スキル・経験</span>
+                    <span class="flex items-center"><span class="w-6 h-6 bg-gray-300 text-gray-600 rounded-full flex items-center justify-center text-xs font-bold mr-1">7</span>目標・不安</span>
+                    <span class="flex items-center"><span class="w-6 h-6 bg-gray-300 text-gray-600 rounded-full flex items-center justify-center text-xs font-bold mr-1">8</span>最後に</span>
+                </div>
+            </div>
+        </div>
+
+        <form id="surveyForm" class="space-y-0">
+            <!-- Section 1: Basic Information -->
+            <div class="section-bg-1 p-8">
+                <div class="flex items-center mb-6">
+                    <div class="w-10 h-10 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold text-lg mr-4">1</div>
+                    <h3 class="text-2xl font-bold text-gray-800">基本情報</h3>
+                </div>
+                <p class="text-gray-600 mb-6">事業の基本的な情報をお教えください。</p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2 required">お名前</label>
+                        <input type="text" name="name" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="山田太郎">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2 required">事業所名(屋号)</label>
+                        <input type="text" name="business_name" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="山田商店">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2 required">業種</label>
+                        <input type="text" name="industry" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="例:飲食店、小売店、美容院、サービス業など">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2 required">所在地</label>
+                        <input type="text" name="location" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="市町村まで">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2 required">営業年数</label>
+                        <input type="text" name="years_in_business" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="〇年 / 創業年">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2 required">電話番号</label>
+                        <input type="tel" name="phone" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="000-0000-0000">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2 required">メールアドレス</label>
+                        <input type="email" name="email" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="example@email.com">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">既存のWebサイト</label>
+                        <input type="url" name="website" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="あればURL / なければ「なし」">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">SNSアカウント</label>
+                        <input type="text" name="social_media" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="Facebook/Instagram等">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 2: Purpose and Target -->
+            <div class="section-bg-2 p-8">
+                <div class="flex items-center mb-6">
+                    <div class="w-10 h-10 bg-green-600 text-white rounded-full flex items-center justify-center font-bold text-lg mr-4">2</div>
+                    <h3 class="text-2xl font-bold text-gray-800">ホームページの目的とターゲット</h3>
+                </div>
+                <p class="text-gray-600 mb-6">ホームページを作成する目的とターゲット顧客について教えてください。</p>
+
+                <div class="space-y-6">
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-3 required">ホームページを作る目的は何ですか？（複数選択可）</label>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                            <label class="flex items-center space-x-3 p-3 border border-gray-300 rounded-lg hover:bg-gray-50 cursor-pointer">
+                                <input type="checkbox" name="purpose" value="new_customers" class="text-blue-600">
+                                <span>新規顧客の獲得</span>
+                            </label>
+                            <label class="flex items-center space-x-3 p-3 border border-gray-300 rounded-lg hover:bg-gray-50 cursor-pointer">
+                                <input type="checkbox" name="purpose" value="reservations" class="text-blue-600">
+                                <span>予約・問い合わせの増加</span>
+                            </label>
+                            <label class="flex items-center space-x-3 p-3 border border-gray-300 rounded-lg hover:bg-gray-50 cursor-pointer">
+                                <input type="checkbox" name="purpose" value="awareness" class="text-blue-600">
+                                <span>サービス・商品の認知度向上</span>
+                            </label>
+                            <label class="flex items-center space-x-3 p-3 border border-gray-300 rounded-lg hover:bg-gray-50 cursor-pointer">
+                                <input type="checkbox" name="purpose" value="existing_customers" class="text-blue-600">
+                                <span>既存顧客への情報発信</span>
+                            </label>
+                            <label class="flex items-center space-x-3 p-3 border border-gray-300 rounded-lg hover:bg-gray-50 cursor-pointer">
+                                <input type="checkbox" name="purpose" value="recruitment" class="text-blue-600">
+                                <span>採用・求人</span>
+                            </label>
+                            <label class="flex items-center space-x-3 p-3 border border-gray-300 rounded-lg hover:bg-gray-50 cursor-pointer">
+                                <input type="checkbox" name="purpose" value="credibility" class="text-blue-600">
+                                <span>信頼性・信用力の向上</span>
+                            </label>
+                        </div>
+                        <div class="mt-3">
+                            <label class="flex items-center space-x-3">
+                                <input type="checkbox" name="purpose" value="other" class="text-blue-600">
+                                <span>その他：</span>
+                                <input type="text" name="purpose_other" class="flex-1 px-3 py-2 border border-gray-300 rounded focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="具体的にお書きください">
+                            </label>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2 required">ホームページで達成したい具体的なゴールを教えてください</label>
+                        <textarea name="specific_goals" required rows="4" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="例：月10件の予約増、問い合わせ月5件、新商品の認知拡大など"></textarea>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2 required">メインターゲット（想定するお客様）を教えてください</label>
+                        <div class="text-sm text-gray-600 mb-2">以下の項目について、できるだけ具体的にお答えください。</div>
+                        <textarea name="target_customers" required rows="6" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="・年齢層：（例：30~50代の女性、20代の若者など）&#10;・居住地：（例：地元の方、観光客、県内全域など）&#10;・属性：（例：ファミリー層、会社員、主婦、学生など）&#10;・ニーズ・関心事：（例：家族で気軽に食事したい、オーガニック商品を探している、など）"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 3: Business Strengths -->
+            <div class="section-bg-3 p-8">
+                <div class="flex items-center mb-6">
+                    <div class="w-10 h-10 bg-purple-600 text-white rounded-full flex items-center justify-center font-bold text-lg mr-4">3</div>
+                    <h3 class="text-2xl font-bold text-gray-800">事業の強みと特徴</h3>
+                </div>
+                <p class="text-gray-600 mb-6">あなたの事業の強みや差別化ポイントについて教えてください。</p>
+
+                <div class="space-y-6">
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-3 required">あなたの事業の強み・差別化ポイントは何ですか？（複数選択可）</label>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                            <label class="flex items-center space-x-3 p-3 border border-gray-300 rounded-lg hover:bg-gray-50 cursor-pointer">
+                                <input type="checkbox" name="strengths" value="local" class="text-purple-600">
+                                <span>地元産・地域密着</span>
+                            </label>
+                            <label class="flex items-center space-x-3 p-3 border border-gray-300 rounded-lg hover:bg-gray-50 cursor-pointer">
+                                <input type="checkbox" name="strengths" value="price" class="text-purple-600">
+                                <span>価格の安さ</span>
+                            </label>
+                            <label class="flex items-center space-x-3 p-3 border border-gray-300 rounded-lg hover:bg-gray-50 cursor-pointer">
+                                <input type="checkbox" name="strengths" value="quality" class="text-purple-600">
+                                <span>品質・技術力の高さ</span>
+                            </label>
+                            <label class="flex items-center space-x-3 p-3 border border-gray-300 rounded-lg hover:bg-gray-50 cursor-pointer">
+                                <input type="checkbox" name="strengths" value="variety" class="text-purple-600">
+                                <span>豊富な品揃え・メニュー</span>
+                            </label>
+                            <label class="flex items-center space-x-3 p-3 border border-gray-300 rounded-lg hover:bg-gray-50 cursor-pointer">
+                                <input type="checkbox" name="strengths" value="history" class="text-purple-600">
+                                <span>長年の歴史・信頼</span>
+                            </label>
+                            <label class="flex items-center space-x-3 p-3 border border-gray-300 rounded-lg hover:bg-gray-50 cursor-pointer">
+                                <input type="checkbox" name="strengths" value="service" class="text-purple-600">
+                                <span>スタッフの対応・サービス</span>
+                            </label>
+                            <label class="flex items-center space-x-3 p-3 border border-gray-300 rounded-lg hover:bg-gray-50 cursor-pointer">
+                                <input type="checkbox" name="strengths" value="unique" class="text-purple-600">
+                                <span>独自の商品・サービス</span>
+                            </label>
+                        </div>
+                        <div class="mt-3">
+                            <label class="flex items-center space-x-3">
+                                <input type="checkbox" name="strengths" value="other" class="text-purple-600">
+                                <span>その他：</span>
+                                <input type="text" name="strengths_other" class="flex-1 px-3 py-2 border border-gray-300 rounded focus:ring-2 focus:ring-purple-500 focus:border-purple-500" placeholder="具体的にお書きください">
+                            </label>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2 required">お客様に提供している価値を教えてください</label>
+                        <div class="text-sm text-gray-600 mb-2">お客様があなたの店・サービスを利用することで、どんな変化や満足を得られますか？</div>
+                        <textarea name="customer_value" required rows="4" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500" placeholder="例：家族の大切な思い出作り、時短で質の高い料理、安心して任せられる技術など"></textarea>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2 required">お客様からよく言われる褒め言葉・評価は何ですか？</label>
+                        <textarea name="customer_feedback" required rows="4" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500" placeholder="例：「新鮮でおいしい」「丁寧な対応」「アットホームな雰囲気」など"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 4: Content Preparation -->
+            <div class="section-bg-4 p-8">
+                <div class="flex items-center mb-6">
+                    <div class="w-10 h-10 bg-emerald-600 text-white rounded-full flex items-center justify-center font-bold text-lg mr-4">4</div>
+                    <h3 class="text-2xl font-bold text-gray-800">掲載内容の準備</h3>
+                </div>
+                <p class="text-gray-600 mb-6">ホームページに掲載する具体的な内容について教えてください。</p>
+
+                <div class="space-y-6">
+                    <!-- Main Products/Services -->
+                    <div class="bg-white p-6 rounded-lg border border-emerald-200">
+                        <h4 class="text-lg font-semibold text-gray-800 mb-4">主力商品・サービス</h4>
+                        <div class="space-y-4">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm font-semibold text-gray-700 mb-2 required">商品・サービス名1</label>
+                                    <input type="text" name="product1_name" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-semibold text-gray-700 mb-2 required">説明（20~30文字程度）</label>
+                                    <input type="text" name="product1_desc" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500">
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm font-semibold text-gray-700 mb-2 required">商品・サービス名2</label>
+                                    <input type="text" name="product2_name" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-semibold text-gray-700 mb-2 required">説明（20~30文字程度）</label>
+                                    <input type="text" name="product2_desc" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500">
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm font-semibold text-gray-700 mb-2 required">商品・サービス名3</label>
+                                    <input type="text" name="product3_name" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-semibold text-gray-700 mb-2 required">説明（20~30文字程度）</label>
+                                    <input type="text" name="product3_desc" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Business Information -->
+                    <div class="bg-white p-6 rounded-lg border border-emerald-200">
+                        <h4 class="text-lg font-semibold text-gray-800 mb-4">営業情報</h4>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-700 mb-2 required">営業時間</label>
+                                <input type="text" name="business_hours" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500" placeholder="9:00-18:00">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-700 mb-2 required">定休日</label>
+                                <input type="text" name="closed_days" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500" placeholder="毎週水曜日">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-700 mb-2 required">駐車場</label>
+                                <input type="text" name="parking" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500" placeholder="有無・台数">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-700 mb-2 required">支払い方法</label>
+                                <input type="text" name="payment_methods" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500" placeholder="現金・カード・電子マネー等">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-3 required">予約の可否</label>
+                        <div class="space-y-2">
+                            <label class="flex items-center space-x-3">
+                                <input type="radio" name="reservation_policy" value="required" class="text-emerald-600">
+                                <span>予約制</span>
+                            </label>
+                            <label class="flex items-center space-x-3">
+                                <input type="radio" name="reservation_policy" value="preferred" class="text-emerald-600">
+                                <span>予約優先</span>
+                            </label>
+                            <label class="flex items-center space-x-3">
+                                <input type="radio" name="reservation_policy" value="not_required" class="text-emerald-600">
+                                <span>予約不要</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2 required">お客様からよく聞かれる質問を3~5個挙げてください</label>
+                        <textarea name="faq" required rows="5" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500" placeholder="例：「駐車場はありますか？」「予約は必要ですか？」「キャッシュレス決済は使えますか？」"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 5: Material Preparation -->
+            <div class="section-bg-5 p-8">
+                <div class="flex items-center mb-6">
+                    <div class="w-10 h-10 bg-yellow-600 text-white rounded-full flex items-center justify-center font-bold text-lg mr-4">5</div>
+                    <h3 class="text-2xl font-bold text-gray-800">素材の準備状況</h3>
+                </div>
+                <p class="text-gray-600 mb-6">ホームページで使用する写真やロゴなどの素材について教えてください。</p>
+
+                <div class="space-y-6">
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-3 required">使用できる写真素材はありますか？（複数選択可）</label>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                            <label class="flex items-center space-x-3 p-3 border border-gray-300 rounded-lg hover:bg-gray-50 cursor-pointer">
+                                <input type="checkbox" name="photo_materials" value="exterior" class="text-yellow-600">
+                                <span>店舗外観の写真</span>
+                            </label>
+                            <label class="flex items-center space-x-3 p-3 border border-gray-300 rounded-lg hover:bg-gray-50 cursor-pointer">
+                                <input type="checkbox" name="photo_materials" value="interior" class="text-yellow-600">
+                                <span>店内・施設内の写真</span>
+                            </label>
+                            <label class="flex items-center space-x-3 p-3 border border-gray-300 rounded-lg hover:bg-gray-50 cursor-pointer">
+                                <input type="checkbox" name="photo_materials" value="products" class="text-yellow-600">
+                                <span>商品・料理の写真</span>
+                            </label>
+                            <label class="flex items-center space-x-3 p-3 border border-gray-300 rounded-lg hover:bg-gray-50 cursor-pointer">
+                                <input type="checkbox" name="photo_materials" value="staff" class="text-yellow-600">
+                                <span>スタッフの写真</span>
+                            </label>
+                            <label class="flex items-center space-x-3 p-3 border border-gray-300 rounded-lg hover:bg-gray-50 cursor-pointer">
+                                <input type="checkbox" name="photo_materials" value="none" class="text-yellow-600">
+                                <span>まだ用意できていない</span>
+                            </label>
+                        </div>
+                        <div class="mt-3">
+                            <label class="flex items-center space-x-3">
+                                <input type="checkbox" name="photo_materials" value="other" class="text-yellow-600">
+                                <span>その他：</span>
+                                <input type="text" name="photo_materials_other" class="flex-1 px-3 py-2 border border-gray-300 rounded focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500" placeholder="具体的にお書きください">
+                            </label>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-3 required">ロゴはありますか？</label>
+                        <div class="space-y-2">
+                            <label class="flex items-center space-x-3">
+                                <input type="radio" name="has_logo" value="yes" class="text-yellow-600">
+                                <span>ある</span>
+                            </label>
+                            <label class="flex items-center space-x-3">
+                                <input type="radio" name="has_logo" value="no" class="text-yellow-600">
+                                <span>ない</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">イメージカラー（ブランドカラー）</label>
+                        <input type="text" name="brand_color" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500" placeholder="例：赤、青、ベージュなど">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 6: Skills & Experience -->
+            <div class="section-bg-6 p-8">
+                <div class="flex items-center mb-6">
+                    <div class="w-10 h-10 bg-red-600 text-white rounded-full flex items-center justify-center font-bold text-lg mr-4">6</div>
+                    <h3 class="text-2xl font-bold text-gray-800">スキル・経験</h3>
+                </div>
+                <p class="text-gray-600 mb-6">ChatGPTやホームページ作成に関する経験について教えてください。</p>
+
+                <div class="space-y-6">
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-3 required">ChatGPTの使用経験はありますか？</label>
+                        <div class="space-y-2">
+                            <label class="flex items-center space-x-3">
+                                <input type="radio" name="chatgpt_experience" value="regular" class="text-red-600">
+                                <span>使ったことがある（日常的に使っている）</span>
+                            </label>
+                            <label class="flex items-center space-x-3">
+                                <input type="radio" name="chatgpt_experience" value="tried" class="text-red-600">
+                                <span>試したことがある程度</span>
+                            </label>
+                            <label class="flex items-center space-x-3">
+                                <input type="radio" name="chatgpt_experience" value="heard" class="text-red-600">
+                                <span>聞いたことはあるが使ったことはない</span>
+                            </label>
+                            <label class="flex items-center space-x-3">
+                                <input type="radio" name="chatgpt_experience" value="none" class="text-red-600">
+                                <span>全く知らない</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-3 required">ホームページ作成・更新の経験はありますか？</label>
+                        <div class="space-y-2">
+                            <label class="flex items-center space-x-3">
+                                <input type="radio" name="website_experience" value="created" class="text-red-600">
+                                <span>自分で作ったことがある</span>
+                            </label>
+                            <label class="flex items-center space-x-3">
+                                <input type="radio" name="website_experience" value="outsourced" class="text-red-600">
+                                <span>業者に依頼したことがある</span>
+                            </label>
+                            <label class="flex items-center space-x-3">
+                                <input type="radio" name="website_experience" value="updates_only" class="text-red-600">
+                                <span>更新のみ経験あり</span>
+                            </label>
+                            <label class="flex items-center space-x-3">
+                                <input type="radio" name="website_experience" value="none" class="text-red-600">
+                                <span>全くない</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-3 required">グーペの利用状況</label>
+                        <div class="space-y-2">
+                            <label class="flex items-center space-x-3">
+                                <input type="radio" name="goope_status" value="has_account" class="text-red-600">
+                                <span>すでにアカウントを持っている</span>
+                            </label>
+                            <label class="flex items-center space-x-3">
+                                <input type="radio" name="goope_status" value="planning" class="text-red-600">
+                                <span>これから作成予定</span>
+                            </label>
+                            <label class="flex items-center space-x-3">
+                                <input type="radio" name="goope_status" value="applied_chamber" class="text-red-600">
+                                <span>商工会に申込済み</span>
+                            </label>
+                            <label class="flex items-center space-x-3">
+                                <input type="radio" name="goope_status" value="not_started" class="text-red-600">
+                                <span>まだ何もしていない</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 7: Goals & Concerns -->
+            <div class="section-bg-7 p-8">
+                <div class="flex items-center mb-6">
+                    <div class="w-10 h-10 bg-indigo-600 text-white rounded-full flex items-center justify-center font-bold text-lg mr-4">7</div>
+                    <h3 class="text-2xl font-bold text-gray-800">当日の目標・不安なこと</h3>
+                </div>
+                <p class="text-gray-600 mb-6">ワークショップで学びたいことや不安に感じていることについて教えてください。</p>
+
+                <div class="space-y-6">
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-3 required">当日のワークショップで特に知りたいこと・学びたいことは何ですか？（複数選択可）</label>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                            <label class="flex items-center space-x-3 p-3 border border-gray-300 rounded-lg hover:bg-gray-50 cursor-pointer">
+                                <input type="checkbox" name="learning_goals" value="chatgpt_usage" class="text-indigo-600">
+                                <span>ChatGPTの効果的な使い方</span>
+                            </label>
+                            <label class="flex items-center space-x-3 p-3 border border-gray-300 rounded-lg hover:bg-gray-50 cursor-pointer">
+                                <input type="checkbox" name="learning_goals" value="copywriting" class="text-indigo-600">
+                                <span>キャッチコピーの作り方</span>
+                            </label>
+                            <label class="flex items-center space-x-3 p-3 border border-gray-300 rounded-lg hover:bg-gray-50 cursor-pointer">
+                                <input type="checkbox" name="learning_goals" value="photo_selection" class="text-indigo-600">
+                                <span>写真の選び方・配置方法</span>
+                            </label>
+                            <label class="flex items-center space-x-3 p-3 border border-gray-300 rounded-lg hover:bg-gray-50 cursor-pointer">
+                                <input type="checkbox" name="learning_goals" value="mobile_optimization" class="text-indigo-600">
+                                <span>スマホ対応の作り方</span>
+                            </label>
+                            <label class="flex items-center space-x-3 p-3 border border-gray-300 rounded-lg hover:bg-gray-50 cursor-pointer">
+                                <input type="checkbox" name="learning_goals" value="seo_basics" class="text-indigo-600">
+                                <span>SEO対策の基本</span>
+                            </label>
+                            <label class="flex items-center space-x-3 p-3 border border-gray-300 rounded-lg hover:bg-gray-50 cursor-pointer">
+                                <input type="checkbox" name="learning_goals" value="operation_tips" class="text-indigo-600">
+                                <span>更新・運用のコツ</span>
+                            </label>
+                        </div>
+                        <div class="mt-3">
+                            <label class="flex items-center space-x-3">
+                                <input type="checkbox" name="learning_goals" value="other" class="text-indigo-600">
+                                <span>その他：</span>
+                                <input type="text" name="learning_goals_other" class="flex-1 px-3 py-2 border border-gray-300 rounded focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" placeholder="具体的にお書きください">
+                            </label>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">不安に感じていること・心配なことがあれば教えてください</label>
+                        <textarea name="concerns" rows="4" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" placeholder="どんな小さなことでも構いません"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 8: Final -->
+            <div class="section-bg-8 p-8">
+                <div class="flex items-center mb-6">
+                    <div class="w-10 h-10 bg-pink-600 text-white rounded-full flex items-center justify-center font-bold text-lg mr-4">8</div>
+                    <h3 class="text-2xl font-bold text-gray-800">最後に</h3>
+                </div>
+                <p class="text-gray-600 mb-6">当日の持参物の確認と、その他お伝えしたいことがあればお聞かせください。</p>
+
+                <div class="space-y-6">
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-3 required">当日持参いただくもの（確認）（複数選択可）</label>
+                        <div class="space-y-3">
+                            <label class="flex items-center space-x-3 p-3 border border-gray-300 rounded-lg hover:bg-gray-50 cursor-pointer">
+                                <input type="checkbox" name="bring_items" value="laptop" class="text-pink-600">
+                                <span>ノートパソコン（推奨）またはタブレット</span>
+                            </label>
+                            <label class="flex items-center space-x-3 p-3 border border-gray-300 rounded-lg hover:bg-gray-50 cursor-pointer">
+                                <input type="checkbox" name="bring_items" value="photos" class="text-pink-600">
+                                <span>使用できる写真素材（USBメモリ等で持参 / スマホでも可）</span>
+                            </label>
+                            <label class="flex items-center space-x-3 p-3 border border-gray-300 rounded-lg hover:bg-gray-50 cursor-pointer">
+                                <input type="checkbox" name="bring_items" value="stationery" class="text-pink-600">
+                                <span>筆記用具・メモ</span>
+                            </label>
+                            <label class="flex items-center space-x-3 p-3 border border-gray-300 rounded-lg hover:bg-gray-50 cursor-pointer">
+                                <input type="checkbox" name="bring_items" value="survey_answers" class="text-pink-600">
+                                <span>このアンケートの回答内容（印刷またはスマホで確認できる状態）</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">その他、事前に伝えておきたいことがあればご記入ください</label>
+                        <textarea name="additional_info" rows="4" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500" placeholder="質問、要望、配慮が必要なことなど、何でもお書きください"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="bg-white p-8 text-center">
+                <button type="submit" class="bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-12 py-4 rounded-lg text-lg font-semibold hover:from-blue-700 hover:to-indigo-700 transition-colors shadow-lg">
+                    <i class="fas fa-paper-plane mr-2"></i>
+                    アンケートを送信
+                </button>
+                <p class="text-sm text-gray-600 mt-4">送信前に入力内容をもう一度ご確認ください</p>
+            </div>
+        </form>
+
+        <!-- Thank You Message -->
+        <div class="bg-gradient-to-r from-green-500 to-emerald-500 text-white p-8">
+            <div class="text-center">
+                <i class="fas fa-check-circle text-4xl mb-4"></i>
+                <h3 class="text-2xl font-bold mb-4">ご回答ありがとうございました！</h3>
+                <div class="text-left max-w-3xl mx-auto space-y-4">
+                    <p>ご記入いただいた内容は、当日のワークショップでそのまま活用できます。</p>
+                    <p><strong>回答内容を印刷またはデータで当日ご持参ください。</strong></p>
+                    <p>当日は皆様と一緒に、実際に手を動かしながらホームページを作り上げていきましょう！</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Instructor's Advice -->
+        <div class="bg-blue-50 p-8">
+            <h3 class="text-xl font-bold text-gray-800 mb-6 text-center">
+                <i class="fas fa-lightbulb text-yellow-500 mr-2"></i>
+                講師からのアドバイス
+            </h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-white p-6 rounded-lg shadow">
+                    <div class="flex items-center mb-3">
+                        <i class="fas fa-camera text-blue-600 mr-2"></i>
+                        <h4 class="font-semibold">写真素材の準備</h4>
+                    </div>
+                    <ul class="text-sm text-gray-700 space-y-2">
+                        <li>• 商品・料理の写真（3~5枚）</li>
+                        <li>• 店舗外観・内観（各1~2枚）</li>
+                        <li>• できるだけ明るく、横長（16:9または4:3）の写真が理想的</li>
+                    </ul>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow">
+                    <div class="flex items-center mb-3">
+                        <i class="fas fa-info-circle text-green-600 mr-2"></i>
+                        <h4 class="font-semibold">営業情報の正確性</h4>
+                    </div>
+                    <ul class="text-sm text-gray-700 space-y-2">
+                        <li>• 営業時間・定休日等は正確に記入してください</li>
+                        <li>• 当日そのままホームページに掲載します</li>
+                    </ul>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow">
+                    <div class="flex items-center mb-3">
+                        <i class="fas fa-star text-purple-600 mr-2"></i>
+                        <h4 class="font-semibold">強みの具体性</h4>
+                    </div>
+                    <ul class="text-sm text-gray-700 space-y-2">
+                        <li>• 「強み」や「お客様の声」は具体的に書くほど効果的</li>
+                        <li>• ChatGPTがより良い文章を生成してくれます</li>
+                    </ul>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow">
+                    <div class="flex items-center mb-3">
+                        <i class="fas fa-heart text-red-600 mr-2"></i>
+                        <h4 class="font-semibold">安心してご参加ください</h4>
+                    </div>
+                    <ul class="text-sm text-gray-700 space-y-2">
+                        <li>• わからない項目があっても大丈夫です</li>
+                        <li>• 当日一緒に考えましょう！</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Form validation and progress tracking
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('surveyForm');
+            const progressSteps = document.querySelectorAll('.progress-step');
+            
+            // Update progress based on scroll position
+            window.addEventListener('scroll', function() {
+                const sections = document.querySelectorAll('[class*="section-bg-"]');
+                const progressSteps = document.querySelectorAll('.w-6.h-6');
+                
+                sections.forEach((section, index) => {
+                    const rect = section.getBoundingClientRect();
+                    const isVisible = rect.top <= window.innerHeight / 2 && rect.bottom >= window.innerHeight / 2;
+                    
+                    if (isVisible && progressSteps[index]) {
+                        // Reset all steps
+                        progressSteps.forEach(step => {
+                            step.className = step.className.replace('bg-blue-600 text-white', 'bg-gray-300 text-gray-600');
+                        });
+                        
+                        // Highlight current and previous steps
+                        for (let i = 0; i <= index; i++) {
+                            if (progressSteps[i]) {
+                                progressSteps[i].className = progressSteps[i].className.replace('bg-gray-300 text-gray-600', 'bg-blue-600 text-white');
+                            }
+                        }
+                    }
+                });
+            });
+            
+            // Form submission
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Basic validation
+                const requiredFields = form.querySelectorAll('[required]');
+                let isValid = true;
+                
+                requiredFields.forEach(field => {
+                    if (!field.value.trim() && field.type !== 'checkbox' && field.type !== 'radio') {
+                        isValid = false;
+                        field.classList.add('border-red-500');
+                    } else {
+                        field.classList.remove('border-red-500');
+                    }
+                });
+                
+                // Check required radio groups
+                const radioGroups = ['reservation_policy', 'has_logo', 'chatgpt_experience', 'website_experience', 'goope_status'];
+                radioGroups.forEach(groupName => {
+                    const group = form.querySelectorAll(`input[name="${groupName}"]:checked`);
+                    if (group.length === 0) {
+                        isValid = false;
+                        const firstRadio = form.querySelector(`input[name="${groupName}"]`);
+                        if (firstRadio) {
+                            firstRadio.closest('div').classList.add('border-red-500', 'border-2', 'rounded-lg');
+                        }
+                    }
+                });
+                
+                // Check required checkbox groups
+                const checkboxGroups = ['purpose', 'strengths', 'photo_materials', 'learning_goals', 'bring_items'];
+                checkboxGroups.forEach(groupName => {
+                    const group = form.querySelectorAll(`input[name="${groupName}"]:checked`);
+                    if (group.length === 0) {
+                        isValid = false;
+                        const firstCheckbox = form.querySelector(`input[name="${groupName}"]`);
+                        if (firstCheckbox) {
+                            firstCheckbox.closest('div').classList.add('border-red-500', 'border-2', 'rounded-lg');
+                        }
+                    }
+                });
+                
+                if (isValid) {
+                    alert('アンケートの送信が完了しました。ありがとうございました！\n\n回答内容を印刷またはデータで当日ご持参ください。');
+                    // In real implementation, you would send the data to a server
+                    // window.location.href = 'thank-you.html';
+                } else {
+                    alert('必須項目に未入力があります。赤枠の項目をご確認ください。');
+                    // Scroll to first error
+                    const firstError = form.querySelector('.border-red-500');
+                    if (firstError) {
+                        firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }
+                }
+            });
+            
+            // Clear error styling when user starts typing
+            const inputs = form.querySelectorAll('input, textarea, select');
+            inputs.forEach(input => {
+                input.addEventListener('input', function() {
+                    this.classList.remove('border-red-500');
+                    const parent = this.closest('div');
+                    if (parent) {
+                        parent.classList.remove('border-red-500', 'border-2');
+                    }
+                });
+                
+                input.addEventListener('change', function() {
+                    this.classList.remove('border-red-500');
+                    const parent = this.closest('div');
+                    if (parent) {
+                        parent.classList.remove('border-red-500', 'border-2');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
