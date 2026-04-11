@@ -53,6 +53,7 @@ async function saveToNotion(dbId, data) {
         '次回同伴':       { rich_text: [{ text: { content: data.nextVisit   || '' } }] },
         'お客様コメント': { rich_text: [{ text: { content: data.shopComment || '' } }] },
         'Place ID':      { rich_text: [{ text: { content: data.placeId     || '' } }] },
+        'AI返信文':      { rich_text: [{ text: { content: data.replyText  || '' } }] },
       },
     }),
   });
@@ -155,7 +156,7 @@ export const handler = async (event) => {
     return {
       statusCode: 200,
       headers: { ...cors, 'Content-Type': 'application/json' },
-      body: JSON.stringify({ success: true, reviewText, replyText, googleUrl }),
+      body: JSON.stringify({ success: true, reviewText, googleUrl }),
     };
   } catch (err) {
     console.error('[980] Error:', err.message);
