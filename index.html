@@ -72,6 +72,7 @@ const SHOP_NAME    = p.get('shop')  || 'お店';
 const PLACE_ID     = p.get('place') || '';
 const NOTION_DB_ID = p.get('db')    || '';
 const MODE         = p.get('mode')  || 'survey';
+const DISCOUNT     = p.get('discount') || '10';
 </script>
 
 <!-- 写真ページ -->
@@ -79,6 +80,10 @@ const MODE         = p.get('mode')  || 'survey';
   <div class="logo">もてログ980</div>
   <div class="shop" id="shopA"></div>
   <div class="sub">料理が来た今がシャッターチャンスです 📸</div>
+  <div style="width:100%;background:#FBF5E6;border:1px solid #C9A84C;border-radius:12px;padding:14px 16px;text-align:center;">
+    <div style="font-size:13px;font-weight:600;color:#8B6914;margin-bottom:6px;">本日の会計が最大10%割引に🎁</div>
+    <div style="font-size:12px;color:#8B6914;line-height:1.7;">LINE登録で5%OFF<br>アンケート回答で<strong>10%OFF</strong></div>
+  </div>
   <div class="photo-hint">
     <div class="photo-hint-title">📷 1枚だけ写真を撮ってください</div>
     <div class="photo-hint-body">料理が来たばかりの今が一番きれいです。<br>スマホのカメラで1枚だけ撮っておいてください。<br><br>お会計の後にもう一つQRコードがあります。<br>そこで口コミ文をAIが作り、<br>写真と一緒にGoogleに投稿できます 🙏</div>
@@ -102,6 +107,10 @@ const MODE         = p.get('mode')  || 'survey';
     <div style="display:flex;justify-content:space-between;margin-top:5px;font-size:10px;color:var(--muted);">
       <span style="flex:1;">写真撮影</span><span style="flex:1;">アンケート</span><span style="flex:1;">口コミ投稿</span>
     </div>
+  </div>
+  <div style="width:100%;background:#FBF5E6;border:1px solid #C9A84C;border-radius:12px;padding:12px 16px;text-align:center;">
+    <div style="font-size:13px;font-weight:600;color:#8B6914;">回答完了で今日の会計が10%OFF 🎁</div>
+    <div style="font-size:11px;color:#8B6914;margin-top:3px;">クーポンは送信後の画面に表示されます</div>
   </div>
   <div class="sub">30秒で完了。ご協力ありがとうございます 🙏</div>
   <div class="card">
@@ -183,6 +192,21 @@ const MODE         = p.get('mode')  || 'survey';
     </div>
   </div>
   <div class="shop" id="shopC"></div>
+
+  <!-- クーポンカード -->
+  <div id="couponCard" style="width:100%;background:linear-gradient(135deg,#2D6A4F,#1B4A35);border-radius:16px;padding:20px;text-align:center;position:relative;overflow:hidden;">
+    <div style="position:absolute;top:-20px;right:-20px;width:80px;height:80px;border-radius:50%;background:rgba(255,255,255,.08);"></div>
+    <div style="position:absolute;bottom:-30px;left:-20px;width:100px;height:100px;border-radius:50%;background:rgba(255,255,255,.06);"></div>
+    <div style="font-size:11px;color:#9FE1CB;letter-spacing:.12em;margin-bottom:6px;">会計割引クーポン</div>
+    <div style="font-size:52px;font-weight:700;color:#FAC775;line-height:1;" id="discountNum">10%</div>
+    <div style="font-size:13px;color:#fff;margin-top:4px;">OFF</div>
+    <div style="margin-top:14px;padding:10px;background:rgba(255,255,255,.1);border-radius:8px;">
+      <div style="font-size:12px;color:#9FE1CB;margin-bottom:4px;">使い方</div>
+      <div style="font-size:13px;color:#fff;line-height:1.6;">この画面をレジでスタッフに<br>見せてください</div>
+    </div>
+    <div style="margin-top:10px;font-size:11px;color:rgba(255,255,255,.5);">本日のお会計のみ有効</div>
+  </div>
+
   <div class="sub">ご協力ありがとうございました！<br>AIが口コミ文を作りました 🎉</div>
   <div class="review-box">
     <div class="review-label">📝 AIが作ったあなたの口コミ文</div>
@@ -230,6 +254,7 @@ const MODE         = p.get('mode')  || 'survey';
 ['shopA','shopB','shopC'].forEach(id => {
   document.getElementById(id).textContent = SHOP_NAME;
 });
+document.getElementById('discountNum').textContent = DISCOUNT + '%';
 
 function show(id) {
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('show'));
