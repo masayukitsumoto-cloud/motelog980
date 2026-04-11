@@ -266,7 +266,42 @@ show(MODE === 'photo' ? 'screenPhoto' : 'screenSurvey');
 function openCamera() {
   const inp = document.createElement('input');
   inp.type = 'file'; inp.accept = 'image/*'; inp.capture = 'environment';
+  inp.addEventListener('change', () => {
+    const surveyUrl = location.origin + '/?mode=survey&shop=' + encodeURIComponent(SHOP_NAME) + '&place=' + PLACE_ID + '&db=' + NOTION_DB_ID + '&discount=' + DISCOUNT;
+    showPhotoSuccess(surveyUrl);
+  });
   inp.click();
+}
+
+function showPhotoSuccess(surveyUrl) {
+  const screen = document.getElementById('screenPhoto');
+  screen.innerHTML = [
+    '<div style="text-align:center;">',
+      '<div style="font-size:56px;margin-bottom:8px;">\u{1F4F8}</div>',
+      '<div style="font-size:20px;font-weight:700;color:#2D6A4F;margin-bottom:6px;">最高の1枚が撮れましたね！</div>',
+      '<div style="font-size:13px;color:#888;line-height:1.7;">この写真、誰かに見せたくなりませんか？<br>口コミに写真を添えると<strong style="color:#2D6A4F;">もっと伝わります</strong></div>',
+    '</div>',
+    '<div style="width:100%;background:linear-gradient(135deg,#2D6A4F,#1B4A35);border-radius:16px;padding:20px;text-align:center;">',
+      '<div style="font-size:12px;color:#9FE1CB;margin-bottom:4px;">アンケートに答えると</div>',
+      '<div style="font-size:40px;font-weight:700;color:#FAC775;line-height:1;">10%</div>',
+      '<div style="font-size:13px;color:#fff;margin-top:2px;">会計割引クーポンがもらえます \uD83C\uDF81</div>',
+    '</div>',
+    '<div style="width:100%;background:#FBF5E6;border:1.5px solid #C9A84C;border-radius:12px;padding:16px;">',
+      '<div style="font-size:12px;font-weight:600;color:#8B6914;margin-bottom:10px;text-align:center;">次にやること</div>',
+      '<div style="display:flex;gap:10px;align-items:flex-start;margin-bottom:10px;">',
+        '<div style="min-width:24px;height:24px;border-radius:50%;background:#C9A84C;color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0;">1</div>',
+        '<div style="font-size:13px;color:#8B6914;line-height:1.6;">今はそのまま食事を楽しんでください</div>',
+      '</div>',
+      '<div style="display:flex;gap:10px;align-items:flex-start;">',
+        '<div style="min-width:24px;height:24px;border-radius:50%;background:#2D6A4F;color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0;">2</div>',
+        '<div style="font-size:13px;color:#8B6914;line-height:1.6;">お会計時にレジ横のQRを読んで<br><strong>30秒アンケートに答えるだけ</strong></div>',
+      '</div>',
+    '</div>',
+    '<button onclick="window.location.href=\'' + surveyUrl + '\'" style="width:100%;padding:17px;border:none;border-radius:13px;background:#2D6A4F;color:#fff;font-size:15px;font-weight:700;cursor:pointer;">',
+      'いますぐアンケートに答える（10%割引）→',
+    '</button>',
+    '<div style="font-size:12px;color:#888;text-align:center;line-height:1.7;">食事中でも後でもOKです。<br>レジ横のQRからもアクセスできます。</div>',
+  ].join('');
 }
 
 const state = { service:0, atmosphere:0, moments:[], momentOther:'', nextVisit:'', shopComment:'' };
