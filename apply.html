@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>もてログ980 - お申し込み</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+:root { --green:#2D6A4F; --green-l:#EAF4EE; --gold:#C9A84C; --text:#1A1A1A; --muted:#888; --border:#E8E4DE; --bg:#F9F7F4; --white:#fff; }
+body { font-family:'Hiragino Sans','Noto Sans JP',sans-serif; background:var(--bg); color:var(--text); min-height:100vh; display:flex; flex-direction:column; align-items:center; padding:32px 16px 64px; }
+.logo { font-size:11px; color:var(--muted); letter-spacing:.12em; margin-bottom:8px; }
+h1 { font-size:22px; font-weight:700; color:var(--green); margin-bottom:6px; text-align:center; }
+.sub { font-size:13px; color:var(--muted); text-align:center; margin-bottom:28px; line-height:1.6; }
+.card { width:100%; max-width:480px; background:var(--white); border-radius:14px; padding:28px; box-shadow:0 2px 20px rgba(0,0,0,.07); }
+.section-title { font-size:12px; font-weight:700; color:var(--green); letter-spacing:.1em; margin:24px 0 12px; padding-bottom:6px; border-bottom:1.5px solid var(--green-l); }
+.section-title:first-child { margin-top:0; }
+.field { margin-bottom:16px; }
+label { display:block; font-size:13px; font-weight:600; margin-bottom:5px; }
+.req { color:#E05; margin-left:3px; }
+input { width:100%; padding:11px 13px; border:1.5px solid var(--border); border-radius:10px; font-size:14px; font-family:inherit; background:var(--bg); color:var(--text); outline:none; transition:border-color .2s; }
+input:focus { border-color:var(--green); background:var(--white); }
+input::placeholder { color:#C0BBB0; }
+.hint { font-size:11px; color:var(--muted); margin-top:4px; line-height:1.5; }
+.kw-grid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:8px; margin-bottom:16px; }
+.price-box { background:var(--green-l); border-radius:10px; padding:16px; margin:20px 0; text-align:center; }
+.price-main { font-size:28px; font-weight:700; color:var(--green); }
+.price-sub { font-size:12px; color:var(--green); margin-top:2px; }
+.trial-badge { display:inline-block; background:var(--gold); color:#fff; font-size:11px; font-weight:700; padding:3px 10px; border-radius:20px; margin-bottom:8px; }
+.btn { width:100%; padding:17px; border:none; border-radius:13px; background:var(--green); color:#fff; font-size:16px; font-weight:700; cursor:pointer; margin-top:24px; }
+.btn:disabled { opacity:.4; cursor:not-allowed; }
+.loading { display:none; text-align:center; padding:16px; color:var(--muted); font-size:13px; }
+@keyframes spin { to{transform:rotate(360deg)} }
+.spinner { width:20px; height:20px; border:3px solid var(--border); border-top-color:var(--green); border-radius:50%; animation:spin .8s linear infinite; display:inline-block; margin-right:8px; vertical-align:middle; }
+.note { font-size:11px; color:var(--muted); text-align:center; margin-top:12px; line-height:1.7; }
+</style>
+</head>
+<body>
+<div class="logo">もてログ980</div>
+<h1>Googleクチコミを自動で増やす</h1>
+<div class="sub">お客様がアンケートに答えるだけで<br>AIが口コミ文を自動生成。Googleへ誘導します。</div>
+<div class="card">
+  <div class="price-box">
+    <div class="trial-badge">7日間無料トライアル</div>
+    <div class="price-main">¥980<span style="font-size:14px;font-weight:400;">/月</span></div>
+    <div class="price-sub">いつでもキャンセル可能</div>
+  </div>
+  <div class="section-title">店舗情報</div>
+  <div class="field">
+    <label>店舗名<span class="req">*</span></label>
+    <input type="text" id="shopName" placeholder="例：海鮮居酒屋 津本">
+  </div>
+  <div class="field">
+    <label>メールアドレス<span class="req">*</span></label>
+    <input type="email" id="email" placeholder="例：info@example.com">
+    <div class="hint">QRコードURLをこのアドレスに送付します</div>
+  </div>
+  <div class="field">
+    <label>場所（都道府県・市区町村）<span class="req">*</span></label>
+    <input type="text" id="location" placeholder="例：長崎県西海市">
+  </div>
+  <div class="field">
+    <label>ジャンル<span class="req">*</span></label>
+    <input type="text" id="genre" placeholder="例：海鮮居酒屋、焼肉、ラーメン">
+  </div>
+  <div class="section-title">MEO最適化キーワード（3つ）</div>
+  <div class="hint" style="margin-bottom:12px;">Googleで検索されたいキーワードを設定してください。口コミ文に自然に反映されます。</div>
+  <div class="kw-grid">
+    <div>
+      <label style="font-size:12px;">KW①<span class="req">*</span></label>
+      <input type="text" id="kw1" placeholder="個室あり">
+    </div>
+    <div>
+      <label style="font-size:12px;">KW②<span class="req">*</span></label>
+      <input type="text" id="kw2" placeholder="新鮮な地魚">
+    </div>
+    <div>
+      <label style="font-size:12px;">KW③<span class="req">*</span></label>
+      <input type="text" id="kw3" placeholder="記念日に人気">
+    </div>
+  </div>
+  <div class="section-title">Google Place ID</div>
+  <div class="field">
+    <label>Google Place ID<span class="req">*</span></label>
+    <input type="text" id="placeId" placeholder="例：ChIJN1t_tDeuEmsRUsoyG83frY4">
+    <div class="hint">
+      <a href="https://developers.google.com/maps/documentation/javascript/examples/places-placeid-finder" target="_blank" style="color:var(--green);">Place IDを調べる →</a>
+    </div>
+  </div>
+  <button class="btn" id="submitBtn" onclick="startCheckout()">7日間無料で始める →</button>
+  <div class="loading" id="loading"><span class="spinner"></span>決済ページに移動しています…</div>
+  <div class="note">クレジットカード情報はStripeで安全に管理されます。<br>無料期間中はいつでもキャンセル可能です。</div>
+</div>
+<script>
+async function startCheckout() {
+  const shopName = document.getElementById('shopName').value.trim();
+  const email    = document.getElementById('email').value.trim();
+  const location = document.getElementById('location').value.trim();
+  const genre    = document.getElementById('genre').value.trim();
+  const kw1      = document.getElementById('kw1').value.trim();
+  const kw2      = document.getElementById('kw2').value.trim();
+  const kw3      = document.getElementById('kw3').value.trim();
+  const placeId  = document.getElementById('placeId').value.trim();
+  if (!shopName || !email || !location || !genre || !kw1 || !kw2 || !kw3 || !placeId) {
+    alert('すべての項目を入力してください');
+    return;
+  }
+  document.getElementById('submitBtn').disabled = true;
+  document.getElementById('loading').style.display = 'block';
+  try {
+    const res = await fetch('/.netlify/functions/create-checkout', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ shopName, email, location, genre, kw1, kw2, kw3, placeId }),
+    });
+    const json = await res.json();
+    if (json.url) {
+      window.location.href = json.url;
+    } else {
+      throw new Error(json.error || 'エラーが発生しました');
+    }
+  } catch (e) {
+    alert('エラー: ' + e.message);
+    document.getElementById('submitBtn').disabled = false;
+    document.getElementById('loading').style.display = 'none';
+  }
+}
+</script>
+</body>
+</html>

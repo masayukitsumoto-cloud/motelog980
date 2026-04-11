@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ご登録完了 | もてログ980</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'Hiragino Sans','Noto Sans JP',sans-serif; background:#F9F7F4; min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:32px 16px; text-align:center; gap:16px; }
+.icon { font-size:56px; }
+h1 { font-size:22px; font-weight:700; color:#2D6A4F; }
+.sub { font-size:14px; color:#888; line-height:1.8; white-space:pre-wrap; }
+.card { background:#fff; border-radius:14px; padding:24px; max-width:400px; width:100%; box-shadow:0 2px 16px rgba(0,0,0,.06); font-size:14px; line-height:1.8; color:#333; }
+.powered { font-size:11px; color:#C5BFB5; margin-top:24px; }
+</style>
+</head>
+<body>
+<div class="icon">🎉</div>
+<h1>ご登録ありがとうございます！</h1>
+<div class="sub" id="shopMsg"></div>
+<div class="card">
+  ご登録のメールアドレスに<br>
+  <strong>QRコードURL</strong>をお送りしました。<br><br>
+  メールが届かない場合は<br>
+  迷惑メールフォルダをご確認ください。<br><br>
+  ご不明な点はこちらへ：<br>
+  <a href="mailto:masayuki.tsumoto@gmail.com" style="color:#2D6A4F;">masayuki.tsumoto@gmail.com</a>
+</div>
+<div class="powered">Powered by もてログ980</div>
+<script>
+  const p = new URLSearchParams(location.search);
+  const shop = p.get('shop') || 'お店';
+  document.getElementById('shopMsg').textContent = shop + 'のセットアップが完了しました。\n数分以内にメールが届きます。';
+</script>
+</body>
+</html>
