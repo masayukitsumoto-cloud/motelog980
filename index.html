@@ -189,6 +189,12 @@ const MODE         = p.get('mode')  || 'survey';
     <div class="review-body" id="reviewText">生成中...</div>
     <button onclick="copyText()" id="copyBtn" style="margin-top:14px;width:100%;padding:11px;border:1.5px solid var(--gold);border-radius:8px;background:transparent;color:#8B6914;font-size:13px;font-weight:600;cursor:pointer;">📋 コピーする</button>
   </div>
+  <div id="replyBox" style="display:none;width:100%;background:var(--white);border-radius:var(--r);padding:18px;border-left:3px solid var(--green);box-shadow:0 2px 12px rgba(0,0,0,.05);">
+    <div style="font-size:10px;font-weight:700;color:var(--green);letter-spacing:.1em;margin-bottom:10px;">💬 オーナー向け返信文（AIが生成）</div>
+    <div class="review-body" id="replyText"></div>
+    <button onclick="copyReply()" id="copyReplyBtn" style="margin-top:14px;width:100%;padding:11px;border:1.5px solid var(--green);border-radius:8px;background:transparent;color:var(--green);font-size:13px;font-weight:600;cursor:pointer;">📋 返信文をコピー</button>
+  </div>
+
   <div class="card" style="display:flex;flex-direction:column;gap:20px;">
     <div style="font-size:13px;font-weight:600;color:var(--green);text-align:center;">写真付きで投稿するとより伝わります ✨</div>
     <div class="flow-step">
@@ -317,6 +323,20 @@ async function submitForm() {
   document.getElementById('reviewText').textContent = reviewText;
   document.getElementById('googleBtn').href = googleUrl;
   show('screenDone');
+}
+
+async function copyReply() {
+  const text = document.getElementById('replyText').textContent;
+  try { await navigator.clipboard.writeText(text); }
+  catch {
+    const ta = document.createElement('textarea');
+    ta.value = text; document.body.appendChild(ta);
+    ta.select(); document.execCommand('copy');
+    document.body.removeChild(ta);
+  }
+  const btn = document.getElementById('copyReplyBtn');
+  btn.textContent = '✅ コピーしました！';
+  setTimeout(() => { btn.textContent = '📋 返信文をコピー'; }, 2500);
 }
 
 async function copyText() {
