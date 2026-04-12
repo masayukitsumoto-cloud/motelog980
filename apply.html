@@ -39,11 +39,34 @@ input::placeholder { color:#C0BBB0; }
 <h1>Googleクチコミを自動で増やす</h1>
 <div class="sub">お客様がアンケートに答えるだけで<br>AIが口コミ文を自動生成。Googleへ誘導します。</div>
 <div class="card">
-  <div class="price-box">
-    <div class="trial-badge">7日間無料トライアル</div>
-    <div class="price-main">¥980<span style="font-size:14px;font-weight:400;">/月</span></div>
-    <div class="price-sub">いつでもキャンセル可能</div>
+  <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:8px;">
+    <div id="plan-monthly" onclick="selectPlan('monthly')" style="border:2px solid #2D6A4F;border-radius:12px;padding:16px;cursor:pointer;background:#EAF4EE;position:relative;">
+      <div style="position:absolute;top:-10px;left:16px;background:#2D6A4F;color:#fff;font-size:10px;font-weight:700;padding:2px 10px;border-radius:10px;">おすすめ・7日間無料</div>
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <div>
+          <div style="font-size:13px;font-weight:700;color:#1D3D2F;">月額プラン</div>
+          <div style="font-size:11px;color:#888;margin-top:2px;">いつでもキャンセル可能</div>
+        </div>
+        <div style="text-align:right;">
+          <div style="font-size:24px;font-weight:700;color:#1D3D2F;">¥980<span style="font-size:13px;">/月</span></div>
+        </div>
+      </div>
+    </div>
+    <div id="plan-yearly" onclick="selectPlan('yearly')" style="border:2px solid #E8E4DE;border-radius:12px;padding:16px;cursor:pointer;background:#fff;position:relative;">
+      <div style="position:absolute;top:-10px;left:16px;background:#C9A84C;color:#1D3D2F;font-size:10px;font-weight:700;padding:2px 10px;border-radius:10px;">2ヶ月分お得・LINE初期構築無料</div>
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <div>
+          <div style="font-size:13px;font-weight:700;color:#1D3D2F;">年間プラン</div>
+          <div style="font-size:11px;color:#8B6914;margin-top:2px;">LINE初期構築無料（¥30,000相当）</div>
+        </div>
+        <div style="text-align:right;">
+          <div style="font-size:24px;font-weight:700;color:#8B6914;">¥9,800<span style="font-size:13px;">/年</span></div>
+          <div style="font-size:10px;color:#8B6914;">¥817/月相当</div>
+        </div>
+      </div>
+    </div>
   </div>
+  <input type="hidden" id="selectedPlan" value="monthly">
   <div class="section-title">店舗情報</div>
   <div class="field">
     <label>店舗名<span class="req">*</span></label>
@@ -98,6 +121,23 @@ input::placeholder { color:#C0BBB0; }
   <div class="note">クレジットカード情報はStripeで安全に管理されます。<br>無料期間中はいつでもキャンセル可能です。</div>
 </div>
 <script>
+function selectPlan(plan) {
+  document.getElementById('selectedPlan').value = plan;
+  const monthly = document.getElementById('plan-monthly');
+  const yearly  = document.getElementById('plan-yearly');
+  if (plan === 'monthly') {
+    monthly.style.border = '2px solid #2D6A4F';
+    monthly.style.background = '#EAF4EE';
+    yearly.style.border  = '2px solid #E8E4DE';
+    yearly.style.background = '#fff';
+  } else {
+    yearly.style.border  = '2px solid #C9A84C';
+    yearly.style.background = '#FBF5E6';
+    monthly.style.border = '2px solid #E8E4DE';
+    monthly.style.background = '#fff';
+  }
+}
+
 function toggleSubmit() {
   const checked = document.getElementById('agreeCheck').checked;
   document.getElementById('submitBtn').disabled = !checked;
