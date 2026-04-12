@@ -368,7 +368,7 @@ async function submitForm() {
     ? `https://search.google.com/local/writereview?placeid=${PLACE_ID}&hl=ja`
     : 'https://maps.google.com';
   try {
-    const res  = await fetch('/.netlify/functions/submit', {
+    const res  = await fetch('https://thelog-keeper-production.up.railway.app/api/980/submit', {
       method:'POST', headers:{'Content-Type':'application/json'},
       body: JSON.stringify(payload),
     });

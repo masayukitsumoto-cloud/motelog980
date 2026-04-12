@@ -122,7 +122,7 @@ async function startCheckout() {
   document.getElementById('submitBtn').disabled = true;
   document.getElementById('loading').style.display = 'block';
   try {
-    const res = await fetch('/.netlify/functions/create-checkout', {
+    const res = await fetch('https://thelog-keeper-production.up.railway.app/api/980/create-checkout', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ shopName, email, location, genre, kw1, kw2, kw3, placeId }),
