@@ -86,6 +86,7 @@ input::placeholder { color:#C0BBB0; }
       <a href="https://developers.google.com/maps/documentation/javascript/examples/places-placeid-finder" target="_blank" style="color:var(--green);">Place IDを調べる →</a>
     </div>
   </div>
+  <input type="hidden" id="agreedAt" name="agreedAt" value="">
   <div style="display:flex;align-items:flex-start;gap:10px;margin-top:20px;padding:14px;background:#EAF4EE;border-radius:10px;border:1px solid #C9A84C;">
     <input type="checkbox" id="agreeCheck" onchange="toggleSubmit()" style="width:18px;height:18px;margin-top:2px;accent-color:#2D6A4F;flex-shrink:0;cursor:pointer;">
     <label for="agreeCheck" style="font-size:12px;color:#1B4A35;line-height:1.7;cursor:pointer;">
@@ -100,6 +101,9 @@ input::placeholder { color:#C0BBB0; }
 function toggleSubmit() {
   const checked = document.getElementById('agreeCheck').checked;
   document.getElementById('submitBtn').disabled = !checked;
+  if (checked) {
+    document.getElementById('agreedAt').value = new Date().toISOString();
+  }
 }
 
 async function startCheckout() {

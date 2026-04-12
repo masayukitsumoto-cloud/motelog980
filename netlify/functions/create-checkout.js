@@ -34,6 +34,7 @@ export const handler = async (event) => {
       'metadata[kw2]':       kw2      || '',
       'metadata[kw3]':       kw3      || '',
       'metadata[place_id]':  placeId  || '',
+      'metadata[agreed_at]':  body.agreedAt || '',
       'metadata[email]':     email,
       'subscription_data[trial_period_days]': '7',
     });
