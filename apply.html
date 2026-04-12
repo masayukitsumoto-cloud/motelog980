@@ -86,11 +86,22 @@ input::placeholder { color:#C0BBB0; }
       <a href="https://developers.google.com/maps/documentation/javascript/examples/places-placeid-finder" target="_blank" style="color:var(--green);">Place IDを調べる →</a>
     </div>
   </div>
-  <button class="btn" id="submitBtn" onclick="startCheckout()">7日間無料で始める →</button>
+  <div style="display:flex;align-items:flex-start;gap:10px;margin-top:20px;padding:14px;background:#EAF4EE;border-radius:10px;border:1px solid #C9A84C;">
+    <input type="checkbox" id="agreeCheck" onchange="toggleSubmit()" style="width:18px;height:18px;margin-top:2px;accent-color:#2D6A4F;flex-shrink:0;cursor:pointer;">
+    <label for="agreeCheck" style="font-size:12px;color:#1B4A35;line-height:1.7;cursor:pointer;">
+      <a href="/terms.html" target="_blank" style="color:#2D6A4F;font-weight:700;text-decoration:underline;">利用規約・プライバシーポリシー・特定商取引法に基づく表示</a>を読み、内容に同意します。
+    </label>
+  </div>
+  <button class="btn" id="submitBtn" onclick="startCheckout()" disabled>7日間無料で始める →</button>
   <div class="loading" id="loading"><span class="spinner"></span>決済ページに移動しています…</div>
   <div class="note">クレジットカード情報はStripeで安全に管理されます。<br>無料期間中はいつでもキャンセル可能です。</div>
 </div>
 <script>
+function toggleSubmit() {
+  const checked = document.getElementById('agreeCheck').checked;
+  document.getElementById('submitBtn').disabled = !checked;
+}
+
 async function startCheckout() {
   const shopName = document.getElementById('shopName').value.trim();
   const email    = document.getElementById('email').value.trim();
