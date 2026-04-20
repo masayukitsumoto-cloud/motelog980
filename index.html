@@ -322,7 +322,7 @@ function openCamera() {
   const inp = document.createElement('input');
   inp.type = 'file'; inp.accept = 'image/*'; inp.capture = 'environment';
   inp.addEventListener('change', () => {
-    const surveyUrl = location.origin + '/?mode=survey&shop=' + encodeURIComponent(SHOP_NAME) + '&place=' + PLACE_ID + '&db=' + NOTION_DB_ID + '&discount=' + DISCOUNT;
+    const surveyUrl = location.origin + '/motelog980/?mode=survey&shop=' + encodeURIComponent(SHOP_NAME) + '&place=' + PLACE_ID + '&db=' + NOTION_DB_ID + '&discount=' + DISCOUNT;
     showPhotoSuccess(surveyUrl);
   });
   inp.click();
