@@ -168,6 +168,61 @@ const DISCOUNT     = p.get('discount') || '10';
       <textarea id="shopComment" rows="3" maxlength="200" placeholder="例：また来ます！○○が特に美味しかったです。／駐車場があると嬉しいです…など"></textarea>
       <div class="char-count"><span id="commentLen">0</span>/200</div>
     </div>
+    <div class="q-block">
+      <div class="q-num">Q 6</div>
+      <div class="q-text">お客様の年代を教えてください 🎂</div>
+      <div class="opts" id="ageOpts">
+        <div class="opt" data-v="10代">10代</div>
+        <div class="opt" data-v="20代">20代</div>
+        <div class="opt" data-v="30代">30代</div>
+        <div class="opt" data-v="40代">40代</div>
+        <div class="opt" data-v="50代">50代</div>
+        <div class="opt" data-v="60代以上">60代以上</div>
+      </div>
+    </div>
+    <div class="q-block">
+      <div class="q-num">Q 7</div>
+      <div class="q-text">性別を教えてください</div>
+      <div class="opts" id="genderOpts">
+        <div class="opt" data-v="男性">男性</div>
+        <div class="opt" data-v="女性">女性</div>
+        <div class="opt" data-v="回答しない">回答しない</div>
+      </div>
+    </div>
+    <div class="q-block">
+      <div class="q-num">Q 8</div>
+      <div class="q-text">何をきっかけにご来店されましたか？ 🔍</div>
+      <div class="opts" id="visitReasonOpts">
+        <div class="opt" data-v="Googleマップ">Googleマップ</div>
+        <div class="opt" data-v="食べログ">食べログ</div>
+        <div class="opt" data-v="Instagram">Instagram</div>
+        <div class="opt" data-v="X（Twitter）">X（Twitter）</div>
+        <div class="opt" data-v="知人の紹介">知人の紹介</div>
+        <div class="opt" data-v="通りがかり">通りがかり</div>
+        <div class="opt" data-v="リピート">リピート</div>
+        <div class="opt" data-v="その他">その他</div>
+      </div>
+    </div>
+    <div class="q-block">
+      <div class="q-num">Q 9</div>
+      <div class="q-text">このお店を友人や家族に紹介したいですか？ 0〜10で教えてください 💌</div>
+      <div class="opts" id="npsOpts" style="justify-content:center;">
+        <div class="opt" data-v="0">0</div>
+        <div class="opt" data-v="1">1</div>
+        <div class="opt" data-v="2">2</div>
+        <div class="opt" data-v="3">3</div>
+        <div class="opt" data-v="4">4</div>
+        <div class="opt" data-v="5">5</div>
+        <div class="opt" data-v="6">6</div>
+        <div class="opt" data-v="7">7</div>
+        <div class="opt" data-v="8">8</div>
+        <div class="opt" data-v="9">9</div>
+        <div class="opt" data-v="10">10</div>
+      </div>
+      <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-top:6px;padding:0 4px;">
+        <span>紹介しない</span><span>ぜひ紹介したい！</span>
+      </div>
+    </div>
   </div>
   <div class="loading" id="loading">
     <div class="spinner"></div>
@@ -304,7 +359,7 @@ function showPhotoSuccess(surveyUrl) {
   ].join('');
 }
 
-const state = { service:0, atmosphere:0, moments:[], momentOther:'', nextVisit:'', shopComment:'' };
+const state = { service:0, atmosphere:0, moments:[], momentOther:'', nextVisit:'', shopComment:'', age:'', gender:'', visitReason:'', nps:'' };
 const hints = ['','もう少しかな…','普通でした','よかった！','とてもよかった！','最高でした！✨'];
 
 function initStars(groupId, key, hintId) {
@@ -354,6 +409,45 @@ function checkReady() {
   document.getElementById('submitBtn').disabled = !(state.service > 0 && state.atmosphere > 0);
 }
 
+// Q6 年代（単一選択）
+document.querySelectorAll('#ageOpts .opt').forEach(opt => {
+  opt.addEventListener('click', () => {
+    document.querySelectorAll('#ageOpts .opt').forEach(o => o.classList.remove('sel'));
+    opt.classList.add('sel');
+    state.age = opt.dataset.v;
+  });
+});
+
+// Q7 性別（単一選択）
+document.querySelectorAll('#genderOpts .opt').forEach(opt => {
+  opt.addEventListener('click', () => {
+    document.querySelectorAll('#genderOpts .opt').forEach(o => o.classList.remove('sel'));
+    opt.classList.add('sel');
+    state.gender = opt.dataset.v;
+  });
+});
+
+// Q8 来店きっかけ（単一選択）
+document.querySelectorAll('#visitReasonOpts .opt').forEach(opt => {
+  opt.addEventListener('click', () => {
+    document.querySelectorAll('#visitReasonOpts .opt').forEach(o => o.classList.remove('sel'));
+    opt.classList.add('sel');
+    state.visitReason = opt.dataset.v;
+  });
+});
+
+// Q9 NPS（単一選択）
+document.querySelectorAll('#npsOpts .opt').forEach(opt => {
+  opt.addEventListener('click', () => {
+    document.querySelectorAll('#npsOpts .opt').forEach(o => o.classList.remove('sel'));
+    opt.classList.add('sel');
+    state.nps = opt.dataset.v;
+  });
+});
+
+function checkSubmit() {
+}
+
 async function submitForm() {
   document.getElementById('submitBtn').disabled = true;
   document.getElementById('loading').classList.add('show');
@@ -361,7 +455,7 @@ async function submitForm() {
   const payload = {
     shopName: SHOP_NAME, placeId: PLACE_ID, notionDbId: NOTION_DB_ID,
     service: state.service, atmosphere: state.atmosphere,
-    moment: momentText, nextVisit: state.nextVisit, shopComment: state.shopComment,
+    moment: momentText, nextVisit: state.nextVisit, shopComment: state.shopComment, age: state.age, gender: state.gender, visitReason: state.visitReason, nps: state.nps,
   };
   let reviewText = '';
   let googleUrl = PLACE_ID
