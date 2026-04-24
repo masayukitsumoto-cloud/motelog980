@@ -63,9 +63,18 @@ textarea::placeholder { color:#C0BBB0; }
 @keyframes spin { to{transform:rotate(360deg)} }
 .spinner { width:28px; height:28px; border:3px solid var(--border); border-top-color:var(--green); border-radius:50%; animation:spin .8s linear infinite; }
 .powered { font-size:11px; color:#C5BFB5; text-align:center; margin-top:20px; }
+
+/* 言語切り替え */
+.lang-switcher { display:flex; gap:8px; justify-content:center; margin:12px 0 4px; flex-wrap:wrap; }
+.lang-btn { padding:6px 16px; border:1.5px solid var(--border); border-radius:20px; font-size:12px; cursor:pointer; background:var(--bg); color:var(--text); transition:all .15s; }
+.lang-btn.active { background:var(--green); color:#fff; border-color:var(--green); }
+[data-lang] { display:none; }
+.lang-ja [data-lang="ja"], .lang-en [data-lang="en"], .lang-zh [data-lang="zh"], .lang-ko [data-lang="ko"] { display:block; }
+.lang-ja span[data-lang="ja"], .lang-en span[data-lang="en"], .lang-zh span[data-lang="zh"], .lang-ko span[data-lang="ko"] { display:inline; }
+span[data-lang] { display:none; }
 </style>
 </head>
-<body>
+<body class="lang-ja">
 <script>
 const p = new URLSearchParams(location.search);
 const SHOP_NAME    = p.get('shop')  || 'お店';
@@ -78,6 +87,12 @@ const DISCOUNT     = p.get('discount') || '10';
 <!-- 写真ページ -->
 <div class="screen" id="screenPhoto">
   <div class="logo">もてログ980</div>
+  <div class="lang-switcher">
+    <button class="lang-btn active" onclick="setLang('ja')">🇯🇵 日本語</button>
+    <button class="lang-btn" onclick="setLang('en')">🇺🇸 English</button>
+    <button class="lang-btn" onclick="setLang('zh')">🇨🇳 中文</button>
+    <button class="lang-btn" onclick="setLang('ko')">🇰🇷 한국어</button>
+  </div>
   <div class="shop" id="shopA"></div>
   <div class="sub">料理が来た今がシャッターチャンスです 📸</div>
   <div style="width:100%;background:#FBF5E6;border:1px solid #C9A84C;border-radius:12px;padding:14px 16px;text-align:center;">
@@ -95,6 +110,12 @@ const DISCOUNT     = p.get('discount') || '10';
 <!-- アンケートページ -->
 <div class="screen" id="screenSurvey">
   <div class="logo">もてログ980</div>
+  <div class="lang-switcher">
+    <button class="lang-btn active" onclick="setLang('ja')">🇯🇵 日本語</button>
+    <button class="lang-btn" onclick="setLang('en')">🇺🇸 English</button>
+    <button class="lang-btn" onclick="setLang('zh')">🇨🇳 中文</button>
+    <button class="lang-btn" onclick="setLang('ko')">🇰🇷 한국어</button>
+  </div>
   <div class="shop" id="shopB"></div>
   <div style="width:100%;max-width:260px;text-align:center;">
     <div class="steps">
@@ -224,11 +245,37 @@ const DISCOUNT     = p.get('discount') || '10';
       </div>
     </div>
   </div>
+    <div class="q-block">
+      <div class="q-num">Q 10</div>
+      <div class="q-text">
+        <span data-lang="ja">出身国を教えてください 🌏</span>
+        <span data-lang="en">What is your country of origin? 🌏</span>
+        <span data-lang="zh">请告诉我们您的国籍 🌏</span>
+        <span data-lang="ko">출신 국가를 알려주세요 🌏</span>
+      </div>
+      <div class="opts" id="countryOpts">
+        <div class="opt" data-v="日本">🇯🇵 日本</div>
+        <div class="opt" data-v="中国">🇨🇳 中国</div>
+        <div class="opt" data-v="韓国">🇰🇷 한국</div>
+        <div class="opt" data-v="台湾">🇹🇼 台湾</div>
+        <div class="opt" data-v="アメリカ">🇺🇸 USA</div>
+        <div class="opt" data-v="フランス">🇫🇷 France</div>
+        <div class="opt" data-v="オーストラリア">🇦🇺 Australia</div>
+        <div class="opt" data-v="タイ">🇹🇭 Thailand</div>
+        <div class="opt" data-v="その他">🌍 Other</div>
+      </div>
+    </div>
+  </div>
   <div class="loading" id="loading">
     <div class="spinner"></div>
     <span>口コミ文を生成しています…</span>
   </div>
-  <button class="btn btn-green" id="submitBtn" disabled onclick="submitForm()">送信して口コミ文を受け取る →</button>
+  <button class="btn btn-green" id="submitBtn" disabled onclick="submitForm()">
+    <span data-lang="ja">送信して口コミ文を受け取る →</span>
+    <span data-lang="en">Submit & Get Review Text →</span>
+    <span data-lang="zh">提交并获取评价文本 →</span>
+    <span data-lang="ko">제출하고 리뷰 텍스트 받기 →</span>
+  </button>
   <div style="font-size:11px;color:var(--muted);text-align:center;">Googleへの投稿は任意です</div>
 </div>
 
@@ -359,7 +406,7 @@ function showPhotoSuccess(surveyUrl) {
   ].join('');
 }
 
-const state = { service:0, atmosphere:0, moments:[], momentOther:'', nextVisit:'', shopComment:'', age:'', gender:'', visitReason:'', nps:'' };
+const state = { service:0, atmosphere:0, moments:[], momentOther:'', nextVisit:'', shopComment:'', age:'', gender:'', visitReason:'', nps:'', country:'', lang:'ja' };
 const hints = ['','もう少しかな…','普通でした','よかった！','とてもよかった！','最高でした！✨'];
 
 function initStars(groupId, key, hintId) {
@@ -448,6 +495,23 @@ document.querySelectorAll('#npsOpts .opt').forEach(opt => {
 function checkSubmit() {
 }
 
+// Q10 出身国（単一選択）
+document.querySelectorAll('#countryOpts .opt').forEach(opt => {
+  opt.addEventListener('click', () => {
+    document.querySelectorAll('#countryOpts .opt').forEach(o => o.classList.remove('sel'));
+    opt.classList.add('sel');
+    state.country = opt.dataset.v;
+  });
+});
+
+// 言語切り替え
+function setLang(lang) {
+  state.lang = lang;
+  document.body.className = 'lang-' + lang;
+  document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+  event.target.classList.add('active');
+}
+
 async function submitForm() {
   document.getElementById('submitBtn').disabled = true;
   document.getElementById('loading').classList.add('show');
@@ -455,7 +519,7 @@ async function submitForm() {
   const payload = {
     shopName: SHOP_NAME, placeId: PLACE_ID, notionDbId: NOTION_DB_ID,
     service: state.service, atmosphere: state.atmosphere,
-    moment: momentText, nextVisit: state.nextVisit, shopComment: state.shopComment, age: state.age, gender: state.gender, visitReason: state.visitReason, nps: state.nps,
+    moment: momentText, nextVisit: state.nextVisit, shopComment: state.shopComment, age: state.age, gender: state.gender, visitReason: state.visitReason, nps: state.nps, country: state.country, lang: state.lang,
   };
   let reviewText = '';
   let googleUrl = PLACE_ID
