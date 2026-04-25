@@ -141,14 +141,30 @@ export const handler = async (event) => {
     console.log('[980] 店舗設定:', settings ? '取得済み' : 'なし');
 
     const dbId = data.notionDbId || process.env.NOTION_980_DB_ID;
-    if (dbId) { await saveToNotion(dbId, data); console.log('[980] Notion保存完了'); }
+    const pageRes = dbId ? await saveToNotion(dbId, data) : null;
+if (pageRes) console.log('[980] Notion保存完了');
 
     const reviewText = await generateReview(data, settings);
     console.log('[980] 口コミ文生成完了');
 
     const replyText = reviewText ? await generateReply(data, reviewText, settings) : null;
     console.log('[980] 返信文生成完了');
-
+if (pageRes && replyText) {
+      await fetch(`https://api.notion.com/v1/pages/${pageRes.id}`, {
+        method: 'PATCH',
+        headers: {
+          'Authorization': `Bearer ${NOTION_TOKEN}`,
+          'Content-Type': 'application/json',
+          'Notion-Version': '2022-06-28',
+        },
+        body: JSON.stringify({
+          properties: {
+            'AI返信文': { rich_text: [{ text: { content: replyText } }] },
+          },
+        }),
+      });
+      console.log('[980] AI返信文をNotionに書き戻し完了');
+    }
     const googleUrl = data.placeId
       ? `https://search.google.com/local/writereview?placeid=${data.placeId}&hl=ja`
       : null;
