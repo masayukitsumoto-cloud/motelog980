@@ -398,42 +398,107 @@ const DISCOUNT     = p.get('discount') || '10';
   <div id="couponCard" style="width:100%;background:linear-gradient(135deg,#2D6A4F,#1B4A35);border-radius:16px;padding:20px;text-align:center;position:relative;overflow:hidden;">
     <div style="position:absolute;top:-20px;right:-20px;width:80px;height:80px;border-radius:50%;background:rgba(255,255,255,.08);"></div>
     <div style="position:absolute;bottom:-30px;left:-20px;width:100px;height:100px;border-radius:50%;background:rgba(255,255,255,.06);"></div>
-    <div style="font-size:11px;color:#9FE1CB;letter-spacing:.12em;margin-bottom:6px;">会計割引クーポン</div>
+    <div style="font-size:11px;color:#9FE1CB;letter-spacing:.12em;margin-bottom:6px;">
+          <span data-lang="ja">会計割引クーポン</span>
+          <span data-lang="en">Bill Discount Coupon</span>
+          <span data-lang="zh">消费折扣券</span>
+          <span data-lang="ko">계산 할인 쿠폰</span>
+        </div>
     <div style="font-size:52px;font-weight:700;color:#FAC775;line-height:1;" id="discountNum">10%</div>
     <div style="font-size:13px;color:#fff;margin-top:4px;">OFF</div>
     <div style="margin-top:14px;padding:10px;background:rgba(255,255,255,.1);border-radius:8px;">
-      <div style="font-size:12px;color:#9FE1CB;margin-bottom:4px;">使い方</div>
-      <div style="font-size:13px;color:#fff;line-height:1.6;">この画面をレジでスタッフに<br>見せてください</div>
+      <div style="font-size:12px;color:#9FE1CB;margin-bottom:4px;">
+          <span data-lang="ja">使い方</span>
+          <span data-lang="en">How to use</span>
+          <span data-lang="zh">使用方法</span>
+          <span data-lang="ko">사용 방법</span>
+        </div>
+      <div style="font-size:13px;color:#fff;line-height:1.6;">
+          <span data-lang="ja">この画面をレジでスタッフに<br>見せてください</span>
+          <span data-lang="en">Show this screen to staff<br>at the register</span>
+          <span data-lang="zh">请在收银台向员工<br>出示此画面</span>
+          <span data-lang="ko">계산대에서 직원에게<br>이 화면을 보여주세요</span>
+        </div>
     </div>
-    <div style="margin-top:10px;font-size:11px;color:rgba(255,255,255,.5);">本日のお会計のみ有効</div>
+    <div style="margin-top:10px;font-size:11px;color:rgba(255,255,255,.5);">
+          <span data-lang="ja">本日のお会計のみ有効</span>
+          <span data-lang="en">Valid for today's bill only</span>
+          <span data-lang="zh">仅限今日消费有效</span>
+          <span data-lang="ko">오늘 계산에만 유효</span>
+        </div>
   </div>
 
-  <div class="sub">ご協力ありがとうございました！<br>AIが口コミ文を作りました 🎉</div>
+  <div class="sub">
+          <span data-lang="ja">ご協力ありがとうございました！<br>AIが口コミ文を作りました 🎉</span>
+          <span data-lang="en">Thank you so much!<br>AI has created your review 🎉</span>
+          <span data-lang="zh">非常感谢您的配合！<br>AI已为您生成评价内容 🎉</span>
+          <span data-lang="ko">협조해 주셔서 감사합니다!<br>AI가 리뷰를 작성했습니다 🎉</span>
+        </div>
   <div class="review-box">
-    <div class="review-label">📝 AIが作ったあなたの口コミ文</div>
-    <div class="review-body" id="reviewText">生成中...</div>
-    <button onclick="copyText()" id="copyBtn" style="margin-top:14px;width:100%;padding:11px;border:1.5px solid var(--gold);border-radius:8px;background:transparent;color:#8B6914;font-size:13px;font-weight:600;cursor:pointer;">📋 コピーする</button>
+    <div class="review-label">
+          <span data-lang="ja">📝 AIが作ったあなたの口コミ文</span>
+          <span data-lang="en">📝 Your AI-Generated Review</span>
+          <span data-lang="zh">📝 AI为您生成的评价内容</span>
+          <span data-lang="ko">📝 AI가 작성한 리뷰</span>
+        </div>
+    <div class="review-body" id="reviewText">
+          <span data-lang="ja">生成中...</span>
+          <span data-lang="en">Generating...</span>
+          <span data-lang="zh">生成中...</span>
+          <span data-lang="ko">생성 중...</span>
+        </div>
+    <button onclick="copyText()" id="copyBtn" style="margin-top:14px;width:100%;padding:11px;border:1.5px solid var(--gold);border-radius:8px;background:transparent;color:#8B6914;font-size:13px;font-weight:600;cursor:pointer;"><span data-lang="ja">📋 コピーする</span><span data-lang="en">📋 Copy</span><span data-lang="zh">📋 复制</span><span data-lang="ko">📋 복사</span></button>
   </div>
   <div id="replyBox" style="display:none;width:100%;background:var(--white);border-radius:var(--r);padding:18px;border-left:3px solid var(--green);box-shadow:0 2px 12px rgba(0,0,0,.05);">
-    <div style="font-size:10px;font-weight:700;color:var(--green);letter-spacing:.1em;margin-bottom:10px;">💬 オーナー向け返信文（AIが生成）</div>
+    <div style="font-size:10px;font-weight:700;color:var(--green);letter-spacing:.1em;margin-bottom:10px;">
+          <span data-lang="ja">💬 オーナー向け返信文（AIが生成）</span>
+          <span data-lang="en">💬 Owner Reply (AI Generated)</span>
+          <span data-lang="zh">💬 店主回复（AI生成）</span>
+          <span data-lang="ko">💬 사장님 답글（AI 생성）</span>
+        </div>
     <div class="review-body" id="replyText"></div>
-    <button onclick="copyReply()" id="copyReplyBtn" style="margin-top:14px;width:100%;padding:11px;border:1.5px solid var(--green);border-radius:8px;background:transparent;color:var(--green);font-size:13px;font-weight:600;cursor:pointer;">📋 返信文をコピー</button>
+    <button onclick="copyReply()" id="copyReplyBtn" style="margin-top:14px;width:100%;padding:11px;border:1.5px solid var(--green);border-radius:8px;background:transparent;color:var(--green);font-size:13px;font-weight:600;cursor:pointer;"><span data-lang="ja">📋 返信文をコピー</span><span data-lang="en">📋 Copy Reply</span><span data-lang="zh">📋 复制回复</span><span data-lang="ko">📋 답글 복사</span></button>
   </div>
 
   <div class="card" style="display:flex;flex-direction:column;gap:20px;">
-    <div style="font-size:13px;font-weight:600;color:var(--green);text-align:center;">よければGoogleに投稿してください ✨</div>
+    <div style="font-size:13px;font-weight:600;color:var(--green);text-align:center;">
+          <span data-lang="ja">よければGoogleに投稿してください ✨</span>
+          <span data-lang="en">Please post your review on Google ✨</span>
+          <span data-lang="zh">如果方便，请在谷歌上发布评价 ✨</span>
+          <span data-lang="ko">구글에 리뷰를 남겨주세요 ✨</span>
+        </div>
     <div class="flow-step">
       <div class="flow-num g">1</div>
       <div>
-        <div class="flow-title">上の口コミ文をコピー</div>
-        <div class="flow-desc">「コピーする」ボタンを押すだけです。</div>
+        <div class="flow-title">
+          <span data-lang="ja">上の口コミ文をコピー</span>
+          <span data-lang="en">Copy the review above</span>
+          <span data-lang="zh">复制上面的评价内容</span>
+          <span data-lang="ko">위의 리뷰를 복사</span>
+        </div>
+        <div class="flow-desc">
+          <span data-lang="ja">「コピーする」ボタンを押すだけです。</span>
+          <span data-lang="en">Just press the "Copy" button.</span>
+          <span data-lang="zh">只需按下"复制"按钮。</span>
+          <span data-lang="ko">「복사」버튼을 누르기만 하면 됩니다.</span>
+        </div>
       </div>
     </div>
     <div class="flow-step">
       <div class="flow-num b">2</div>
       <div>
-        <div class="flow-title">Googleで貼り付け＋写真を投稿</div>
-        <div class="flow-desc">さっき撮った料理写真と一緒に投稿すると<br>お店の応援になります 🙏<br><span style="font-size:11px;color:var(--muted);">写真なしでも投稿できます</span></div>
+        <div class="flow-title">
+          <span data-lang="ja">Googleで貼り付け＋写真を投稿</span>
+          <span data-lang="en">Paste on Google + Add your photo</span>
+          <span data-lang="zh">在谷歌粘贴＋上传照片</span>
+          <span data-lang="ko">구글에 붙여넣기 + 사진 업로드</span>
+        </div>
+        <div class="flow-desc">
+          <span data-lang="ja">さっき撮った料理写真と一緒に投稿すると<br>お店の応援になります 🙏<br><span style="font-size:11px;color:var(--muted);">写真なしでも投稿できます</span></span>
+          <span data-lang="en">Posting with your food photo helps the restaurant 🙏<br><span style="font-size:11px;color:var(--muted);">You can also post without a photo</span></span>
+          <span data-lang="zh">和刚才拍的餐食照片一起发布<br>是对餐厅最好的支持 🙏<br><span style="font-size:11px;color:var(--muted);">没有照片也可以发布</span></span>
+          <span data-lang="ko">방금 찍은 음식 사진과 함께 올리면<br>가게에 큰 힘이 됩니다 🙏<br><span style="font-size:11px;color:var(--muted);">사진 없이도 올릴 수 있습니다</span></span>
+        </div>
         <a class="btn btn-blue" id="googleBtn" href="#" target="_blank" style="margin-top:10px;padding:13px 16px;font-size:14px;border-radius:10px;">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" style="flex-shrink:0">
             <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#fff"/>
@@ -441,12 +506,17 @@ const DISCOUNT     = p.get('discount') || '10';
             <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#fff"/>
             <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#fff"/>
           </svg>
-          Googleマップで口コミを書く
+          <span data-lang="ja">Googleマップで口コミを書く</span><span data-lang="en">Write a Google Review</span><span data-lang="zh">在谷歌地图写评价</span><span data-lang="ko">구글 지도에 리뷰 쓰기</span>
         </a>
       </div>
     </div>
   </div>
-  <div style="font-size:12px;color:var(--muted);text-align:center;line-height:1.8;">このページはいつでも閉じてOKです 🙏<br>Googleへの投稿は任意です。しなくても大丈夫です。</div>
+  <div style="font-size:12px;color:var(--muted);text-align:center;line-height:1.8;">
+          <span data-lang="ja">このページはいつでも閉じてOKです 🙏<br>Googleへの投稿は任意です。しなくても大丈夫です。</span>
+          <span data-lang="en">You can close this page anytime 🙏<br>Posting on Google is optional. No worries!</span>
+          <span data-lang="zh">您随时可以关闭此页面 🙏<br>在谷歌上发布评价是可选的，不做也没关系。</span>
+          <span data-lang="ko">이 페이지는 언제든지 닫아도 됩니다 🙏<br>구글 리뷰 작성은 선택사항입니다.</span>
+        </div>
 </div>
 
 <div class="powered">Powered by もてログ980</div>
@@ -475,38 +545,94 @@ function openCamera() {
 }
 
 function showPhotoSuccess(surveyUrl) {
+  const lang = state.lang || 'ja';
+  const t = {
+    ja: {
+      title: '最高の1枚が撮れましたね！',
+      sub: 'この写真、誰かに見せたくなりませんか？<br>口コミに写真を添えると<strong style="color:#2D6A4F;">もっと伝わります</strong>',
+      couponLabel: 'アンケートに答えると',
+      couponSub: '会計割引クーポンがもらえます 🎁',
+      nextTitle: '次にやること',
+      step1: '今はそのまま食事を楽しんでください',
+      step2: 'お会計時にレジ横のQRを読んで<br><strong>30秒アンケートに答えるだけ</strong>',
+      btn: 'いますぐアンケートに答える（10%割引）→',
+      foot: '食事中でも後でもOKです。<br>レジ横のQRからもアクセスできます。',
+    },
+    en: {
+      title: 'Great shot! 📸',
+      sub: 'Want to share this photo?<br>Reviews with photos are <strong style="color:#2D6A4F;">more convincing!</strong>',
+      couponLabel: 'Complete the survey and get',
+      couponSub: '10% off your bill! 🎁',
+      nextTitle: "What's next",
+      step1: 'Enjoy your meal for now',
+      step2: 'Scan the QR at the register<br><strong>and answer a 30-second survey</strong>',
+      btn: 'Answer Survey Now (10% OFF) →',
+      foot: 'You can do it during or after your meal.<br>Also accessible via QR at the register.',
+    },
+    zh: {
+      title: '拍得很好！📸',
+      sub: '想把这张照片分享给别人吗？<br>带照片的评价<strong style="color:#2D6A4F;">更有说服力！</strong>',
+      couponLabel: '完成问卷即可获得',
+      couponSub: '消费9折优惠券！🎁',
+      nextTitle: '接下来做什么',
+      step1: '现在请继续享用您的餐食',
+      step2: '结账时扫描收银台旁的二维码<br><strong>回答30秒问卷即可</strong>',
+      btn: '立即回答问卷（享9折优惠）→',
+      foot: '用餐中或用餐后均可操作。<br>也可通过收银台旁的二维码访问。',
+    },
+    ko: {
+      title: '멋진 사진이에요! 📸',
+      sub: '이 사진을 누군가에게 보여주고 싶지 않으신가요?<br>사진이 있는 리뷰는 <strong style="color:#2D6A4F;">더 잘 전달됩니다!</strong>',
+      couponLabel: '설문 완료 시',
+      couponSub: '계산 10% 할인 쿠폰 증정! 🎁',
+      nextTitle: '다음에 할 일',
+      step1: '지금은 식사를 즐겨주세요',
+      step2: '계산 시 계산대 옆 QR코드를 스캔하여<br><strong>30초 설문에 답해주세요</strong>',
+      btn: '지금 설문 답하기 (10% 할인) →',
+      foot: '식사 중이나 식사 후에도 괜찮습니다.<br>계산대 옆 QR코드로도 접근할 수 있습니다.',
+    },
+  };
+  const s = t[lang] || t['ja'];
   const screen = document.getElementById('screenPhoto');
+  const btnActive = (l) => lang === l ? 'active' : '';
+  const langBtns = `<div class="lang-switcher">
+    <button class="lang-btn ${btnActive('ja')}" onclick="state.lang='ja';document.body.className='lang-ja';showPhotoSuccess('${surveyUrl}')">🇯🇵 日本語</button>
+    <button class="lang-btn ${btnActive('en')}" onclick="state.lang='en';document.body.className='lang-en';showPhotoSuccess('${surveyUrl}')">🇺🇸 English</button>
+    <button class="lang-btn ${btnActive('zh')}" onclick="state.lang='zh';document.body.className='lang-zh';showPhotoSuccess('${surveyUrl}')">🇨🇳 中文</button>
+    <button class="lang-btn ${btnActive('ko')}" onclick="state.lang='ko';document.body.className='lang-ko';showPhotoSuccess('${surveyUrl}')">🇰🇷 한국어</button>
+  </div>`;
   screen.innerHTML = [
+    langBtns,
     '<div style="text-align:center;">',
-      '<div style="font-size:56px;margin-bottom:8px;">\u{1F4F8}</div>',
-      '<div style="font-size:20px;font-weight:700;color:#2D6A4F;margin-bottom:6px;">最高の1枚が撮れましたね！</div>',
-      '<div style="font-size:13px;color:#888;line-height:1.7;">この写真、誰かに見せたくなりませんか？<br>口コミに写真を添えると<strong style="color:#2D6A4F;">もっと伝わります</strong></div>',
+      '<div style="font-size:56px;margin-bottom:8px;">📸</div>',
+      '<div style="font-size:20px;font-weight:700;color:#2D6A4F;margin-bottom:6px;">' + s.title + '</div>',
+      '<div style="font-size:13px;color:#888;line-height:1.7;">' + s.sub + '</div>',
     '</div>',
     '<div style="width:100%;background:linear-gradient(135deg,#2D6A4F,#1B4A35);border-radius:16px;padding:20px;text-align:center;">',
-      '<div style="font-size:12px;color:#9FE1CB;margin-bottom:4px;">アンケートに答えると</div>',
+      '<div style="font-size:12px;color:#9FE1CB;margin-bottom:4px;">' + s.couponLabel + '</div>',
       '<div style="font-size:40px;font-weight:700;color:#FAC775;line-height:1;">10%</div>',
-      '<div style="font-size:13px;color:#fff;margin-top:2px;">会計割引クーポンがもらえます \uD83C\uDF81</div>',
+      '<div style="font-size:13px;color:#fff;margin-top:2px;">' + s.couponSub + '</div>',
     '</div>',
     '<div style="width:100%;background:#FBF5E6;border:1.5px solid #C9A84C;border-radius:12px;padding:16px;">',
-      '<div style="font-size:12px;font-weight:600;color:#8B6914;margin-bottom:10px;text-align:center;">次にやること</div>',
+      '<div style="font-size:12px;font-weight:600;color:#8B6914;margin-bottom:10px;text-align:center;">' + s.nextTitle + '</div>',
       '<div style="display:flex;gap:10px;align-items:flex-start;margin-bottom:10px;">',
         '<div style="min-width:24px;height:24px;border-radius:50%;background:#C9A84C;color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0;">1</div>',
-        '<div style="font-size:13px;color:#8B6914;line-height:1.6;">今はそのまま食事を楽しんでください</div>',
+        '<div style="font-size:13px;color:#8B6914;line-height:1.6;">' + s.step1 + '</div>',
       '</div>',
       '<div style="display:flex;gap:10px;align-items:flex-start;">',
         '<div style="min-width:24px;height:24px;border-radius:50%;background:#2D6A4F;color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0;">2</div>',
-        '<div style="font-size:13px;color:#8B6914;line-height:1.6;">お会計時にレジ横のQRを読んで<br><strong>30秒アンケートに答えるだけ</strong></div>',
+        '<div style="font-size:13px;color:#8B6914;line-height:1.6;">' + s.step2 + '</div>',
       '</div>',
     '</div>',
-    '<button onclick="window.location.href=\'' + surveyUrl + '\'" style="width:100%;padding:17px;border:none;border-radius:13px;background:#2D6A4F;color:#fff;font-size:15px;font-weight:700;cursor:pointer;">',
-      'いますぐアンケートに答える（10%割引）→',
-    '</button>',
-    '<div style="font-size:12px;color:#888;text-align:center;line-height:1.7;">食事中でも後でもOKです。<br>レジ横のQRからもアクセスできます。</div>',
+    '<button onclick="window.location.href=\'' + surveyUrl + '\'" style="width:100%;padding:17px;border:none;border-radius:13px;background:#2D6A4F;color:#fff;font-size:15px;font-weight:700;cursor:pointer;">' + s.btn + '</button>',
+    '<div style="font-size:12px;color:#888;text-align:center;line-height:1.7;">' + s.foot + '</div>',
   ].join('');
 }
 
+
 const state = { service:0, atmosphere:0, moments:[], momentOther:'', nextVisit:'', shopComment:'', age:'', gender:'', visitReason:'', nps:'', country:'', lang:'ja' };
 const hints = ['','もう少しかな…','普通でした','よかった！','とてもよかった！','最高でした！✨'];
+window._hints = hints;
 
 function initStars(groupId, key, hintId) {
   document.querySelectorAll(`#${groupId} .star`).forEach(star => {
@@ -515,7 +641,7 @@ function initStars(groupId, key, hintId) {
       state[key] = v;
       document.querySelectorAll(`#${groupId} .star`).forEach(s =>
         s.classList.toggle('on', Number(s.dataset.v) <= v));
-      document.getElementById(hintId).textContent = hints[v];
+      document.getElementById(hintId).textContent = (window._hints || hints)[v];
       checkReady();
     });
   });
@@ -607,8 +733,19 @@ document.querySelectorAll('#countryOpts .opt').forEach(opt => {
 function setLang(lang) {
   state.lang = lang;
   document.body.className = 'lang-' + lang;
-  document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
-  event.target.classList.add('active');
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.classList.remove('active');
+    if (btn.getAttribute('onclick') && btn.getAttribute('onclick').includes("'" + lang + "'")) {
+      btn.classList.add('active');
+    }
+  });
+  const hintsMap = {
+    ja: ['','もう少しかな…','普通でした','よかった！','とてもよかった！','最高でした！✨'],
+    en: ['','Needs improvement','Average','Good!','Very good!','Excellent! ✨'],
+    zh: ['','有待改善','一般','不错！','非常好！','完美！✨'],
+    ko: ['','개선이 필요해요','보통이에요','좋았어요!','매우 좋았어요!','최고예요! ✨'],
+  };
+  window._hints = hintsMap[lang] || hintsMap['ja'];
 }
 
 async function submitForm() {
