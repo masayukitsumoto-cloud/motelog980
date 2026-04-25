@@ -757,7 +757,7 @@ async function submitForm() {
   document.getElementById('submitBtn').disabled = true;
   document.getElementById('loading').classList.add('show');
   // body.classNameから確実にlangを取得（state.langより確実）
-  const currentLang = document.body.className.replace('lang-', '') || state.lang || 'ja';
+  const currentLang = ['ja','en','zh','ko'].find(l => document.body.classList.contains('lang-' + l)) || state.lang || 'ja';
   state.lang = currentLang;
   const momentText = [...state.moments, state.momentOther.trim()].filter(Boolean).join('、');
   const payload = {
