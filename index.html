@@ -756,13 +756,14 @@ function setLang(lang) {
 async function submitForm() {
   document.getElementById('submitBtn').disabled = true;
   document.getElementById('loading').classList.add('show');
-  console.log('[DEBUG] state.lang at submit:', state.lang);
-  console.log('[DEBUG] document.body.className:', document.body.className);
+  // body.classNameから確実にlangを取得（state.langより確実）
+  const currentLang = document.body.className.replace('lang-', '') || state.lang || 'ja';
+  state.lang = currentLang;
   const momentText = [...state.moments, state.momentOther.trim()].filter(Boolean).join('、');
   const payload = {
     shopName: SHOP_NAME, placeId: PLACE_ID, notionDbId: NOTION_DB_ID,
     service: state.service, atmosphere: state.atmosphere,
-    moment: momentText, nextVisit: state.nextVisit, shopComment: state.shopComment, age: state.age, gender: state.gender, visitReason: state.visitReason, nps: state.nps, country: state.country, lang: state.lang,
+    moment: momentText, nextVisit: state.nextVisit, shopComment: state.shopComment, age: state.age, gender: state.gender, visitReason: state.visitReason, nps: state.nps, country: state.country, lang: currentLang,
   };
   let reviewText = '';
   let googleUrl = PLACE_ID
