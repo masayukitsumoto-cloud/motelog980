@@ -94,17 +94,52 @@ const DISCOUNT     = p.get('discount') || '10';
     <button class="lang-btn" onclick="setLang('ko')">🇰🇷 한국어</button>
   </div>
   <div class="shop" id="shopA"></div>
-  <div class="sub">料理が来た今がシャッターチャンスです 📸</div>
+  <div class="sub">
+          <span data-lang="ja">料理が来た今がシャッターチャンスです 📸</span>
+          <span data-lang="en">Now is the perfect time for a photo! 📸</span>
+          <span data-lang="zh">现在是拍照的最佳时机！📸</span>
+          <span data-lang="ko">지금이 사진 찍기 좋은 순간입니다! 📸</span>
+        </div>
   <div style="width:100%;background:#FBF5E6;border:1px solid #C9A84C;border-radius:12px;padding:14px 16px;text-align:center;">
-    <div style="font-size:13px;font-weight:600;color:#8B6914;margin-bottom:6px;">本日の会計が最大10%割引に🎁</div>
-    <div style="font-size:12px;color:#8B6914;line-height:1.7;">LINE登録で5%OFF<br>アンケート回答で<strong>10%OFF</strong></div>
+    <div style="font-size:13px;font-weight:600;color:#8B6914;margin-bottom:6px;">
+          <span data-lang="ja">本日の会計が最大10%割引に🎁</span>
+          <span data-lang="en">Get up to 10% off your bill today! 🎁</span>
+          <span data-lang="zh">今天消费最高享9折优惠！🎁</span>
+          <span data-lang="ko">오늘 계산 시 최대 10% 할인! 🎁</span>
+        </div>
+    <div style="font-size:12px;color:#8B6914;line-height:1.7;">
+          <span data-lang="ja">LINE登録で5%OFF<br>アンケート回答で<strong>10%OFF</strong></span>
+          <span data-lang="en">5% off for LINE registration<br><strong>10% off</strong> for survey completion</span>
+          <span data-lang="zh">注册LINE享5%折扣<br>完成问卷享<strong>10%折扣</strong></span>
+          <span data-lang="ko">LINE 등록 시 5% 할인<br>설문 완료 시 <strong>10% 할인</strong></span>
+        </div>
   </div>
   <div class="photo-hint">
-    <div class="photo-hint-title">📷 1枚だけ写真を撮ってください</div>
-    <div class="photo-hint-body">料理が来たばかりの今が一番きれいです。<br>スマホのカメラで1枚だけ撮っておいてください。<br><br>お会計の後にもう一つQRコードがあります。<br>そこで口コミ文をAIが作り、<br>写真と一緒にGoogleに投稿できます 🙏</div>
+    <div class="photo-hint-title">
+          <span data-lang="ja">📷 1枚だけ写真を撮ってください</span>
+          <span data-lang="en">📷 Please take just one photo</span>
+          <span data-lang="zh">📷 请拍一张照片</span>
+          <span data-lang="ko">📷 사진을 한 장만 찍어주세요</span>
+        </div>
+    <div class="photo-hint-body">
+          <span data-lang="ja">料理が来たばかりの今が一番きれいです。<br>スマホのカメラで1枚だけ撮っておいてください。<br><br>お会計の後にもう一つQRコードがあります。<br>そこで口コミ文をAIが作り、<br>写真と一緒にGoogleに投稿できます 🙏</span>
+          <span data-lang="en">The food looks best right when it arrives!<br>Please take one photo with your smartphone.<br><br>After paying, there will be another QR code.<br>AI will create a review for you<br>to post on Google with your photo 🙏</span>
+          <span data-lang="zh">刚上菜时食物看起来最好看！<br>请用手机拍一张照片。<br><br>结账后还有一个二维码。<br>AI将为您生成评价内容，<br>可以和照片一起发布到谷歌地图 🙏</span>
+          <span data-lang="ko">음식이 나왔을 때가 가장 예쁩니다!<br>스마트폰으로 사진을 한 장 찍어주세요.<br><br>계산 후 QR코드가 하나 더 있습니다.<br>AI가 리뷰를 작성해드리고<br>사진과 함께 구글에 등록할 수 있습니다 🙏</span>
+        </div>
   </div>
-  <button class="btn btn-green" onclick="openCamera()">📷 カメラを開く</button>
-  <div style="font-size:12px;color:var(--muted);text-align:center;line-height:1.7;">撮影後はそのまま食事をお楽しみください。<br>お会計時にもう一枚QRがあります。</div>
+  <button class="btn btn-green" onclick="openCamera()">
+          <span data-lang="ja">📷 カメラを開く</span>
+          <span data-lang="en">📷 Open Camera</span>
+          <span data-lang="zh">📷 打开相机</span>
+          <span data-lang="ko">📷 카메라 열기</span>
+        </button>
+  <div style="font-size:12px;color:var(--muted);text-align:center;line-height:1.7;">
+          <span data-lang="ja">撮影後はそのまま食事をお楽しみください。<br>お会計時にもう一枚QRがあります。</span>
+          <span data-lang="en">After taking the photo, enjoy your meal!<br>There will be another QR code at checkout.</span>
+          <span data-lang="zh">拍完照片后请享用您的餐食！<br>结账时还有另一个二维码。</span>
+          <span data-lang="ko">사진 촬영 후 식사를 즐겨주세요!<br>계산 시 QR코드가 하나 더 있습니다.</span>
+        </div>
 </div>
 
 <!-- アンケートページ -->
@@ -126,18 +161,40 @@ const DISCOUNT     = p.get('discount') || '10';
       <div class="step-dot">3</div>
     </div>
     <div style="display:flex;justify-content:space-between;margin-top:5px;font-size:10px;color:var(--muted);">
-      <span style="flex:1;">写真撮影</span><span style="flex:1;">アンケート</span><span style="flex:1;">口コミ投稿</span>
+      <span style="flex:1;"><span data-lang="ja">写真撮影</span><span data-lang="en">Photo</span><span data-lang="zh">拍照</span><span data-lang="ko">사진</span></span>
+          <span style="flex:1;"><span data-lang="ja">アンケート</span><span data-lang="en">Survey</span><span data-lang="zh">问卷</span><span data-lang="ko">설문</span></span>
+          <span style="flex:1;"><span data-lang="ja">口コミ投稿</span><span data-lang="en">Review</span><span data-lang="zh">评价</span><span data-lang="ko">리뷰</span></span>
     </div>
   </div>
   <div style="width:100%;background:#FBF5E6;border:1px solid #C9A84C;border-radius:12px;padding:12px 16px;text-align:center;">
-    <div style="font-size:13px;font-weight:600;color:#8B6914;">回答完了で今日の会計が10%OFF 🎁</div>
-    <div style="font-size:11px;color:#8B6914;margin-top:3px;">クーポンは送信後の画面に表示されます</div>
+    <div style="font-size:13px;font-weight:600;color:#8B6914;">
+          <span data-lang="ja">回答完了で今日の会計が10%OFF 🎁</span>
+          <span data-lang="en">Complete survey for 10% off today! 🎁</span>
+          <span data-lang="zh">完成问卷享今日消费9折优惠！🎁</span>
+          <span data-lang="ko">설문 완료 시 오늘 10% 할인! 🎁</span>
+        </div>
+    <div style="font-size:11px;color:#8B6914;margin-top:3px;">
+          <span data-lang="ja">クーポンは送信後の画面に表示されます</span>
+          <span data-lang="en">Coupon will appear after submission</span>
+          <span data-lang="zh">优惠券将在提交后显示</span>
+          <span data-lang="ko">쿠폰은 제출 후 화면에 표시됩니다</span>
+        </div>
   </div>
-  <div class="sub">30秒で完了。ご協力ありがとうございます 🙏</div>
+  <div class="sub">
+          <span data-lang="ja">30秒で完了。ご協力ありがとうございます 🙏</span>
+          <span data-lang="en">Done in 30 seconds. Thank you! 🙏</span>
+          <span data-lang="zh">30秒内完成。感谢您的配合！🙏</span>
+          <span data-lang="ko">30초면 완료됩니다. 감사합니다! 🙏</span>
+        </div>
   <div class="card">
     <div class="q-block">
       <div class="q-num">Q 1</div>
-      <div class="q-text">接客はいかがでしたか？</div>
+      <div class="q-text">
+          <span data-lang="ja">接客はいかがでしたか？</span>
+          <span data-lang="en">How was the service?</span>
+          <span data-lang="zh">服务如何？</span>
+          <span data-lang="ko">서비스는 어떠셨나요?</span>
+        </div>
       <div class="stars" id="stars-service">
         <span class="star" data-v="1">★</span><span class="star" data-v="2">★</span>
         <span class="star" data-v="3">★</span><span class="star" data-v="4">★</span>
@@ -147,7 +204,12 @@ const DISCOUNT     = p.get('discount') || '10';
     </div>
     <div class="q-block">
       <div class="q-num">Q 2</div>
-      <div class="q-text">お店の雰囲気はいかがでしたか？</div>
+      <div class="q-text">
+          <span data-lang="ja">お店の雰囲気はいかがでしたか？</span>
+          <span data-lang="en">How was the atmosphere?</span>
+          <span data-lang="zh">餐厅氛围如何？</span>
+          <span data-lang="ko">가게 분위기는 어떠셨나요?</span>
+        </div>
       <div class="stars" id="stars-atmosphere">
         <span class="star" data-v="1">★</span><span class="star" data-v="2">★</span>
         <span class="star" data-v="3">★</span><span class="star" data-v="4">★</span>
@@ -157,41 +219,61 @@ const DISCOUNT     = p.get('discount') || '10';
     </div>
     <div class="q-block">
       <div class="q-num">Q 3</div>
-      <div class="q-text">テンションが上がった瞬間は？<br><small style="font-weight:400;font-size:12px;color:var(--muted);">複数OK・その他は下に自由記入</small></div>
+      <div class="q-text">
+          <span data-lang="ja">テンションが上がった瞬間は？<br><small style="font-weight:400;font-size:12px;color:var(--muted);">複数OK・その他は下に自由記入</small></span>
+          <span data-lang="en">What was the highlight of your visit?<br><small style="font-weight:400;font-size:12px;color:var(--muted);">Multiple OK・Write others below</small></span>
+          <span data-lang="zh">您最喜欢的瞬间是什么？<br><small style="font-weight:400;font-size:12px;color:var(--muted);">可多选・其他请在下方填写</small></span>
+          <span data-lang="ko">가장 좋았던 순간은?<br><small style="font-weight:400;font-size:12px;color:var(--muted);">복수 선택 가능・기타는 아래에 입력</small></span>
+        </div>
       <div class="opts" id="momentOpts">
-        <div class="opt" data-v="料理が来たとき">料理が来たとき 🍽️</div>
-        <div class="opt" data-v="見た目が素敵だった">見た目が素敵 📸</div>
-        <div class="opt" data-v="スタッフの対応">スタッフの対応 👏</div>
-        <div class="opt" data-v="味が最高だった">味が最高 😋</div>
-        <div class="opt" data-v="雰囲気がよかった">雰囲気がよかった ✨</div>
-        <div class="opt" data-v="コスパがいい">コスパがいい 💰</div>
+        <div class="opt" data-v="料理が来たとき"><span data-lang="ja">料理が来たとき 🍽️</span><span data-lang="en">Food arrived 🍽️</span><span data-lang="zh">上菜时 🍽️</span><span data-lang="ko">음식이 나왔을 때 🍽️</span></div>
+        <div class="opt" data-v="見た目が素敵だった"><span data-lang="ja">見た目が素敵 📸</span><span data-lang="en">Beautiful presentation 📸</span><span data-lang="zh">外观精美 📸</span><span data-lang="ko">보기 좋았다 📸</span></div>
+        <div class="opt" data-v="スタッフの対応"><span data-lang="ja">スタッフの対応 👏</span><span data-lang="en">Great staff 👏</span><span data-lang="zh">员工服务好 👏</span><span data-lang="ko">직원 응대 👏</span></div>
+        <div class="opt" data-v="味が最高だった"><span data-lang="ja">味が最高 😋</span><span data-lang="en">Delicious taste 😋</span><span data-lang="zh">味道绝佳 😋</span><span data-lang="ko">맛이 최고 😋</span></div>
+        <div class="opt" data-v="雰囲気がよかった"><span data-lang="ja">雰囲気がよかった ✨</span><span data-lang="en">Great atmosphere ✨</span><span data-lang="zh">氛围很好 ✨</span><span data-lang="ko">분위기가 좋았다 ✨</span></div>
+        <div class="opt" data-v="コスパがいい"><span data-lang="ja">コスパがいい 💰</span><span data-lang="en">Great value 💰</span><span data-lang="zh">性价比高 💰</span><span data-lang="ko">가성비 좋다 💰</span></div>
       </div>
       <div style="margin-top:10px;">
-        <textarea id="momentOther" rows="2" maxlength="80" placeholder="その他：どんな瞬間でも（任意）"></textarea>
+        <textarea id="momentOther" rows="2" maxlength="80" placeholder="その他 / Others / 其他 / 기타（任意）"></textarea>
         <div class="char-count"><span id="otherLen">0</span>/80</div>
       </div>
     </div>
     <div class="q-block">
       <div class="q-num">Q 4</div>
-      <div class="q-text">次回は誰と来たいですか？</div>
+      <div class="q-text">
+          <span data-lang="ja">次回は誰と来たいですか？</span>
+          <span data-lang="en">Who would you like to come with next time?</span>
+          <span data-lang="zh">下次您想和谁一起来？</span>
+          <span data-lang="ko">다음엔 누구와 오고 싶으신가요?</span>
+        </div>
       <div class="opts" id="nextOpts">
-        <div class="opt" data-v="家族と">家族と 👨‍👩‍👧</div>
-        <div class="opt" data-v="友人と">友人と 👫</div>
-        <div class="opt" data-v="恋人と">恋人と 💑</div>
-        <div class="opt" data-v="同僚と">同僚と 👔</div>
-        <div class="opt" data-v="一人で">一人で ☕</div>
-        <div class="opt" data-v="また来ます！">また来ます 🔥</div>
+        <div class="opt" data-v="家族と"><span data-lang="ja">家族と 👨‍👩‍👧</span><span data-lang="en">With family 👨‍👩‍👧</span><span data-lang="zh">和家人 👨‍👩‍👧</span><span data-lang="ko">가족과 👨‍👩‍👧</span></div>
+        <div class="opt" data-v="友人と"><span data-lang="ja">友人と 👫</span><span data-lang="en">With friends 👫</span><span data-lang="zh">和朋友 👫</span><span data-lang="ko">친구와 👫</span></div>
+        <div class="opt" data-v="恋人と"><span data-lang="ja">恋人と 💑</span><span data-lang="en">With partner 💑</span><span data-lang="zh">和恋人 💑</span><span data-lang="ko">연인과 💑</span></div>
+        <div class="opt" data-v="同僚と"><span data-lang="ja">同僚と 👔</span><span data-lang="en">With colleagues 👔</span><span data-lang="zh">和同事 👔</span><span data-lang="ko">동료와 👔</span></div>
+        <div class="opt" data-v="一人で"><span data-lang="ja">一人で ☕</span><span data-lang="en">Alone ☕</span><span data-lang="zh">一个人 ☕</span><span data-lang="ko">혼자 ☕</span></div>
+        <div class="opt" data-v="また来ます！"><span data-lang="ja">また来ます 🔥</span><span data-lang="en">Will come back 🔥</span><span data-lang="zh">会再来 🔥</span><span data-lang="ko">또 올게요 🔥</span></div>
       </div>
     </div>
     <div class="q-block">
       <div class="q-num">Q 5</div>
-      <div class="q-text">お店への応援コメント・ご意見があればぜひ教えてください 💬</div>
-      <textarea id="shopComment" rows="3" maxlength="200" placeholder="例：また来ます！○○が特に美味しかったです。／駐車場があると嬉しいです…など"></textarea>
+      <div class="q-text">
+          <span data-lang="ja">お店への応援コメント・ご意見があればぜひ教えてください 💬</span>
+          <span data-lang="en">Any comments or suggestions for the restaurant? 💬</span>
+          <span data-lang="zh">请告诉我们您对餐厅的意见或建议 💬</span>
+          <span data-lang="ko">가게에 대한 응원이나 의견을 알려주세요 💬</span>
+        </div>
+      <textarea id="shopComment" rows="3" maxlength="200" placeholder="例：また来ます！/ e.g. I'll be back! / 例：我会再来！/ 예: 또 올게요!"></textarea>
       <div class="char-count"><span id="commentLen">0</span>/200</div>
     </div>
     <div class="q-block">
       <div class="q-num">Q 6</div>
-      <div class="q-text">お客様の年代を教えてください 🎂</div>
+      <div class="q-text">
+          <span data-lang="ja">お客様の年代を教えてください 🎂</span>
+          <span data-lang="en">What is your age group? 🎂</span>
+          <span data-lang="zh">请告诉我们您的年龄段 🎂</span>
+          <span data-lang="ko">연령대를 알려주세요 🎂</span>
+        </div>
       <div class="opts" id="ageOpts">
         <div class="opt" data-v="10代">10代</div>
         <div class="opt" data-v="20代">20代</div>
@@ -203,30 +285,45 @@ const DISCOUNT     = p.get('discount') || '10';
     </div>
     <div class="q-block">
       <div class="q-num">Q 7</div>
-      <div class="q-text">性別を教えてください</div>
+      <div class="q-text">
+          <span data-lang="ja">性別を教えてください</span>
+          <span data-lang="en">What is your gender?</span>
+          <span data-lang="zh">请告诉我们您的性别</span>
+          <span data-lang="ko">성별을 알려주세요</span>
+        </div>
       <div class="opts" id="genderOpts">
-        <div class="opt" data-v="男性">男性</div>
-        <div class="opt" data-v="女性">女性</div>
-        <div class="opt" data-v="回答しない">回答しない</div>
+        <div class="opt" data-v="男性"><span data-lang="ja">男性</span><span data-lang="en">Male</span><span data-lang="zh">男</span><span data-lang="ko">남성</span></div>
+        <div class="opt" data-v="女性"><span data-lang="ja">女性</span><span data-lang="en">Female</span><span data-lang="zh">女</span><span data-lang="ko">여성</span></div>
+        <div class="opt" data-v="回答しない"><span data-lang="ja">回答しない</span><span data-lang="en">Prefer not to say</span><span data-lang="zh">不作答</span><span data-lang="ko">응답 안 함</span></div>
       </div>
     </div>
     <div class="q-block">
       <div class="q-num">Q 8</div>
-      <div class="q-text">何をきっかけにご来店されましたか？ 🔍</div>
+      <div class="q-text">
+          <span data-lang="ja">何をきっかけにご来店されましたか？ 🔍</span>
+          <span data-lang="en">How did you find us? 🔍</span>
+          <span data-lang="zh">您是如何得知我们餐厅的？🔍</span>
+          <span data-lang="ko">어떻게 알고 오셨나요? 🔍</span>
+        </div>
       <div class="opts" id="visitReasonOpts">
         <div class="opt" data-v="Googleマップ">Googleマップ</div>
         <div class="opt" data-v="食べログ">食べログ</div>
         <div class="opt" data-v="Instagram">Instagram</div>
         <div class="opt" data-v="X（Twitter）">X（Twitter）</div>
-        <div class="opt" data-v="知人の紹介">知人の紹介</div>
-        <div class="opt" data-v="通りがかり">通りがかり</div>
-        <div class="opt" data-v="リピート">リピート</div>
-        <div class="opt" data-v="その他">その他</div>
+        <div class="opt" data-v="知人の紹介"><span data-lang="ja">知人の紹介</span><span data-lang="en">Recommendation</span><span data-lang="zh">朋友推荐</span><span data-lang="ko">지인 추천</span></div>
+        <div class="opt" data-v="通りがかり"><span data-lang="ja">通りがかり</span><span data-lang="en">Passed by</span><span data-lang="zh">路过</span><span data-lang="ko">지나다가</span></div>
+        <div class="opt" data-v="リピート"><span data-lang="ja">リピート</span><span data-lang="en">Repeat visit</span><span data-lang="zh">再次光临</span><span data-lang="ko">재방문</span></div>
+        <div class="opt" data-v="その他"><span data-lang="ja">その他</span><span data-lang="en">Other</span><span data-lang="zh">其他</span><span data-lang="ko">기타</span></div>
       </div>
     </div>
     <div class="q-block">
       <div class="q-num">Q 9</div>
-      <div class="q-text">このお店を友人や家族に紹介したいですか？ 0〜10で教えてください 💌</div>
+      <div class="q-text">
+          <span data-lang="ja">このお店を友人や家族に紹介したいですか？ 0〜10で教えてください 💌</span>
+          <span data-lang="en">How likely are you to recommend us? (0-10) 💌</span>
+          <span data-lang="zh">您向朋友或家人推荐此餐厅的可能性？(0-10) 💌</span>
+          <span data-lang="ko">가족이나 친구에게 추천하고 싶으신가요? (0-10) 💌</span>
+        </div>
       <div class="opts" id="npsOpts" style="justify-content:center;">
         <div class="opt" data-v="0">0</div>
         <div class="opt" data-v="1">1</div>
@@ -290,7 +387,9 @@ const DISCOUNT     = p.get('discount') || '10';
       <div class="step-dot active">3</div>
     </div>
     <div style="display:flex;justify-content:space-between;margin-top:5px;font-size:10px;color:var(--muted);">
-      <span style="flex:1;">写真撮影</span><span style="flex:1;">アンケート</span><span style="flex:1;">口コミ投稿</span>
+      <span style="flex:1;"><span data-lang="ja">写真撮影</span><span data-lang="en">Photo</span><span data-lang="zh">拍照</span><span data-lang="ko">사진</span></span>
+          <span style="flex:1;"><span data-lang="ja">アンケート</span><span data-lang="en">Survey</span><span data-lang="zh">问卷</span><span data-lang="ko">설문</span></span>
+          <span style="flex:1;"><span data-lang="ja">口コミ投稿</span><span data-lang="en">Review</span><span data-lang="zh">评价</span><span data-lang="ko">리뷰</span></span>
     </div>
   </div>
   <div class="shop" id="shopC"></div>
