@@ -756,6 +756,8 @@ function setLang(lang) {
 async function submitForm() {
   document.getElementById('submitBtn').disabled = true;
   document.getElementById('loading').classList.add('show');
+  console.log('[DEBUG] state.lang at submit:', state.lang);
+  console.log('[DEBUG] document.body.className:', document.body.className);
   const momentText = [...state.moments, state.momentOther.trim()].filter(Boolean).join('、');
   const payload = {
     shopName: SHOP_NAME, placeId: PLACE_ID, notionDbId: NOTION_DB_ID,
