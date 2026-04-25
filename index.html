@@ -526,19 +526,6 @@ function show(id) {
   document.getElementById(id).classList.add('show');
   window.scrollTo({ top:0, behavior:'smooth' });
 }
-// URLから言語を自動設定
-const urlLang = new URLSearchParams(location.search).get('lang');
-if (urlLang && ['ja','en','zh','ko'].includes(urlLang)) {
-  state.lang = urlLang;
-  document.body.className = 'lang-' + urlLang;
-  // 写真ページの言語ボタンのアクティブ状態を更新
-  document.querySelectorAll('.lang-btn').forEach(btn => {
-    btn.classList.remove('active');
-    if (btn.getAttribute('onclick') && btn.getAttribute('onclick').includes("'" + urlLang + "'")) {
-      btn.classList.add('active');
-    }
-  });
-}
 show(MODE === 'photo' ? 'screenPhoto' : 'screenSurvey');
 
 function openCamera() {
@@ -630,6 +617,19 @@ function showPhotoSuccess(surveyUrl) {
 
 
 const state = { service:0, atmosphere:0, moments:[], momentOther:'', nextVisit:'', shopComment:'', age:'', gender:'', visitReason:'', nps:'', country:'', lang:'ja' };
+
+// URLから言語を自動設定（stateの後に実行）
+const urlLang = new URLSearchParams(location.search).get('lang');
+if (urlLang && ['ja','en','zh','ko'].includes(urlLang)) {
+  state.lang = urlLang;
+  document.body.className = 'lang-' + urlLang;
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.classList.remove('active');
+    if (btn.getAttribute('onclick') && btn.getAttribute('onclick').includes("'" + urlLang + "'")) {
+      btn.classList.add('active');
+    }
+  });
+}
 const hints = ['','もう少しかな…','普通でした','よかった！','とてもよかった！','最高でした！✨'];
 window._hints = hints;
 
