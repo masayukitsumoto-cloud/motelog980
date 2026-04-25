@@ -145,6 +145,12 @@ const DISCOUNT     = p.get('discount') || '10';
 <!-- アンケートページ -->
 <div class="screen" id="screenSurvey">
   <div class="logo">もてログ980</div>
+  <div class="lang-switcher">
+    <button class="lang-btn active" onclick="setLang('ja')">🇯🇵 日本語</button>
+    <button class="lang-btn" onclick="setLang('en')">🇺🇸 English</button>
+    <button class="lang-btn" onclick="setLang('zh')">🇨🇳 中文</button>
+    <button class="lang-btn" onclick="setLang('ko')">🇰🇷 한국어</button>
+  </div>
   <div class="shop" id="shopB"></div>
   <div style="width:100%;max-width:260px;text-align:center;">
     <div class="steps">
