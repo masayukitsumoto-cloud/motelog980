@@ -145,12 +145,6 @@ const DISCOUNT     = p.get('discount') || '10';
 <!-- アンケートページ -->
 <div class="screen" id="screenSurvey">
   <div class="logo">もてログ980</div>
-  <div class="lang-switcher">
-    <button class="lang-btn active" onclick="setLang('ja')">🇯🇵 日本語</button>
-    <button class="lang-btn" onclick="setLang('en')">🇺🇸 English</button>
-    <button class="lang-btn" onclick="setLang('zh')">🇨🇳 中文</button>
-    <button class="lang-btn" onclick="setLang('ko')">🇰🇷 한국어</button>
-  </div>
   <div class="shop" id="shopB"></div>
   <div style="width:100%;max-width:260px;text-align:center;">
     <div class="steps">
@@ -532,13 +526,26 @@ function show(id) {
   document.getElementById(id).classList.add('show');
   window.scrollTo({ top:0, behavior:'smooth' });
 }
+// URLから言語を自動設定
+const urlLang = new URLSearchParams(location.search).get('lang');
+if (urlLang && ['ja','en','zh','ko'].includes(urlLang)) {
+  state.lang = urlLang;
+  document.body.className = 'lang-' + urlLang;
+  // 写真ページの言語ボタンのアクティブ状態を更新
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.classList.remove('active');
+    if (btn.getAttribute('onclick') && btn.getAttribute('onclick').includes("'" + urlLang + "'")) {
+      btn.classList.add('active');
+    }
+  });
+}
 show(MODE === 'photo' ? 'screenPhoto' : 'screenSurvey');
 
 function openCamera() {
   const inp = document.createElement('input');
   inp.type = 'file'; inp.accept = 'image/*'; inp.capture = 'environment';
   inp.addEventListener('change', () => {
-    const surveyUrl = location.origin + '/motelog980/?mode=survey&shop=' + encodeURIComponent(SHOP_NAME) + '&place=' + PLACE_ID + '&db=' + NOTION_DB_ID + '&discount=' + DISCOUNT;
+    const surveyUrl = location.origin + '/motelog980/?mode=survey&shop=' + encodeURIComponent(SHOP_NAME) + '&place=' + PLACE_ID + '&db=' + NOTION_DB_ID + '&discount=' + DISCOUNT + '&lang=' + (state.lang || 'ja');
     showPhotoSuccess(surveyUrl);
   });
   inp.click();
@@ -594,15 +601,7 @@ function showPhotoSuccess(surveyUrl) {
   };
   const s = t[lang] || t['ja'];
   const screen = document.getElementById('screenPhoto');
-  const btnActive = (l) => lang === l ? 'active' : '';
-  const langBtns = `<div class="lang-switcher">
-    <button class="lang-btn ${btnActive('ja')}" onclick="state.lang='ja';document.body.className='lang-ja';showPhotoSuccess('${surveyUrl}')">🇯🇵 日本語</button>
-    <button class="lang-btn ${btnActive('en')}" onclick="state.lang='en';document.body.className='lang-en';showPhotoSuccess('${surveyUrl}')">🇺🇸 English</button>
-    <button class="lang-btn ${btnActive('zh')}" onclick="state.lang='zh';document.body.className='lang-zh';showPhotoSuccess('${surveyUrl}')">🇨🇳 中文</button>
-    <button class="lang-btn ${btnActive('ko')}" onclick="state.lang='ko';document.body.className='lang-ko';showPhotoSuccess('${surveyUrl}')">🇰🇷 한국어</button>
-  </div>`;
   screen.innerHTML = [
-    langBtns,
     '<div style="text-align:center;">',
       '<div style="font-size:56px;margin-bottom:8px;">📸</div>',
       '<div style="font-size:20px;font-weight:700;color:#2D6A4F;margin-bottom:6px;">' + s.title + '</div>',
