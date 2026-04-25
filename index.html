@@ -770,21 +770,55 @@ async function submitForm() {
     ? `https://search.google.com/local/writereview?placeid=${PLACE_ID}&hl=ja`
     : 'https://maps.google.com';
   try {
-    const res  = await fetch('https://thelog-keeper-production.up.railway.app/api/980/submit', {
-      method:'POST', headers:{'Content-Type':'application/json'},
+    const res = await fetch('https://thelog-keeper-production.up.railway.app/api/980/submit-stream', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload),
     });
-    const json = await res.json();
-    if (json.reviewText) reviewText = json.reviewText;
-    if (json.googleUrl)  googleUrl  = json.googleUrl;
+
+    // 完了ページを先に表示
+    document.getElementById('loading').classList.remove('show');
+    show('screenDone');
+    document.getElementById('googleBtn').href = googleUrl;
+    const reviewEl = document.getElementById('reviewText');
+    reviewEl.textContent = '';
+
+    // ストリーミングで文字をリアルタイム表示
+    const reader = res.body.getReader();
+    const decoder = new TextDecoder();
+    let buffer = '';
+
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      buffer += decoder.decode(value, { stream: true });
+      const lines = buffer.split('\n');
+      buffer = lines.pop();
+      for (const line of lines) {
+        if (!line.startsWith('data:')) continue;
+        try {
+          const j = JSON.parse(line.slice(5).trim());
+          if (j.token) {
+            reviewText += j.token;
+            reviewEl.textContent = reviewText;
+          }
+          if (j.reviewText) {
+            reviewText = j.reviewText;
+            reviewEl.textContent = reviewText;
+          }
+          if (j.googleUrl) {
+            googleUrl = j.googleUrl;
+            document.getElementById('googleBtn').href = googleUrl;
+          }
+        } catch(e) {}
+      }
+    }
   } catch(e) {
     console.error(e);
-    reviewText = 'AIの生成に失敗しました。手動でご記入ください。';
+    document.getElementById('loading').classList.remove('show');
+    document.getElementById('reviewText').textContent = 'AIの生成に失敗しました。手動でご記入ください。';
+    show('screenDone');
   }
-  document.getElementById('loading').classList.remove('show');
-  document.getElementById('reviewText').textContent = reviewText;
-  document.getElementById('googleBtn').href = googleUrl;
-  show('screenDone');
 }
 
 async function copyReply() {
