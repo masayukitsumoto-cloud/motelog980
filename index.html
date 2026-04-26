@@ -82,6 +82,11 @@ const PLACE_ID     = p.get('place') || '';
 const NOTION_DB_ID = p.get('db')    || '';
 const MODE         = p.get('mode')  || 'photo';
 const DISCOUNT     = p.get('discount') || '10';
+// surveyモードでlineDiscountInfoを非表示にする
+document.addEventListener('DOMContentLoaded', () => {
+  const info = document.getElementById('lineDiscountInfo');
+  if (info && MODE === 'survey') info.style.display = 'none';
+});
 </script>
 
 <!-- 写真ページ -->
@@ -100,7 +105,7 @@ const DISCOUNT     = p.get('discount') || '10';
           <span data-lang="zh">现在是拍照的最佳时机！📸</span>
           <span data-lang="ko">지금이 사진 찍기 좋은 순간입니다! 📸</span>
         </div>
-  <div style="width:100%;background:#FBF5E6;border:1px solid #C9A84C;border-radius:12px;padding:14px 16px;text-align:center;">
+  <div style="width:100%;background:#FBF5E6;border:1px solid #C9A84C;border-radius:12px;padding:14px 16px;text-align:center;" id="lineDiscountInfo">
     <div style="font-size:13px;font-weight:600;color:#8B6914;margin-bottom:6px;">
           <span data-lang="ja">本日の会計が最大10%割引に🎁</span>
           <span data-lang="en">Get up to 10% off your bill today! 🎁</span>
