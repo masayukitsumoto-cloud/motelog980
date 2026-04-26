@@ -66,7 +66,57 @@ input::placeholder { color:#C0BBB0; }
       </div>
     </div>
   </div>
-  <input type="hidden" id="selectedPlan" value="monthly">
+  <div id="plan-standard_monthly" onclick="selectPlan('standard_monthly')" style="border:2px solid #E8E4DE;border-radius:12px;padding:16px;cursor:pointer;background:#fff;position:relative;">
+      <div style="position:absolute;top:-10px;left:16px;background:#2D6A4F;color:#fff;font-size:10px;font-weight:700;padding:2px 10px;border-radius:10px;">7日間無料・中規模店向け</div>
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <div>
+          <div style="font-size:13px;font-weight:700;color:#1D3D2F;">スタンダード 月額</div>
+          <div style="font-size:11px;color:#888;margin-top:2px;">月間550件・10〜30席の店舗に</div>
+        </div>
+        <div style="text-align:right;">
+          <div style="font-size:24px;font-weight:700;color:#1D3D2F;">¥2,980<span style="font-size:13px;">/月</span></div>
+        </div>
+      </div>
+    </div>
+    <div id="plan-standard_yearly" onclick="selectPlan('standard_yearly')" style="border:2px solid #E8E4DE;border-radius:12px;padding:16px;cursor:pointer;background:#fff;position:relative;">
+      <div style="position:absolute;top:-10px;left:16px;background:#C9A84C;color:#1D3D2F;font-size:10px;font-weight:700;padding:2px 10px;border-radius:10px;">2ヶ月分お得・LINE初期構築+月次レポート</div>
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <div>
+          <div style="font-size:13px;font-weight:700;color:#1D3D2F;">スタンダード 年額</div>
+          <div style="font-size:11px;color:#8B6914;margin-top:2px;">LINE初期構築無料＋月次レポート</div>
+        </div>
+        <div style="text-align:right;">
+          <div style="font-size:24px;font-weight:700;color:#8B6914;">¥29,800<span style="font-size:13px;">/年</span></div>
+          <div style="font-size:10px;color:#8B6914;">¥2,483/月相当</div>
+        </div>
+      </div>
+    </div>
+    <div id="plan-pro_monthly" onclick="selectPlan('pro_monthly')" style="border:2px solid #E8E4DE;border-radius:12px;padding:16px;cursor:pointer;background:#fff;position:relative;">
+      <div style="position:absolute;top:-10px;left:16px;background:#2D6A4F;color:#fff;font-size:10px;font-weight:700;padding:2px 10px;border-radius:10px;">7日間無料・大規模店向け</div>
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <div>
+          <div style="font-size:13px;font-weight:700;color:#1D3D2F;">プロ 月額</div>
+          <div style="font-size:11px;color:#888;margin-top:2px;">月間1,150件・繁盛店・大規模店に</div>
+        </div>
+        <div style="text-align:right;">
+          <div style="font-size:24px;font-weight:700;color:#1D3D2F;">¥5,980<span style="font-size:13px;">/月</span></div>
+        </div>
+      </div>
+    </div>
+    <div id="plan-pro_yearly" onclick="selectPlan('pro_yearly')" style="border:2px solid #E8E4DE;border-radius:12px;padding:16px;cursor:pointer;background:#fff;position:relative;">
+      <div style="position:absolute;top:-10px;left:16px;background:#C9A84C;color:#1D3D2F;font-size:10px;font-weight:700;padding:2px 10px;border-radius:10px;">2ヶ月分お得・LINE初期構築+月次レポート+優先サポート</div>
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <div>
+          <div style="font-size:13px;font-weight:700;color:#1D3D2F;">プロ 年額</div>
+          <div style="font-size:11px;color:#8B6914;margin-top:2px;">LINE初期構築無料＋月次レポート＋優先サポート</div>
+        </div>
+        <div style="text-align:right;">
+          <div style="font-size:24px;font-weight:700;color:#8B6914;">¥59,800<span style="font-size:13px;">/年</span></div>
+          <div style="font-size:10px;color:#8B6914;">¥4,983/月相当</div>
+        </div>
+      </div>
+    </div>
+    <input type="hidden" id="selectedPlan" value="monthly">
   <div class="section-title">店舗情報</div>
   <div class="field">
     <label>店舗名<span class="req">*</span></label>
@@ -122,21 +172,21 @@ input::placeholder { color:#C0BBB0; }
 </div>
 <script>
 function selectPlan(plan) {
-  document.getElementById('selectedPlan').value = plan;
-  const monthly = document.getElementById('plan-monthly');
-  const yearly  = document.getElementById('plan-yearly');
-  if (plan === 'monthly') {
-    monthly.style.border = '2px solid #2D6A4F';
-    monthly.style.background = '#EAF4EE';
-    yearly.style.border  = '2px solid #E8E4DE';
-    yearly.style.background = '#fff';
-  } else {
-    yearly.style.border  = '2px solid #C9A84C';
-    yearly.style.background = '#FBF5E6';
-    monthly.style.border = '2px solid #E8E4DE';
-    monthly.style.background = '#fff';
-  }
-}
+    document.getElementById('selectedPlan').value = plan;
+    const plans = ['monthly','yearly','standard_monthly','standard_yearly','pro_monthly','pro_yearly'];
+    plans.forEach(p => {
+      const el = document.getElementById('plan-' + p);
+      if (!el) return;
+      const isYearly = p.includes('yearly');
+      if (p === plan) {
+        el.style.border = isYearly ? '2px solid #C9A84C' : '2px solid #2D6A4F';
+        el.style.background = isYearly ? '#FBF5E6' : '#EAF4EE';
+      } else {
+        el.style.border = '2px solid #E8E4DE';
+        el.style.background = '#fff';
+      }
+    });
+  
 
 function toggleSubmit() {
   const checked = document.getElementById('agreeCheck').checked;
@@ -165,7 +215,7 @@ async function startCheckout() {
     const res = await fetch('https://thelog-keeper-production.up.railway.app/api/980/create-checkout', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ shopName, email, location, genre, kw1, kw2, kw3, placeId }),
+      body: JSON.stringify({ shopName, email, location, genre, kw1, kw2, kw3, placeId, plan: document.getElementById('selectedPlan').value, agreedAt: document.getElementById('agreedAt').value }),
     });
     const json = await res.json();
     if (json.url) {
