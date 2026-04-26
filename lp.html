@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>もてログ980 — QR1枚で口コミ・データ・LINE連携</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Shippori+Mincho:wght@700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --red:#BE0018;--red2:#FF2040;--red-l:#FFF0F0;
+  --green:#06C755;--blue:#3A8FFF;
+  --ink:#0D0D0D;--ink2:#161616;--ink3:#1E1E1E;
+  --stone:#F5F0EB;--stone-d:#E8E2D9;
+  --muted:#888;--border:#E0D8D0;--border-d:#2A2A2A;
+  --white:#fff;
+  --serif:'Shippori Mincho',serif;
+  --sans:'Noto Sans JP',sans-serif;
+  --r:3px;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:var(--sans);background:var(--white);color:var(--ink);line-height:1.7;-webkit-font-smoothing:antialiased;}
+
+/* ── NAV ── */
+nav{position:sticky;top:0;z-index:100;background:rgba(13,13,13,.94);backdrop-filter:blur(16px);border-bottom:1px solid #1E1E1E;}
+.nav-inner{max-width:1000px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:58px;padding:0 24px;}
+.nav-logo{display:flex;align-items:center;gap:10px;}
+.nav-logo img{width:34px;height:34px;border-radius:5px;object-fit:cover;}
+.nav-logo-t{font-size:13px;font-weight:900;letter-spacing:.18em;color:#fff;}
+.nav-logo-t span{color:var(--red2);}
+.nav-cta{background:var(--red);color:#fff;padding:8px 22px;border-radius:var(--r);font-size:12px;font-weight:700;letter-spacing:.1em;text-decoration:none;transition:opacity .2s;box-shadow:0 0 16px rgba(190,0,24,.35);}
+.nav-cta:hover{opacity:.82;}
+
+/* ── SECTIONS ── */
+section{padding:88px 24px;}
+.inner{max-width:1000px;margin:0 auto;}
+.sec-label{font-size:10px;font-weight:700;letter-spacing:.32em;color:var(--red);margin-bottom:10px;display:flex;align-items:center;gap:10px;}
+.sec-label::before{content:'';display:inline-block;width:16px;height:1px;background:var(--red);}
+.sec-label.light{color:rgba(255,255,255,.25);}
+.sec-label.light::before{background:rgba(255,255,255,.15);}
+h2.sec-title{font-family:var(--serif);font-size:clamp(26px,4vw,40px);font-weight:800;line-height:1.2;margin-bottom:16px;}
+h2.sec-title span{color:var(--red);}
+h2.sec-title.wh{color:#fff;}
+.sec-desc{font-size:15px;color:#555;line-height:1.9;max-width:560px;}
+.sec-desc.light{color:rgba(255,255,255,.4);}
+
+/* ── BUTTONS ── */
+.btn-red{display:inline-block;background:var(--red);color:#fff;padding:14px 34px;border-radius:var(--r);font-size:14px;font-weight:700;letter-spacing:.08em;text-decoration:none;transition:opacity .2s;box-shadow:0 0 20px rgba(190,0,24,.4);}
+.btn-red:hover{opacity:.85;}
+.btn-ghost{display:inline-block;border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.6);padding:14px 28px;border-radius:var(--r);font-size:14px;font-weight:700;text-decoration:none;transition:all .2s;}
+.btn-ghost:hover{border-color:rgba(255,255,255,.4);color:#fff;}
+
+/* ── HERO ── */
+.hero{background:var(--ink);position:relative;overflow:hidden;padding:0;}
+.hero-g1{position:absolute;top:-120px;left:-80px;width:500px;height:500px;border-radius:50%;background:radial-gradient(ellipse,rgba(190,0,24,.18) 0%,transparent 70%);}
+.hero-g2{position:absolute;bottom:-100px;right:-60px;width:400px;height:400px;border-radius:50%;background:radial-gradient(ellipse,rgba(57,255,143,.05) 0%,transparent 70%);}
+.hero-inner{max-width:1000px;margin:0 auto;padding:90px 32px 80px;display:grid;grid-template-columns:1fr 360px;gap:64px;align-items:center;position:relative;z-index:1;}
+.hero-kicker{font-size:10px;font-weight:700;letter-spacing:.3em;color:rgba(255,255,255,.3);margin-bottom:14px;display:flex;align-items:center;gap:10px;}
+.hero-kicker::before{content:'';width:24px;height:1px;background:var(--red);box-shadow:0 0 6px var(--red);}
+.hero-h1{font-family:var(--serif);font-size:clamp(34px,4.5vw,52px);font-weight:800;color:#fff;line-height:1.12;margin-bottom:12px;}
+.hero-h1 .acc{color:var(--red2);text-shadow:0 0 18px rgba(255,32,64,.5);}
+.hero-sub{font-size:14px;color:rgba(255,255,255,.5);margin-bottom:32px;line-height:1.85;max-width:440px;}
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:28px;}
+.hero-chips{display:flex;gap:6px;flex-wrap:wrap;}
+.chip{font-size:9px;font-weight:700;letter-spacing:.12em;color:rgba(255,255,255,.3);background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:2px;padding:4px 10px;}
+
+/* 価格カード */
+.price-card{background:var(--ink2);border:1px solid var(--border-d);border-radius:10px;padding:28px;position:relative;overflow:hidden;}
+.price-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--red),#FF6B6B);}
+.pc-eyebrow{font-size:9px;font-weight:700;letter-spacing:.25em;color:rgba(255,255,255,.3);margin-bottom:6px;display:block;}
+.pc-trial{font-size:11px;font-weight:700;color:var(--green);display:flex;align-items:center;gap:6px;margin-bottom:16px;}
+.pc-trial::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 8px var(--green);flex-shrink:0;}
+.plan-tabs{display:flex;gap:4px;margin-bottom:16px;}
+.plan-tab{flex:1;padding:7px 4px;border:1px solid var(--border-d);border-radius:4px;font-size:10px;font-weight:700;color:rgba(255,255,255,.35);text-align:center;cursor:pointer;transition:all .15s;background:transparent;}
+.plan-tab.active{border-color:var(--red);background:rgba(190,0,24,.15);color:var(--red2);}
+.plan-price-row{display:flex;align-items:baseline;gap:2px;margin-bottom:3px;}
+.plan-yen{font-size:18px;font-weight:900;color:var(--red2);}
+.plan-num{font-size:52px;font-weight:900;color:#fff;line-height:1;letter-spacing:-.03em;}
+.plan-per{font-size:12px;font-weight:700;color:var(--muted);}
+.plan-limit{font-size:10px;color:rgba(255,255,255,.3);margin-bottom:16px;}
+.plan-annual{font-size:10px;color:rgba(255,255,255,.25);margin-bottom:18px;padding-bottom:14px;border-bottom:1px solid var(--border-d);}
+.plan-annual strong{color:rgba(255,255,255,.5);}
+.pf-list{display:flex;flex-direction:column;gap:9px;margin-bottom:20px;}
+.pf-row{display:flex;align-items:center;gap:10px;}
+.pf-ck{width:16px;height:16px;border-radius:2px;background:rgba(190,0,24,.25);border:1px solid rgba(190,0,24,.45);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.pf-ck svg{width:9px;height:9px;stroke:var(--red2);stroke-width:2.5;fill:none;}
+.pf-t{font-size:11px;font-weight:700;color:rgba(255,255,255,.65);}
+.pc-cta{display:block;background:var(--red);color:#fff;text-align:center;padding:12px;border-radius:5px;font-size:13px;font-weight:700;letter-spacing:.08em;text-decoration:none;transition:opacity .2s;}
+.pc-cta:hover{opacity:.85;}
+
+/* ── PROBLEM ── */
+.problem{background:var(--stone);}
+.prob-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:48px;}
+.prob-card{background:var(--white);border:1px solid var(--border);border-radius:8px;padding:26px 22px;position:relative;overflow:hidden;}
+.prob-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--red);}
+.prob-num{font-size:44px;font-weight:900;color:var(--red-l);line-height:1;margin-bottom:8px;font-family:var(--serif);}
+.prob-ttl{font-size:15px;font-weight:700;margin-bottom:8px;line-height:1.3;}
+.prob-body{font-size:13px;color:var(--muted);line-height:1.75;}
+
+/* ── HOW IT WORKS ── */
+.how{background:var(--ink);}
+.flow-wrap{margin-top:52px;display:flex;flex-direction:column;gap:0;}
+.flow-item{display:grid;grid-template-columns:60px 1fr;gap:20px;align-items:stretch;}
+.flow-left{display:flex;flex-direction:column;align-items:center;padding-top:4px;}
+.fl-num{width:44px;height:44px;border-radius:50%;border:1px solid var(--border-d);background:var(--ink2);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:900;color:var(--red2);flex-shrink:0;box-shadow:0 0 12px rgba(255,32,64,.2);}
+.fl-line{width:1px;flex:1;background:var(--border-d);margin-top:6px;min-height:32px;}
+.flow-item:last-child .fl-line{visibility:hidden;}
+.flow-right{padding-bottom:28px;}
+.flow-card{background:var(--ink2);border:1px solid var(--border-d);border-radius:8px;padding:16px 18px;}
+.fc-top{display:flex;align-items:center;gap:10px;margin-bottom:5px;}
+.fc-icon{font-size:18px;flex-shrink:0;}
+.fc-name{font-size:13px;font-weight:900;color:#fff;}
+.fc-time{font-size:10px;font-weight:700;color:rgba(255,255,255,.2);margin-left:auto;}
+.fc-desc{font-size:12px;color:rgba(255,255,255,.4);line-height:1.65;}
+.fc-note{font-size:10px;color:rgba(255,255,255,.2);margin-top:4px;}
+
+/* ── FEATURES ── */
+.feat-grid{display:flex;flex-direction:column;gap:80px;margin-top:64px;}
+.feat-row{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;}
+.feat-row.rev{direction:rtl;}
+.feat-row.rev>*{direction:ltr;}
+.feat-icon-box{width:44px;height:44px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:18px;border:1px solid rgba(190,0,24,.3);background:rgba(190,0,24,.08);}
+.feat-title{font-family:var(--serif);font-size:clamp(22px,3vw,30px);font-weight:800;line-height:1.2;margin-bottom:10px;}
+.feat-title span{color:var(--red);}
+.feat-body{font-size:14px;color:#555;line-height:1.88;margin-bottom:18px;}
+.feat-pts{display:flex;flex-direction:column;gap:7px;}
+.feat-pt{display:flex;align-items:flex-start;gap:9px;font-size:13px;color:#333;}
+.feat-pt::before{content:'';width:4px;height:4px;border-radius:50%;background:var(--red);margin-top:9px;flex-shrink:0;}
+.mock-wrap{background:var(--ink);border:1px solid var(--border-d);border-radius:10px;overflow:hidden;}
+.mock-head{background:#161616;padding:11px 16px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border-d);}
+.mock-head-title{font-size:9px;font-weight:700;letter-spacing:.18em;color:var(--muted);}
+.live-dot{font-size:9px;font-weight:700;color:var(--green);}
+
+/* Notion mock */
+.kpi-bar{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border-d);}
+.kpi-c{background:#0D0D0D;padding:13px 14px;text-align:center;}
+.kpi-l{font-size:8px;font-weight:700;letter-spacing:.1em;color:#444;display:block;margin-bottom:4px;}
+.kpi-v{font-size:24px;font-weight:900;color:#fff;line-height:1;}
+.kpi-v.r{color:var(--red2);}
+.kpi-u{font-size:8px;font-weight:700;color:#444;}
+.db-rows{padding:0;}
+.db-row{display:flex;align-items:center;gap:7px;padding:8px 14px;border-bottom:1px solid #111;font-size:11px;}
+.db-row:last-child{border-bottom:none;}
+.db-date{color:#333;width:34px;flex-shrink:0;font-size:10px;}
+.db-stars{display:flex;width:46px;flex-shrink:0;}
+.dbs{font-size:9px;color:#F59E0B;}
+.dbs.off{color:#222;}
+.db-flag{font-size:13px;flex-shrink:0;}
+.db-txt{color:#555;font-size:10px;flex:1;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;}
+.db-lang{font-size:7px;font-weight:700;padding:2px 5px;border-radius:2px;flex-shrink:0;}
+.dl-jp{background:#0D2040;color:#4A9EE0;}
+.dl-en{background:#0D2A1A;color:#3DBD6A;}
+.dl-zh{background:#2A1800;color:#D97706;}
+.dl-ko{background:#1A0D2A;color:#9B7FD4;}
+.chart-wrap{padding:12px 14px;border-top:1px solid #111;}
+.c-lbl{font-size:8px;font-weight:700;letter-spacing:.15em;color:#333;margin-bottom:9px;}
+.bar-r{display:flex;align-items:center;gap:6px;margin-bottom:5px;}
+.bar-name{font-size:8px;color:#444;width:32px;text-align:right;flex-shrink:0;}
+.bar-trk{flex:1;height:10px;background:#151515;border-radius:2px;overflow:hidden;}
+.bar-fill{height:100%;border-radius:2px;display:flex;align-items:center;justify-content:flex-end;padding-right:3px;}
+.bar-pct{font-size:7px;font-weight:700;color:#fff;}
+/* Inbound mock */
+.lang-cards{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;padding:14px;background:#0D0D0D;}
+.lc{border-radius:6px;padding:10px 4px;text-align:center;}
+.lc-flag{font-size:18px;display:block;margin-bottom:4px;}
+.lc-name{font-size:8px;font-weight:700;}
+.review-cards{padding:12px 14px;background:#0D0D0D;display:flex;flex-direction:column;gap:7px;}
+.rc{border-radius:6px;padding:10px 12px;}
+.rc-lang{font-size:8px;font-weight:700;margin-bottom:4px;}
+.rc-text{font-size:10px;color:#aaa;line-height:1.55;}
+/* LINE mock */
+.line-case{border-radius:7px;overflow:hidden;margin:0 14px 10px;}
+.lc-head{padding:7px 12px;font-size:9px;font-weight:700;letter-spacing:.1em;}
+.lc-body{padding:10px 12px;display:flex;flex-direction:column;gap:5px;background:#E9DDD4;}
+.bub{padding:7px 10px;border-radius:8px;font-size:9px;line-height:1.5;max-width:80%;}
+.b-shop{background:#fff;color:#333;border-bottom-left-radius:2px;align-self:flex-start;}
+.b-user{background:var(--green);color:#fff;border-bottom-right-radius:2px;align-self:flex-end;}
+.lc-foot{padding:7px 12px;font-size:9px;font-weight:700;}
+
+/* ── PRICING ── */
+.pricing-sec{background:var(--ink);}
+.price-table-wrap{margin-top:48px;overflow-x:auto;}
+table.compare{width:100%;border-collapse:separate;border-spacing:0;table-layout:fixed;}
+table.compare colgroup col:nth-child(1){width:28%;}
+table.compare colgroup col:nth-child(2){width:18%;}
+table.compare colgroup col:nth-child(3){width:20%;}
+table.compare colgroup col:nth-child(4){width:18%;}
+table.compare colgroup col:nth-child(5){width:16%;}
+.th-other{padding:0 6px 18px;border:none;text-align:center;vertical-align:bottom;}
+.th-main{padding:0 6px 0;border:none;text-align:center;vertical-align:bottom;position:relative;}
+.th-badge{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--red);color:#fff;font-size:8px;font-weight:700;letter-spacing:.1em;padding:3px 12px;border-radius:20px;white-space:nowrap;box-shadow:0 0 12px rgba(190,0,24,.5);}
+.th-wrap-other{background:#1A1A1A;border:1px solid #2A2A2A;border-radius:8px 8px 0 0;padding:16px 10px 14px;}
+.th-wrap-main{background:var(--red);border-radius:8px 8px 0 0;padding:20px 10px 14px;}
+.th-service{font-size:8px;font-weight:700;letter-spacing:.15em;color:#555;display:block;margin-bottom:5px;}
+.th-service-main{font-size:8px;font-weight:700;letter-spacing:.15em;color:rgba(255,255,255,.5);display:block;margin-bottom:5px;}
+.th-plan{font-size:10px;font-weight:700;color:#666;display:block;margin-bottom:6px;}
+.th-plan-main{font-size:10px;font-weight:700;color:rgba(255,255,255,.8);display:block;margin-bottom:6px;}
+.th-price{font-size:26px;font-weight:900;color:#555;line-height:1;}
+.th-price-main{font-size:32px;font-weight:900;color:#fff;line-height:1;text-shadow:0 0 16px rgba(255,255,255,.2);}
+.th-per{font-size:10px;font-weight:700;color:#444;}
+.th-per-main{font-size:10px;font-weight:700;color:rgba(255,255,255,.6);}
+.td-feat{padding:13px 0 13px 4px;font-size:12px;font-weight:700;color:rgba(255,255,255,.65);border:none;border-bottom:1px solid #1A1A1A;}
+.td-other{text-align:center;padding:13px 6px;border:none;border-bottom:1px solid #1A1A1A;border-left:1px solid #1E1E1E;background:#111;}
+.td-main{text-align:center;padding:13px 6px;border:none;border-bottom:1px solid rgba(190,0,24,.15);border-left:1px solid rgba(190,0,24,.15);background:rgba(190,0,24,.07);}
+.ok-dot{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;background:var(--green);font-size:12px;box-shadow:0 0 8px rgba(6,199,85,.35);}
+.ng-x{font-size:18px;color:#2A2A2A;}
+.td-cta-other{text-align:center;padding:14px 6px 0;border:none;border-left:1px solid #1E1E1E;background:#0D0D0D;}
+.td-cta-main{text-align:center;padding:14px 6px 0;border:none;border-left:1px solid rgba(190,0,24,.15);background:rgba(190,0,24,.12);border-radius:0 0 8px 8px;}
+.cta-fill-btn{display:inline-block;background:#fff;color:var(--red);padding:9px 14px;border-radius:3px;font-size:11px;font-weight:700;letter-spacing:.06em;text-decoration:none;box-shadow:0 0 12px rgba(255,255,255,.12);}
+.compare-note{font-size:11px;color:rgba(255,255,255,.18);text-align:center;margin-top:16px;}
+
+/* ── 料金プラン詳細 ── */
+.plans-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:48px;}
+.plan-card{background:var(--ink2);border:1px solid var(--border-d);border-radius:8px;padding:22px 18px;position:relative;}
+.plan-card.featured{border-color:rgba(190,0,24,.4);}
+.plan-card.featured::before{content:'おすすめ';position:absolute;top:-11px;left:50%;transform:translateX(-50%);background:var(--red);color:#fff;font-size:8px;font-weight:700;letter-spacing:.1em;padding:3px 12px;border-radius:20px;white-space:nowrap;}
+.pc-plan-name{font-size:9px;font-weight:700;letter-spacing:.2em;color:var(--muted);margin-bottom:6px;display:block;}
+.pc-plan-price{font-size:34px;font-weight:900;color:#fff;line-height:1;margin-bottom:2px;}
+.pc-plan-price span{font-size:12px;font-weight:700;color:var(--muted);}
+.pc-plan-limit{font-size:10px;color:var(--muted);margin-bottom:14px;display:block;}
+.pc-plan-features{display:flex;flex-direction:column;gap:6px;margin-bottom:16px;border-top:1px solid var(--border-d);padding-top:12px;}
+.ppf{font-size:11px;color:rgba(255,255,255,.6);display:flex;align-items:flex-start;gap:6px;line-height:1.5;}
+.ppf::before{content:'•';color:var(--red);flex-shrink:0;}
+.pc-plan-annual{font-size:10px;color:#444;padding:8px 10px;background:#111;border-radius:4px;line-height:1.6;}
+.pc-plan-annual strong{color:rgba(255,255,255,.4);}
+
+/* ── PATTERN ── */
+.pattern-sec{background:var(--stone);}
+.pattern-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:44px;}
+.pat-card{background:var(--white);border:1px solid var(--border);border-radius:8px;padding:24px 20px;}
+.pat-badge{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:50%;background:var(--red);color:#fff;font-size:12px;font-weight:900;margin-bottom:12px;}
+.pat-ttl{font-size:15px;font-weight:700;margin-bottom:6px;}
+.pat-sub{font-size:12px;color:var(--muted);margin-bottom:10px;}
+.pat-tag{display:inline-block;font-size:10px;font-weight:700;padding:3px 10px;border-radius:20px;background:var(--red-l);color:var(--red);}
+
+/* ── FAQ ── */
+.faq-list{margin-top:44px;border-top:1px solid var(--border);}
+.faq-item{border-bottom:1px solid var(--border);}
+.faq-q{width:100%;background:none;border:none;text-align:left;padding:18px 0;font-size:15px;font-weight:700;color:var(--ink);cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:16px;font-family:var(--sans);}
+.faq-icon{width:22px;height:22px;border-radius:50%;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;transition:transform .25s;}
+.faq-q[aria-expanded="true"] .faq-icon{transform:rotate(45deg);background:var(--red);border-color:var(--red);color:#fff;}
+.faq-a{font-size:14px;color:#555;line-height:1.85;max-height:0;overflow:hidden;transition:max-height .35s ease,padding .3s;}
+.faq-item.open .faq-a{max-height:400px;padding-bottom:18px;}
+
+/* ── CTA FOOTER ── */
+.cta-sec{background:var(--ink);padding:88px 24px;position:relative;overflow:hidden;}
+.cta-glow{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:600px;height:300px;border-radius:50%;background:radial-gradient(ellipse,rgba(190,0,24,.18) 0%,transparent 70%);}
+.cta-inner{max-width:560px;margin:0 auto;text-align:center;position:relative;z-index:1;}
+.cta-neon{margin-bottom:24px;}
+.cta-neon img{width:200px;height:auto;border-radius:12px;box-shadow:0 0 36px rgba(255,32,64,.4),0 0 72px rgba(255,32,64,.18);}
+.cta-h2{font-family:var(--serif);font-size:clamp(28px,4vw,44px);font-weight:800;color:#fff;line-height:1.15;margin-bottom:14px;}
+.cta-h2 span{color:var(--red2);text-shadow:0 0 20px rgba(255,32,64,.5);}
+.cta-p{font-size:14px;color:rgba(255,255,255,.45);margin-bottom:32px;line-height:1.8;}
+.cta-btn-wrap{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:14px;}
+.cta-btn-white{display:inline-block;background:#fff;color:var(--red);padding:16px 36px;border-radius:var(--r);font-size:14px;font-weight:700;letter-spacing:.06em;text-decoration:none;transition:opacity .2s;}
+.cta-btn-white:hover{opacity:.9;}
+.cta-note{font-size:11px;color:rgba(255,255,255,.22);}
+
+footer{background:#0A0A0A;padding:32px 24px;text-align:center;}
+footer p{font-size:11px;color:#333;letter-spacing:.1em;}
+footer a{color:#444;text-decoration:none;}
+
+@media(max-width:768px){
+  .hero-inner{grid-template-columns:1fr;gap:40px;}
+  .prob-grid{grid-template-columns:1fr;}
+  .feat-row{grid-template-columns:1fr;}
+  .feat-row.rev{direction:ltr;}
+  .plans-grid{grid-template-columns:1fr 1fr;}
+  .pattern-grid{grid-template-columns:1fr;}
+  .price-table-wrap{font-size:11px;}
+}
+@media(max-width:480px){
+  .plans-grid{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <div class="nav-logo">
+      <img src="https://masayukitsumoto-cloud.github.io/motelog980/lp_icon.jpg" alt="motelog980">
+      <span class="nav-logo-t">もてログ<span>980</span></span>
+    </div>
+    <a href="#trial" class="nav-cta">7日間無料で試す</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-g1"></div><div class="hero-g2"></div>
+  <div class="hero-inner">
+    <div>
+      <span class="hero-kicker">MOTELOG 980 — 飲食業界30年の現場から生まれた</span>
+      <h1 class="hero-h1">
+        飲食店<span class="acc">最強</span>の<br>
+        アンケート<br>口コミツール
+      </h1>
+      <p class="hero-sub">QRを1枚テーブルに置くだけ。スタッフは10秒の声かけだけ。来店客の回答がAI口コミになり、Notionに蓄積され、インバウンドにも4言語で対応する。</p>
+      <div class="hero-btns">
+        <a href="#trial" class="btn-red">7日間無料で試す →</a>
+        <a href="#how" class="btn-ghost">仕組みを見る</a>
+      </div>
+      <div class="hero-chips">
+        <span class="chip">QR設置のみ</span>
+        <span class="chip">4言語対応</span>
+        <span class="chip">AI生成2〜3秒</span>
+        <span class="chip">10問アンケート</span>
+        <span class="chip">Notion自動蓄積</span>
+        <span class="chip">10%割引クーポン</span>
+      </div>
+    </div>
+    <!-- 価格カード（タブ切替） -->
+    <div class="price-card">
+      <span class="pc-eyebrow">PRICING — まず7日間無料で</span>
+      <div class="plan-tabs">
+        <button class="plan-tab active" onclick="switchPlan(this,'lite')">ライト</button>
+        <button class="plan-tab" onclick="switchPlan(this,'std')">スタンダード</button>
+        <button class="plan-tab" onclick="switchPlan(this,'pro')">プロ</button>
+      </div>
+      <div class="plan-price-row">
+        <span class="plan-yen">¥</span>
+        <span class="plan-num" id="plan-num">980</span>
+        <span class="plan-per">/ 月</span>
+      </div>
+      <div class="plan-limit" id="plan-limit">月間150件まで｜小規模店（〜10席）</div>
+      <div class="pc-trial">7日間無料トライアル付き</div>
+      <div class="plan-annual" id="plan-annual">年額 <strong>¥9,800</strong>（2ヶ月分無料）+ <strong>LINE初期構築無料</strong>（通常¥30,000）</div>
+      <div class="pf-list">
+        <div class="pf-row"><div class="pf-ck"><svg viewBox="0 0 12 10"><polyline points="1,5 4,9 11,1"/></svg></div><span class="pf-t">QRコード → AI口コミ自動生成（2〜3秒）</span></div>
+        <div class="pf-row"><div class="pf-ck"><svg viewBox="0 0 12 10"><polyline points="1,5 4,9 11,1"/></svg></div><span class="pf-t">4言語対応（日・英・中・韓）</span></div>
+        <div class="pf-row"><div class="pf-ck"><svg viewBox="0 0 12 10"><polyline points="1,5 4,9 11,1"/></svg></div><span class="pf-t">10問アンケート → Notionに全自動蓄積</span></div>
+        <div class="pf-row"><div class="pf-ck"><svg viewBox="0 0 12 10"><polyline points="1,5 4,9 11,1"/></svg></div><span class="pf-t">10%割引クーポン（当日・毎回）</span></div>
+        <div class="pf-row"><div class="pf-ck"><svg viewBox="0 0 12 10"><polyline points="1,5 4,9 11,1"/></svg></div><span class="pf-t">LINE公式アカウント連携</span></div>
+      </div>
+      <a href="https://masayukitsumoto-cloud.github.io/motelog980/apply.html" class="pc-cta">無料トライアルを始める →</a>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEM -->
+<section class="problem">
+  <div class="inner">
+    <span class="sec-label">PROBLEM</span>
+    <h2 class="sec-title">飲食店が今日も<span>損している</span>3つのこと</h2>
+    <div class="prob-grid">
+      <div class="prob-card">
+        <div class="prob-num">01</div>
+        <div class="prob-ttl">口コミを頼むのが気まずくて放置</div>
+        <div class="prob-body">「よかったらGoogleに…」と言い出せない。スタッフも客も気を遣う。結果、満足した体験がそのまま消える。</div>
+      </div>
+      <div class="prob-card">
+        <div class="prob-num">02</div>
+        <div class="prob-ttl">外国人客の声が一切取れていない</div>
+        <div class="prob-body">インバウンドが増えているのに言語の壁でフィードバックが取れない。4言語の口コミが積まれずMEOにも活かせない。</div>
+      </div>
+      <div class="prob-card">
+        <div class="prob-num">03</div>
+        <div class="prob-ttl">顧客データが何も残らない</div>
+        <div class="prob-body">年代・性別・来店きっかけ・NPS・出身国。経営判断に必要な10項目が感覚だけで終わり、改善の根拠がない。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how" id="how" style="background:var(--ink);">
+  <div class="inner">
+    <span class="sec-label light">HOW IT WORKS</span>
+    <h2 class="sec-title wh">お客様の<span>動線</span>はこれだけ</h2>
+    <p class="sec-desc light">スタッフの声かけは10秒だけ。あとはお客様が自分で動く。全部で約50秒。</p>
+    <div class="flow-wrap" style="margin-top:48px;">
+      <div class="flow-item"><div class="flow-left"><div class="fl-num">1</div><div class="fl-line"></div></div><div class="flow-right"><div class="flow-card"><div class="fc-top"><span class="fc-icon">📱</span><span class="fc-name">QRコードをスキャン</span><span class="fc-time">5秒</span></div><div class="fc-desc">テーブルのQRポップをスマホで読み込む</div></div></div></div>
+      <div class="flow-item"><div class="flow-left"><div class="fl-num">2</div><div class="fl-line"></div></div><div class="flow-right"><div class="flow-card"><div class="fc-top"><span class="fc-icon">🌏</span><span class="fc-name">言語を選択</span><span class="fc-time">3秒</span></div><div class="fc-desc">🇯🇵 日本語 / 🇺🇸 English / 🇨🇳 中文 / 🇰🇷 한국어 の4択。以降のページに全自動で引き継ぎ。</div></div></div></div>
+      <div class="flow-item"><div class="flow-left"><div class="fl-num">3</div><div class="fl-line"></div></div><div class="flow-right"><div class="flow-card"><div class="fc-top"><span class="fc-icon">📷</span><span class="fc-name">料理の写真を1枚撮影</span><span class="fc-time">10秒</span></div><div class="fc-desc">カメラが自動で起動。口コミに使う写真を1枚だけ。</div></div></div></div>
+      <div class="flow-item"><div class="flow-left"><div class="fl-num">4</div><div class="fl-line"></div></div><div class="flow-right"><div class="flow-card"><div class="fc-top"><span class="fc-icon">📋</span><span class="fc-name">10問のアンケートに回答</span><span class="fc-time">30秒</span></div><div class="fc-desc">接客★・雰囲気★・テンション・次回同伴・コメント・年代・性別・来店きっかけ・NPS（0〜10）・出身国。ほぼ選択式。</div><div class="fc-note">※ 回答と同時にNotionへ自動保存（11項目）</div></div></div></div>
+      <div class="flow-item"><div class="flow-left"><div class="fl-num">5</div><div class="fl-line"></div></div><div class="flow-right"><div class="flow-card"><div class="fc-top"><span class="fc-icon">⭐</span><span class="fc-name">AIが選択言語で口コミ文を自動生成</span><span class="fc-time">2〜3秒</span></div><div class="fc-desc">最初に選んだ言語のままAIが口コミ文を生成。コピーしてGoogleに貼るだけ。</div></div></div></div>
+      <div class="flow-item"><div class="flow-left"><div class="fl-num">6</div><div class="fl-line"></div></div><div class="flow-right"><div class="flow-card"><div class="fc-top"><span class="fc-icon">🎟️</span><span class="fc-name">10%割引クーポンを表示</span><span class="fc-time">即時</span></div><div class="fc-desc">アンケート完了で当日10%OFFクーポンを発行。スタッフへ画面を見せるだけ。</div><div class="fc-note">※ Googleへの口コミ投稿は完全任意。クーポンはアンケート回答で受け取れる。</div></div></div></div>
+      <div class="flow-item"><div class="flow-left"><div class="fl-num">7</div><div class="fl-line" style="visibility:hidden;"></div></div><div class="flow-right"><div class="flow-card" style="border-color:rgba(190,0,24,.3);"><div class="fc-top"><span class="fc-icon">📍</span><span class="fc-name">Googleマップへ口コミ投稿（任意）</span><span class="fc-time">任意</span></div><div class="fc-desc">生成された口コミ文をコピー → Googleに貼るだけ。投稿しなくてもクーポンは使える。</div></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section style="padding:88px 24px;background:var(--white);">
+  <div class="inner">
+    <span class="sec-label">FEATURES</span>
+    <h2 class="sec-title">3つの<span>コア機能</span></h2>
+    <div class="feat-grid">
+
+      <!-- F1 DB -->
+      <div class="feat-row">
+        <div class="mock-wrap">
+          <div class="mock-head"><span class="mock-head-title">🗄️ もてログ980 口コミDB — Notion（実際の画面）</span><span class="live-dot">● LIVE</span></div>
+          <img src="https://masayukitsumoto-cloud.github.io/motelog980/lp_notion.png" alt="Notion口コミDB実画面" style="width:100%;display:block;border-bottom:1px solid #1A1A1A;">
+          <div style="padding:11px 14px;background:#0D0D0D;display:flex;flex-direction:column;gap:6px;">
+            <div style="font-size:8px;font-weight:700;letter-spacing:.18em;color:#333;margin-bottom:2px;">このデータから読み取れること</div>
+            <div style="display:flex;gap:7px;"><span style="color:var(--red2);font-size:10px;flex-shrink:0;">▶</span><span style="font-size:10px;color:#666;line-height:1.55;">韓国語・20代女性・NPS10 → インバウンド満足度が高い客層が判明</span></div>
+            <div style="display:flex;gap:7px;"><span style="color:var(--red2);font-size:10px;flex-shrink:0;">▶</span><span style="font-size:10px;color:#666;line-height:1.55;">来店きっかけ「通りがかり」→ 看板・外観改善への投資判断ができる</span></div>
+            <div style="display:flex;gap:7px;"><span style="color:var(--red2);font-size:10px;flex-shrink:0;">▶</span><span style="font-size:10px;color:#666;line-height:1.55;">テンションワードからMEOキーワードと訴求軸を抽出できる</span></div>
+          </div>
+        </div>
+        <div>
+          <div class="feat-icon-box">📊</div>
+          <h3 class="feat-title">全アンケートが<span>戦略の情報源</span>になる</h3>
+          <p class="feat-body">回答は送信した瞬間にNotionへ自動保存。接客・雰囲気の星評価だけでなく、年代・性別・出身国・NPS・来店きっかけまで11項目が蓄積される。感覚で経営していた時代に終止符を打てる。</p>
+          <div class="feat-pts">
+            <div class="feat-pt">接客★・雰囲気★・テンション・次回同伴・コメント</div>
+            <div class="feat-pt">年代・性別・来店きっかけ・NPS・出身国・言語を自動記録</div>
+            <div class="feat-pt">AI生成口コミ文・AI生成返信文もセットで蓄積</div>
+            <div class="feat-pt">Notionで国別比率・評価推移・来店きっかけ分析が可視化</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- F2 Inbound -->
+      <div class="feat-row rev">
+        <div class="mock-wrap">
+          <div class="mock-head"><span class="mock-head-title">🌏 4言語対応 — 言語選択・アンケート実画面</span></div>
+          <div style="display:flex;gap:6px;padding:12px;background:#0D0D0D;overflow-x:auto;">
+            <div style="flex-shrink:0;width:155px;">
+              <img src="https://masayukitsumoto-cloud.github.io/motelog980/lp_survey.png" alt="アンケート実画面" style="width:155px;border-radius:6px;display:block;border:1px solid #2A2A2A;">
+              <div style="font-size:7px;font-weight:700;color:#333;text-align:center;margin-top:5px;">言語選択 → アンケート</div>
+            </div>
+            <div style="flex:1;display:flex;flex-direction:column;gap:6px;min-width:160px;">
+              <div style="background:#111;border:1px solid #1D3A5F;border-radius:5px;padding:9px 10px;">
+                <div style="font-size:8px;color:#3A8FFF;font-weight:700;margin-bottom:3px;">🇺🇸 English（AI生成）</div>
+                <div style="font-size:9px;color:#888;line-height:1.55;">"The ramen was stunning! Staff incredibly friendly. Definitely coming back!"</div>
+              </div>
+              <div style="background:#111;border:1px solid #2A1800;border-radius:5px;padding:9px 10px;">
+                <div style="font-size:8px;color:#D97706;font-weight:700;margin-bottom:3px;">🇨🇳 中文（自动生成）</div>
+                <div style="font-size:9px;color:#888;line-height:1.55;">"拉面上桌那一刻令人震撼！服务非常周到，绝对会再来！"</div>
+              </div>
+              <div style="background:#111;border:1px solid #1A0D2A;border-radius:5px;padding:9px 10px;">
+                <div style="font-size:8px;color:#9B7FD4;font-weight:700;margin-bottom:3px;">🇰🇷 한국어（자동 생성）</div>
+                <div style="font-size:9px;color:#888;line-height:1.55;">"서비스도 정말 친절했어요. 꼭 다시 오고 싶어요 🍜"</div>
+              </div>
+              <div style="background:#111;border:1px solid #222;border-radius:5px;padding:7px 10px;">
+                <div style="font-size:8px;color:#555;line-height:1.5;">選択した言語のまま<br>AIが口コミ文・返信文を自動生成します</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="feat-icon-box">🌏</div>
+          <h3 class="feat-title"><span>インバウンドにも</span>圧倒的に強い</h3>
+          <p class="feat-body">外国人客が最初に言語を1回選ぶだけで、アンケートも口コミ文も全て母国語で完結する。言語の壁を越えて、4言語のGoogleレビューが蓄積されていく。</p>
+          <div class="feat-pts">
+            <div class="feat-pt">言語選択は最初の1回のみ。全ページに自動引き継ぎ</div>
+            <div class="feat-pt">選択した言語でAIが口コミ文・返信文を自動生成</div>
+            <div class="feat-pt">出身国もDBに記録。どの国の客が多いかが分かる</div>
+            <div class="feat-pt">外国語レビューの増加でGoogleマップ評価が向上</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- F3 LINE -->
+      <div class="feat-row">
+        <div class="mock-wrap">
+          <div class="mock-head"><span class="mock-head-title">💬 LINE連携 — 2つのパターン</span></div>
+          <div style="padding:12px 14px;background:#0D0D0D;display:flex;flex-direction:column;gap:10px;">
+            <!-- Case A -->
+            <div style="border:1px solid #1C3A1C;border-radius:7px;overflow:hidden;">
+              <div style="background:#0D2A0D;padding:7px 12px;font-size:9px;font-weight:700;color:#3DBD6A;letter-spacing:.1em;">CASE A — LINE公式アカウントをお持ちの場合</div>
+              <div style="padding:10px 12px;background:#E9DDD4;display:flex;flex-direction:column;gap:5px;">
+                <div class="bub b-shop">QRから友だち追加していただくと今日のお会計が10%OFFになります 😊</div>
+                <div class="bub b-user">友だち追加しました！</div>
+                <div class="bub b-shop">ありがとうございます！アンケートもぜひご協力ください。</div>
+              </div>
+              <div style="padding:8px 12px;background:#0D2A0D;font-size:9px;color:#3DBD6A;">✅ 来店のたびに友だちリストが自然に蓄積される</div>
+            </div>
+            <!-- Case B -->
+            <div style="border:1px solid #2A1A00;border-radius:7px;overflow:hidden;">
+              <div style="background:#1E1200;padding:7px 12px;font-size:9px;font-weight:700;color:#D97706;letter-spacing:.1em;">CASE B — LINE公式アカウントをお持ちでない場合</div>
+              <div style="padding:12px;background:#111;display:flex;align-items:flex-start;gap:10px;">
+                <span style="font-size:22px;flex-shrink:0;">🎁</span>
+                <div>
+                  <span style="font-size:11px;font-weight:700;color:#D97706;display:block;margin-bottom:4px;">年額プランでLINE初期構築を無料代行</span>
+                  <span style="font-size:10px;color:#666;line-height:1.7;">アカウント作成・リッチメニュー・あいさつメッセージ設定まで全対応。通常¥30,000相当が0円。</span>
+                </div>
+              </div>
+              <div style="padding:8px 12px;background:#1E1200;font-size:9px;color:#D97706;">💡 構築後はCASE Aと同じ運用が可能です</div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="feat-icon-box">💬</div>
+          <h3 class="feat-title">来店のたびに<span>LINEでつながる</span></h3>
+          <p class="feat-body">お店のLINE公式アカウントと連携することで、来店客が自然にリスト化される。毎回の来店で当日10%OFFが受けられるため、お客様が記憶し繰り返し来店・繰り返し口コミが生まれる。</p>
+          <div class="feat-pts">
+            <div class="feat-pt">LINE登録 → 当日10%OFFクーポン発行（来店ごと）</div>
+            <div class="feat-pt">来店のたびに友だちリストが増え、再来店促進に活用</div>
+            <div class="feat-pt">同じお客様が繰り返し口コミを投稿 → MEOがじわじわ強くなる</div>
+            <div class="feat-pt">LINE公式がない場合は年額プランでゼロから構築（無料）</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing-sec" id="pricing">
+  <div class="inner">
+    <span class="sec-label light">PRICING</span>
+    <h2 class="sec-title wh">他社と<span>比べてみてください</span></h2>
+    <p class="sec-desc light">全プラン7日間無料トライアル付き。初期費用なし。いつでもキャンセル可。</p>
+
+    <!-- 比較テーブル -->
+    <div class="price-table-wrap">
+      <table class="compare">
+        <colgroup><col><col><col><col><col></colgroup>
+        <thead>
+          <tr>
+            <th style="border:none;padding:0 0 18px;"></th>
+            <th class="th-other"><div class="th-wrap-other"><span class="th-service">競合A</span><span class="th-plan">口コミ管理</span><span class="th-price">¥15,000<span class="th-per">/月〜</span></span></div></th>
+            <th class="th-main">
+              <div style="position:absolute;top:-11px;left:50%;transform:translateX(-50%);background:var(--red);color:#fff;font-size:8px;font-weight:700;letter-spacing:.1em;padding:3px 14px;border-radius:20px;white-space:nowrap;box-shadow:0 0 10px rgba(190,0,24,.5);">もてログ980</div>
+              <div class="th-wrap-main"><span class="th-service-main">ライトプラン</span><span class="th-plan-main">アンケート×AI×DB</span><span class="th-price-main">¥980<span class="th-per-main">/月</span></span></div>
+            </th>
+            <th class="th-other"><div class="th-wrap-other"><span class="th-service">競合B</span><span class="th-plan">MEOツール</span><span class="th-price">¥30,000<span class="th-per">/月〜</span></span></div></th>
+            <th class="th-other"><div class="th-wrap-other"><span class="th-service">競合C</span><span class="th-plan">口コミ依頼SaaS</span><span class="th-price">¥5,000<span class="th-per">/月〜</span></span></div></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td class="td-feat">AI口コミ自動生成（2〜3秒）</td><td class="td-other"><span class="ng-x">✕</span></td><td class="td-main"><span class="ok-dot">●</span></td><td class="td-other"><span class="ng-x">✕</span></td><td class="td-other"><span class="ng-x">✕</span></td></tr><tr><td class="td-feat">10問アンケート収集</td><td class="td-other"><span class="ng-x">✕</span></td><td class="td-main"><span class="ok-dot">●</span></td><td class="td-other"><span class="ng-x">✕</span></td><td class="td-other"><span class="ng-x">✕</span></td></tr><tr><td class="td-feat">4言語インバウンド対応</td><td class="td-other"><span class="ng-x">✕</span></td><td class="td-main"><span class="ok-dot">●</span></td><td class="td-other"><span class="ng-x">✕</span></td><td class="td-other"><span class="ng-x">✕</span></td></tr><tr><td class="td-feat">Notion DB自動蓄積（11項目）</td><td class="td-other"><span class="ng-x">✕</span></td><td class="td-main"><span class="ok-dot">●</span></td><td class="td-other"><span class="ng-x">✕</span></td><td class="td-other"><span class="ng-x">✕</span></td></tr><tr><td class="td-feat">LINE公式アカウント連携</td><td class="td-other"><span class="ng-x">✕</span></td><td class="td-main"><span class="ok-dot">●</span></td><td class="td-other"><span class="ng-x">✕</span></td><td class="td-other"><span class="ng-x">✕</span></td></tr><tr><td class="td-feat">10%割引クーポン発行</td><td class="td-other"><span class="ng-x">✕</span></td><td class="td-main"><span class="ok-dot">●</span></td><td class="td-other"><span class="ng-x">✕</span></td><td class="td-other"><span class="ng-x">✕</span></td></tr><tr><td class="td-feat">出身国・年代・NPS記録</td><td class="td-other"><span class="ng-x">✕</span></td><td class="td-main"><span class="ok-dot">●</span></td><td class="td-other"><span class="ng-x">✕</span></td><td class="td-other"><span class="ng-x">✕</span></td></tr>
+          <tr>
+            <td class="td-feat" style="border-bottom:none;">口コミ管理・MEO対策</td>
+            <td class="td-other" style="border-bottom:none;"><span class="ok-dot" style="background:#444;">●</span></td>
+            <td class="td-main" style="border-bottom:none;"><span class="ok-dot">●</span></td>
+            <td class="td-other" style="border-bottom:none;"><span class="ok-dot" style="background:#444;">●</span></td>
+            <td class="td-other" style="border-bottom:none;"><span class="ng-x">✕</span></td>
+          </tr>
+          <tr>
+            <td style="border:none;padding:0;"></td>
+            <td class="td-cta-other"><span style="font-size:10px;color:#333;font-weight:700;">参考価格</span></td>
+            <td class="td-cta-main"><a href="https://masayukitsumoto-cloud.github.io/motelog980/apply.html" class="cta-fill-btn">7日間無料で始める →</a><div style="font-size:9px;color:rgba(255,255,255,.2);margin-top:8px;padding-bottom:4px;">年額¥9,800でLINE構築も無料</div></td>
+            <td class="td-cta-other"><span style="font-size:10px;color:#333;font-weight:700;">参考価格</span></td>
+            <td class="td-cta-other"><span style="font-size:10px;color:#333;font-weight:700;">参考価格</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="compare-note">※ 競合他社の価格・機能は公開情報をもとにした参考値です。</p>
+
+    <!-- 料金プラン詳細 -->
+    <div style="margin-top:72px;">
+      <span class="sec-label light">PLANS</span>
+      <h2 class="sec-title wh" style="margin-bottom:8px;">店舗規模に合わせた<span>4プラン</span></h2>
+      <p class="sec-desc light" style="margin-bottom:0;">月間アンケート送信数に応じてお選びください。1店舗1契約。</p>
+    </div>
+    <div class="plans-grid">
+      <div class="plan-card">
+        <span class="pc-plan-name">LITE — ライト</span>
+        <div class="pc-plan-price">¥980<span>/月</span></div>
+        <span class="pc-plan-limit">月間150件まで｜〜10席・カフェ等</span>
+        <div class="pc-plan-features">
+          <div class="ppf">全機能使い放題（上限内）</div>
+          <div class="ppf">7日間無料トライアル</div>
+        </div>
+        <div class="pc-plan-annual">年額 <strong>¥9,800</strong>（2ヶ月無料）<br><strong>LINE初期構築無料</strong>（¥30,000相当）</div>
+      </div>
+      <div class="plan-card featured">
+        <span class="pc-plan-name">STANDARD — スタンダード</span>
+        <div class="pc-plan-price">¥2,980<span>/月</span></div>
+        <span class="pc-plan-limit">月間550件まで｜10〜30席</span>
+        <div class="pc-plan-features">
+          <div class="ppf">全機能使い放題（上限内）</div>
+          <div class="ppf">7日間無料トライアル</div>
+        </div>
+        <div class="pc-plan-annual">年額 <strong>¥29,800</strong>（2ヶ月無料）<br><strong>LINE初期構築無料＋月次レポート</strong></div>
+      </div>
+      <div class="plan-card">
+        <span class="pc-plan-name">PRO — プロ</span>
+        <div class="pc-plan-price">¥5,980<span>/月</span></div>
+        <span class="pc-plan-limit">月間1,150件まで｜大規模・繁盛店</span>
+        <div class="pc-plan-features">
+          <div class="ppf">全機能使い放題（上限内）</div>
+          <div class="ppf">7日間無料トライアル</div>
+        </div>
+        <div class="pc-plan-annual">年額 <strong>¥59,800</strong>（2ヶ月無料）<br><strong>LINE構築無料＋レポート＋優先サポート</strong></div>
+      </div>
+      <div class="plan-card" style="border-color:#2A2A2A;">
+        <span class="pc-plan-name">ENTERPRISE</span>
+        <div class="pc-plan-price" style="font-size:26px;">個別見積</div>
+        <span class="pc-plan-limit">無制限｜10店舗以上・FC・チェーン</span>
+        <div class="pc-plan-features">
+          <div class="ppf">専任サポート</div>
+          <div class="ppf">カスタム対応・個別設計</div>
+        </div>
+        <div class="pc-plan-annual" style="color:#555;">複数店舗をお持ちの場合は<br>エンタープライズをご検討ください</div>
+      </div>
+    </div>
+    <p style="font-size:11px;color:rgba(255,255,255,.2);text-align:center;margin-top:16px;">※ 月間上限到達時はAI口コミ生成をスキップしクーポンのみ表示します。翌月1日に自動リセット。</p>
+  </div>
+</section>
+
+<!-- PATTERN -->
+<section class="pattern-sec">
+  <div class="inner">
+    <span class="sec-label">PATTERN</span>
+    <h2 class="sec-title">3つの<span>導入パターン</span></h2>
+    <p class="sec-desc">ITリテラシーやLINE環境に合わせてお選びいただけます。</p>
+    <div class="pattern-grid">
+      <div class="pat-card">
+        <div class="pat-badge">A</div>
+        <div class="pat-ttl">アンケートのみ</div>
+        <div class="pat-sub">LINE設定はご自身で</div>
+        <div style="font-size:13px;color:#555;line-height:1.75;margin-bottom:14px;">QRコード設置とアンケート機能のみを使うシンプルな導入。LINE公式アカウントをすでにお持ちで、設定はご自身でできる方向け。</div>
+        <span class="pat-tag">ITリテラシーのある方向け</span>
+      </div>
+      <div class="pat-card">
+        <div class="pat-badge">B</div>
+        <div class="pat-ttl">LINEサポート付き</div>
+        <div class="pat-sub">手順書を見ながら自分で設定</div>
+        <div style="font-size:13px;color:#555;line-height:1.75;margin-bottom:14px;">LINE公式アカウントの設定マニュアルをご提供。手順書を見ながらご自身で設定いただく方向け。ご不明点はサポートします。</div>
+        <span class="pat-tag">手順書で設定したい方向け</span>
+      </div>
+      <div class="pat-card" style="border-color:var(--red);position:relative;">
+        <div style="position:absolute;top:-10px;right:16px;background:var(--red);color:#fff;font-size:9px;font-weight:700;padding:3px 12px;border-radius:20px;">年額プラン限定</div>
+        <div class="pat-badge">C</div>
+        <div class="pat-ttl">フルサポート</div>
+        <div class="pat-sub">LINE初期構築を全て代行</div>
+        <div style="font-size:13px;color:#555;line-height:1.75;margin-bottom:14px;">アカウント作成・リッチメニュー・あいさつメッセージ設定まで全て弊社が代行。「全部おまかせ」にしたいオーナー向け（通常¥30,000→無料）。</div>
+        <span class="pat-tag" style="background:#FFF0F0;color:var(--red);">全部おまかせ向け</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section style="padding:88px 24px;background:var(--white);">
+  <div class="inner">
+    <span class="sec-label">FAQ</span>
+    <h2 class="sec-title">よくある<span>質問</span></h2>
+    <div class="faq-list">
+      <div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)"><span>導入にどのくらい手間がかかりますか？</span><span class="faq-icon">+</span></button><div class="faq-a">申込後、当日中にQRコード用のURLをお送りします。そのURLをQRコード化（無料ツールで可）して印刷し、テーブルに置くだけで完了です。スタッフへの説明は「テーブルのQRを案内してください」の一言。Notionのデータベース設定も弊社が行います。</div></div>
+      <div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)"><span>月間上限を超えたらどうなりますか？</span><span class="faq-icon">+</span></button><div class="faq-a">AI口コミ文の生成をスキップしてクーポンのみ表示します。「今月のご利用上限に達しました。プランをアップグレードするとご利用いただけます」と案内されます。翌月1日に自動リセットされます。</div></div>
+      <div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)"><span>Googleへの口コミ投稿を促すのは景品表示法に問題ありませんか？</span><span class="faq-icon">+</span></button><div class="faq-a">問題ありません。もてログ980では「アンケートへの回答」が10%OFFクーポンの条件です。Googleへの口コミ投稿は完全任意で、投稿しなくてもクーポンを使えます。Googleの利用規約・景品表示法ともに準拠した設計です。</div></div>
+      <div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)"><span>LINE公式アカウントを持っていない場合は？</span><span class="faq-icon">+</span></button><div class="faq-a">年額プランにご加入いただければ、LINE公式アカウントの初期構築（アカウント作成・リッチメニュー・あいさつメッセージ）を無料で代行します（通常¥30,000相当）。手順書でご自身で設定いただくパターンBも選択可能です。</div></div>
+      <div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)"><span>Notionを使ったことがなくても大丈夫ですか？</span><span class="faq-icon">+</span></button><div class="faq-a">大丈夫です。申込後に弊社がお店専用のNotionデータベースを自動作成・設定します。Notionは無料プランで使えます。閲覧するだけなら直感的に操作できます。</div></div>
+      <div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)"><span>複数店舗で使えますか？</span><span class="faq-icon">+</span></button><div class="faq-a">1店舗1契約です。2〜9店舗の場合は店舗数分のご契約をお願いします。10店舗以上の場合はエンタープライズプラン（個別見積・無制限）をご検討ください。</div></div>
+      <div class="faq-item"><button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)"><span>解約はいつでもできますか？</span><span class="faq-icon">+</span></button><div class="faq-a">はい。7日間の無料トライアル中も含め、いつでも解約できます。Stripeの管理画面から1クリックで完了します。月途中解約の場合、次回以降の請求は発生しません。</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-sec" id="trial">
+  <div class="cta-glow"></div>
+  <div class="cta-inner">
+    <div class="cta-neon"><img src="https://masayukitsumoto-cloud.github.io/motelog980/lp_icon.jpg" alt="motelog980 neon sign"></div>
+    <h2 class="cta-h2">¥980で、<br><span>これだけ動く。</span></h2>
+    <p class="cta-p">QRを置くだけ。スタッフは10秒の声かけだけ。<br>7日間、無料でその体験をしてみてください。</p>
+    <div class="cta-btn-wrap">
+      <a href="https://masayukitsumoto-cloud.github.io/motelog980/apply.html" class="cta-btn-white">7日間無料トライアルを始める →</a>
+    </div>
+    <p class="cta-note">クレジットカード登録後、7日間は一切請求されません。いつでもキャンセル可能。</p>
+  </div>
+</section>
+
+<footer>
+  <p>
+    © 2026 もてログ980 —
+    <a href="https://www.instagram.com/motelog980_official/">Instagram @motelog980_official</a> —
+    <a href="mailto:masayuki.tsumoto@gmail.com">masayuki.tsumoto@gmail.com</a>
+  </p>
+</footer>
+
+<script>
+// プランタブ
+const plans = {
+  lite: { num:'980', limit:'月間150件まで｜小規模店（〜10席）', annual:'年額 <strong>¥9,800</strong>（2ヶ月分無料）+ <strong>LINE初期構築無料</strong>（通常¥30,000）' },
+  std:  { num:'2,980', limit:'月間550件まで｜中規模店（10〜30席）', annual:'年額 <strong>¥29,800</strong>（2ヶ月分無料）+ <strong>LINE初期構築無料＋月次レポート</strong>' },
+  pro:  { num:'5,980', limit:'月間1,150件まで｜大規模店・繁盛店', annual:'年額 <strong>¥59,800</strong>（2ヶ月分無料）+ <strong>LINE構築無料＋レポート＋優先サポート</strong>' },
+};
+function switchPlan(btn, key) {
+  document.querySelectorAll('.plan-tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  const p = plans[key];
+  document.getElementById('plan-num').textContent = p.num;
+  document.getElementById('plan-limit').textContent = p.limit;
+  document.getElementById('plan-annual').innerHTML = p.annual;
+}
+// FAQ
+function toggleFaq(btn) {
+  const item = btn.closest('.faq-item');
+  const open = item.classList.contains('open');
+  document.querySelectorAll('.faq-item.open').forEach(el => {
+    el.classList.remove('open');
+    el.querySelector('.faq-q').setAttribute('aria-expanded','false');
+  });
+  if (!open) { item.classList.add('open'); btn.setAttribute('aria-expanded','true'); }
+}
+</script>
+</body>
+</html>
