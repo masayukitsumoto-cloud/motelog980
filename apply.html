@@ -151,7 +151,23 @@ input::placeholder { color:#C0BBB0; }
       <input type="text" id="kw3" placeholder="記念日に人気">
     </div>
   </div>
-  <div class="section-title">Google Place ID</div>
+  <div class="section-title">プランを選択してください</div>
+<div class="field">
+  <label style="font-size:12px;">割引タイプ<span class="req">＊</span></label>
+  <div style="display:flex;flex-direction:column;gap:10px;margin-top:6px;">
+    <label style="display:flex;align-items:flex-start;gap:10px;cursor:pointer;">
+      <input type="radio" name="planType" value="line" required style="margin-top:3px;accent-color:#2D6A4F;">
+      <span style="font-size:13px;color:#1B4A35;line-height:1.6;"><strong>LINEあり</strong>｜LINE登録＋アンケート回答で<strong>10%割引</strong></span>
+    </label>
+    <label style="display:flex;align-items:flex-start;gap:10px;cursor:pointer;">
+      <input type="radio" name="planType" value="survey" required style="margin-top:3px;accent-color:#2D6A4F;">
+      <span style="font-size:13px;color:#1B4A35;line-height:1.6;"><strong>アンケートのみ</strong>｜アンケート回答で<strong>5%割引</strong></span>
+    </label>
+  </div>
+  <div class="hint" style="margin-top:6px;">※ 同時併用はできません。導入後の変更は可能です。</div>
+</div>
+
+<div class="section-title">Google Place ID</div>
   <div class="field">
     <label>Google Place ID<span class="req">*</span></label>
     <input type="text" id="placeId" placeholder="例：ChIJN1t_tDeuEmsRUsoyG83frY4">
