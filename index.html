@@ -531,6 +531,7 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById(id).textContent = SHOP_NAME;
 });
 document.getElementById('discountNum').textContent = DISCOUNT + '%';
+document.querySelectorAll('.discount-pct').forEach(el => el.textContent = DISCOUNT + '%');
 
 function show(id) {
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('show'));
