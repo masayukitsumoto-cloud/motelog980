@@ -85,7 +85,7 @@ const DISCOUNT     = p.get('discount') || '10';
 // surveyモードでlineDiscountInfoを非表示にする
 document.addEventListener('DOMContentLoaded', () => {
   const info = document.getElementById('lineDiscountInfo');
-  if (info && MODE === 'survey') info.style.display = 'none';
+  if (info && DISCOUNT !== '10') info.style.display = 'none';
 });
 </script>
 
@@ -557,44 +557,44 @@ function showPhotoSuccess(surveyUrl) {
       title: '最高の1枚が撮れましたね！',
       sub: 'この写真、誰かに見せたくなりませんか？<br>口コミに写真を添えると<strong style="color:#2D6A4F;">もっと伝わります</strong>',
       couponLabel: 'アンケートに答えると',
-      couponSub: '会計割引クーポンがもらえます 🎁',
+      couponSub: DISCOUNT + '%OFF 会計割引クーポンがもらえます 🎁',
       nextTitle: '次にやること',
       step1: '今はそのまま食事を楽しんでください',
       step2: 'お会計時にレジ横のQRを読んで<br><strong>30秒アンケートに答えるだけ</strong>',
-      btn: 'いますぐアンケートに答える（10%割引）→',
+      btn: 'いますぐアンケートに答える（' + DISCOUNT + '%割引）→',
       foot: '食事中でも後でもOKです。<br>レジ横のQRからもアクセスできます。',
     },
     en: {
       title: 'Great shot! 📸',
       sub: 'Want to share this photo?<br>Reviews with photos are <strong style="color:#2D6A4F;">more convincing!</strong>',
       couponLabel: 'Complete the survey and get',
-      couponSub: '10% off your bill! 🎁',
+      couponSub: DISCOUNT + '% off your bill! 🎁',
       nextTitle: "What's next",
       step1: 'Enjoy your meal for now',
       step2: 'Scan the QR at the register<br><strong>and answer a 30-second survey</strong>',
-      btn: 'Answer Survey Now (10% OFF) →',
+      btn: 'Answer Survey Now (' + DISCOUNT + '% OFF) →',
       foot: 'You can do it during or after your meal.<br>Also accessible via QR at the register.',
     },
     zh: {
       title: '拍得很好！📸',
       sub: '想把这张照片分享给别人吗？<br>带照片的评价<strong style="color:#2D6A4F;">更有说服力！</strong>',
       couponLabel: '完成问卷即可获得',
-      couponSub: '消费9折优惠券！🎁',
+      couponSub: DISCOUNT + '%消费优惠券！🎁',
       nextTitle: '接下来做什么',
       step1: '现在请继续享用您的餐食',
       step2: '结账时扫描收银台旁的二维码<br><strong>回答30秒问卷即可</strong>',
-      btn: '立即回答问卷（享9折优惠）→',
+      btn: '立即回答问卷（享' + DISCOUNT + '%优惠）→',
       foot: '用餐中或用餐后均可操作。<br>也可通过收银台旁的二维码访问。',
     },
     ko: {
       title: '멋진 사진이에요! 📸',
       sub: '이 사진을 누군가에게 보여주고 싶지 않으신가요?<br>사진이 있는 리뷰는 <strong style="color:#2D6A4F;">더 잘 전달됩니다!</strong>',
       couponLabel: '설문 완료 시',
-      couponSub: '계산 10% 할인 쿠폰 증정! 🎁',
+      couponSub: DISCOUNT + '% 할인 쿠폰 증정! 🎁',
       nextTitle: '다음에 할 일',
       step1: '지금은 식사를 즐겨주세요',
       step2: '계산 시 계산대 옆 QR코드를 스캔하여<br><strong>30초 설문에 답해주세요</strong>',
-      btn: '지금 설문 답하기 (10% 할인) →',
+      btn: '지금 설문 답하기 (' + DISCOUNT + '% 할인) →',
       foot: '식사 중이나 식사 후에도 괜찮습니다.<br>계산대 옆 QR코드로도 접근할 수 있습니다.',
     },
   };
@@ -608,7 +608,7 @@ function showPhotoSuccess(surveyUrl) {
     '</div>',
     '<div style="width:100%;background:linear-gradient(135deg,#2D6A4F,#1B4A35);border-radius:16px;padding:20px;text-align:center;">',
       '<div style="font-size:12px;color:#9FE1CB;margin-bottom:4px;">' + s.couponLabel + '</div>',
-      '<div style="font-size:40px;font-weight:700;color:#FAC775;line-height:1;">10%</div>',
+      '<div style="font-size:40px;font-weight:700;color:#FAC775;line-height:1;">' + DISCOUNT + '%</div>',
       '<div style="font-size:13px;color:#fff;margin-top:2px;">' + s.couponSub + '</div>',
     '</div>',
     '<div style="width:100%;background:#FBF5E6;border:1.5px solid #C9A84C;border-radius:12px;padding:16px;">',
