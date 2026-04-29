@@ -626,24 +626,18 @@ function showPhotoSuccess(surveyUrl, file) {
     '<button onclick="window.location.href=\'' + surveyUrl + '\'" style="width:100%;padding:17px;border:none;border-radius:13px;background:#2D6A4F;color:#fff;font-size:15px;font-weight:700;cursor:pointer;">' + s.btn + '</button>',
     '<div style="font-size:12px;color:#888;text-align:center;line-height:1.7;">' + s.foot + '</div>',
   ].join('');
-  // 撮影画像を保存（canvas経由でbase64変換）
+  // 撮影画像を画面に表示（長押しで写真ライブラリに保存）
   if (file) {
     const link = document.getElementById('savePhotoLink');
     if (link) {
-      const img = new Image();
       const objectUrl = URL.createObjectURL(file);
-      img.onload = () => {
-        const canvas = document.createElement('canvas');
-        canvas.width = img.width;
-        canvas.height = img.height;
-        const ctx = canvas.getContext('2d');
-        ctx.drawImage(img, 0, 0);
-        const dataUrl = canvas.toDataURL('image/jpeg', 0.9);
-        link.href = dataUrl;
-        link.download = 'motelog_photo_' + Date.now() + '.jpg';
-        URL.revokeObjectURL(objectUrl);
-      };
-      img.src = objectUrl;
+      // ボタンを画像プレビュー＋案内に置き換え
+      link.outerHTML = '<div id="savePhotoArea" style="width:100%;text-align:center;">' +
+        '<img src="' + objectUrl + '" style="width:100%;max-width:100%;border-radius:12px;border:2px solid #C9A84C;" />' +
+        '<div style="margin-top:8px;padding:10px;background:#FBF5E6;border-radius:10px;font-size:12px;color:#8B6914;font-weight:700;">' +
+        '📷 上の写真を長押し →「写真に追加」で保存できます' +
+        '</div>' +
+        '</div>';
     }
   }
 }
