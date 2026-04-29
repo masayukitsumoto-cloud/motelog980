@@ -626,13 +626,27 @@ function showPhotoSuccess(surveyUrl, file) {
     '<button onclick="window.location.href=\'' + surveyUrl + '\'" style="width:100%;padding:17px;border:none;border-radius:13px;background:#2D6A4F;color:#fff;font-size:15px;font-weight:700;cursor:pointer;">' + s.btn + '</button>',
     '<div style="font-size:12px;color:#888;text-align:center;line-height:1.7;">' + s.foot + '</div>',
   ].join('');
-  // 撮影画像をaタグのhrefに設定
+  // 撮影画像を保存（iPhoneはWeb Share API、AndroidはDL）
   if (file) {
     const link = document.getElementById('savePhotoLink');
     if (link) {
-      const url = URL.createObjectURL(file);
-      link.href = url;
-      link.download = 'motelog_photo_' + Date.now() + '.jpg';
+      link.addEventListener('click', async (e) => {
+        e.preventDefault();
+        if (navigator.share && navigator.canShare && navigator.canShare({ files: [file] })) {
+          try {
+            await navigator.share({ files: [file], title: 'もてログ980' });
+          } catch(err) { /* キャンセル時は何もしない */ }
+        } else {
+          const url = URL.createObjectURL(file);
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = 'motelog_photo_' + Date.now() + '.jpg';
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+          URL.revokeObjectURL(url);
+        }
+      });
     }
   }
 }
