@@ -626,6 +626,7 @@ function showPhotoSuccess(surveyUrl, file) {
     '</div>',
     '<button id="savePhotoBtn" style="width:100%;padding:14px;border:2px solid #C9A84C;border-radius:13px;background:#FBF5E6;color:#8B6914;font-size:14px;font-weight:700;cursor:pointer;">' + s.saveBtn + '</button>',
     '<button onclick="window.location.href=\'' + surveyUrl + '\'" style="width:100%;padding:17px;border:none;border-radius:13px;background:#2D6A4F;color:#fff;font-size:15px;font-weight:700;cursor:pointer;">' + s.btn + '</button>',
+  ].join('');
   // 写真保存ボタンのイベント処理
   if (file) {
     const saveBtn = document.getElementById('savePhotoBtn');
@@ -646,8 +647,6 @@ function showPhotoSuccess(surveyUrl, file) {
       });
     }
   }
-    '<div style="font-size:12px;color:#888;text-align:center;line-height:1.7;">' + s.foot + '</div>',
-  ].join('');
 }
 
 
