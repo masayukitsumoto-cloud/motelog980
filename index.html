@@ -545,12 +545,12 @@ function openCamera() {
   inp.type = 'file'; inp.accept = 'image/*'; inp.capture = 'environment';
   inp.addEventListener('change', () => {
     const surveyUrl = location.origin + '/motelog980/?mode=survey&shop=' + encodeURIComponent(SHOP_NAME) + '&place=' + PLACE_ID + '&db=' + NOTION_DB_ID + '&discount=' + DISCOUNT + '&lang=' + (state.lang || 'ja');
-    showPhotoSuccess(surveyUrl, inp.files[0]);
+    showPhotoSuccess(surveyUrl);
   });
   inp.click();
 }
 
-function showPhotoSuccess(surveyUrl, file) {
+function showPhotoSuccess(surveyUrl) {
   const lang = state.lang || 'ja';
   const t = {
     ja: {
@@ -559,7 +559,6 @@ function showPhotoSuccess(surveyUrl, file) {
       couponLabel: 'アンケートに答えると',
       couponSub: DISCOUNT + '%OFF 会計割引クーポンがもらえます 🎁',
       nextTitle: '次にやること',
-      saveBtn: '📷 この写真をカメラロールに保存する',
       step1: '今はそのまま食事を楽しんでください',
       step2: 'お会計時にレジ横のQRを読んで<br><strong>30秒アンケートに答えるだけ</strong>',
       btn: 'いますぐアンケートに答える（' + DISCOUNT + '%割引）→',
@@ -571,7 +570,6 @@ function showPhotoSuccess(surveyUrl, file) {
       couponLabel: 'Complete the survey and get',
       couponSub: DISCOUNT + '% off your bill! 🎁',
       nextTitle: "What's next",
-      saveBtn: '📷 Save this photo to your camera roll',
       step1: 'Enjoy your meal for now',
       step2: 'Scan the QR at the register<br><strong>and answer a 30-second survey</strong>',
       btn: 'Answer Survey Now (' + DISCOUNT + '% OFF) →',
@@ -624,28 +622,7 @@ function showPhotoSuccess(surveyUrl, file) {
         '<div style="font-size:13px;color:#8B6914;line-height:1.6;">' + s.step2 + '</div>',
       '</div>',
     '</div>',
-    '<button id="savePhotoBtn" style="width:100%;padding:14px;border:2px solid #C9A84C;border-radius:13px;background:#FBF5E6;color:#8B6914;font-size:14px;font-weight:700;cursor:pointer;">' + s.saveBtn + '</button>',
     '<button onclick="window.location.href=\'' + surveyUrl + '\'" style="width:100%;padding:17px;border:none;border-radius:13px;background:#2D6A4F;color:#fff;font-size:15px;font-weight:700;cursor:pointer;">' + s.btn + '</button>',
-  // 写真保存ボタンのイベント処理
-  if (file) {
-    const saveBtn = document.getElementById('savePhotoBtn');
-    if (saveBtn) {
-      saveBtn.addEventListener('click', () => {
-        const url = URL.createObjectURL(file);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = 'motelog_photo_' + Date.now() + '.jpg';
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        URL.revokeObjectURL(url);
-        saveBtn.textContent = '✅ 保存しました！';
-        saveBtn.style.background = '#EAF4EE';
-        saveBtn.style.color = '#2D6A4F';
-        saveBtn.style.borderColor = '#2D6A4F';
-      });
-    }
-  }
     '<div style="font-size:12px;color:#888;text-align:center;line-height:1.7;">' + s.foot + '</div>',
   ].join('');
 }
