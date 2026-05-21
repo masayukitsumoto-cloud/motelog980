@@ -165,6 +165,61 @@ if (pageRes && replyText) {
       });
       console.log('[980] AI返信文をNotionに書き戻し完了');
     }
+
+    // ── 会員証チェックイン処理 ──────────────────────────
+    const RAILWAY_API = 'https://thelog-keeper-production.up.railway.app';
+    const lineUid = data.lineUid || '';
+    let memberId = null;
+    let isNewMember = false;
+
+    if (lineUid) {
+      try {
+        // 既存会員チェック
+        const memberRes = await fetch(`${RAILWAY_API}/api/980/member?uid=${encodeURIComponent(lineUid)}`);
+        const memberData = await memberRes.json();
+
+        if (memberData.success && memberData.member) {
+          // 既存会員：来店カウント+1
+          memberId = memberData.member.memberId;
+          await fetch(`${RAILWAY_API}/api/980/member/checkin`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              lineUid,
+              shopName: data.shopName || '',
+              placeId: data.placeId || '',
+            }),
+          });
+          console.log('[980] 会員チェックイン完了:', memberId);
+        } else {
+          // 新規会員：会員番号発行
+          const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+          const now = new Date(new Date().toLocaleString('en-US', { timeZone: 'Asia/Tokyo' }));
+          const ymd = now.getFullYear().toString()
+            + String(now.getMonth() + 1).padStart(2, '0')
+            + String(now.getDate()).padStart(2, '0');
+          let suffix = '';
+          for (let i = 0; i < 6; i++) suffix += chars[Math.floor(Math.random() * chars.length)];
+          memberId = `MTLG-${ymd}-${suffix}`;
+          isNewMember = true;
+
+          // Notionに会員登録
+          await fetch(`${RAILWAY_API}/api/980/member/register`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              lineUid,
+              memberId,
+              shopName: data.shopName || '',
+            }),
+          });
+          console.log('[980] 新規会員登録完了:', memberId);
+        }
+      } catch(e) {
+        console.error('[980] 会員処理エラー:', e.message);
+      }
+    }
+
     const googleUrl = data.placeId
       ? `https://search.google.com/local/writereview?placeid=${data.placeId}&hl=ja`
       : null;
@@ -172,7 +227,7 @@ if (pageRes && replyText) {
     return {
       statusCode: 200,
       headers: { ...cors, 'Content-Type': 'application/json' },
-      body: JSON.stringify({ success: true, reviewText, googleUrl }),
+      body: JSON.stringify({ success: true, reviewText, googleUrl, memberId, isNewMember }),
     };
   } catch (err) {
     console.error('[980] Error:', err.message);
