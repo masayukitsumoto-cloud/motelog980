@@ -155,6 +155,46 @@ async function handleFollow(event) {
   await replyMessage(event.replyToken, messages);
 }
 
+
+// ── メッセージイベント処理 ───────────────────────────
+async function handleMessage(event) {
+  const lineUid = event.source.userId;
+  const text = (event.message?.text || '').trim();
+  const triggers = ['会員証', 'かいいんしょう', 'member', 'MEMBER', '会員', 'カード'];
+
+  if (!triggers.includes(text)) return;
+
+  const member = await findMember(lineUid);
+  const memberUrl = `${BASE_URL}/member?uid=${lineUid}`;
+
+  if (!member) {
+    await replyMessage(event.replyToken, [{
+      type: 'text',
+      text: '会員証がまだ発行されていません。\n\nもてログ980の加盟店でアンケートに答えると\n会員証が発行されます 🎫'
+    }]);
+    return;
+  }
+
+  await replyMessage(event.replyToken, [
+    {
+      type: 'text',
+      text: `🎫 ${member.memberId}\n\n累計来店：${member.visitCount || 0}回\n\n下のボタンから会員証を確認してください。`
+    },
+    {
+      type: 'template',
+      altText: '会員証を確認する',
+      template: {
+        type: 'buttons',
+        text: '会員証を表示します',
+        actions: [
+          { type: 'uri', label: '🎫 会員証を見る', uri: memberUrl },
+          { type: 'uri', label: '🏪 加盟店一覧', uri: 'https://masayukitsumoto-cloud.github.io/motelog980/shops.html' }
+        ]
+      }
+    }
+  ]);
+}
+
 // ── メインハンドラ ────────────────────────────────────
 export const handler = async (event) => {
   if (event.httpMethod !== 'POST') {
@@ -183,6 +223,9 @@ export const handler = async (event) => {
       if (ev.type === 'follow') {
         await handleFollow(ev);
         console.log('[LINE] 友だち追加処理完了:', ev.source.userId);
+      } else if (ev.type === 'message' && ev.message?.type === 'text') {
+        await handleMessage(ev);
+        console.log('[LINE] メッセージ処理完了:', ev.source.userId);
       }
     } catch(e) {
       console.error('[LINE] イベント処理エラー:', e.message);
