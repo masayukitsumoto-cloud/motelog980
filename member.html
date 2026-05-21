@@ -2,219 +2,89 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 <title>もてログ会員証</title>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap');
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-:root{
-  --green:#1A4A2E;--green-m:#2D6A4F;--green-l:#EAF4EE;
-  --gold:#C9A84C;--gold-l:#FBF5E6;
-  --text:#1A1A1A;--muted:#888;--border:#E8E4DE;--bg:#F9F7F4;--white:#fff;
-}
-body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:24px 16px 60px}
-.logo{font-size:11px;color:var(--muted);letter-spacing:.14em;text-align:center;margin-bottom:20px}
-
-/* ローディング */
-.loading{display:flex;flex-direction:column;align-items:center;gap:12px;padding:60px 0;color:var(--muted);font-size:13px}
-.spinner{width:28px;height:28px;border:3px solid var(--border);border-top-color:var(--green-m);border-radius:50%;animation:spin .8s linear infinite}
+:root{--green:#2D6A50;--green-d:#1F4D3A;--green-l:#EAF2EE;--green-m:#4A8C6F;--beige:#F5F0E8;--beige-d:#EDE8DF;--text:#1A1A1A;--text-s:#888;--border:#E0DAD0;--white:#FFFFFF;--r:16px}
+body{font-family:'Noto Sans JP',sans-serif;background:var(--beige);min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:32px 16px 60px}
+.loading{display:flex;flex-direction:column;align-items:center;gap:14px;padding:80px 0;color:var(--text-s);font-size:13px}
+.spinner{width:32px;height:32px;border:2.5px solid var(--beige-d);border-top-color:var(--green);border-radius:50%;animation:spin .8s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
-
-/* エラー */
-.error-box{width:100%;max-width:360px;background:var(--white);border-radius:14px;padding:28px;text-align:center;border:1px solid var(--border)}
-.error-icon{font-size:40px;margin-bottom:12px}
-.error-title{font-size:16px;font-weight:700;color:var(--text);margin-bottom:8px}
-.error-sub{font-size:13px;color:var(--muted);line-height:1.7}
-
-/* 会員証カード */
-.member-card{width:100%;max-width:360px;border-radius:18px;overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,.12)}
-
-.card-top{background:var(--green);padding:24px 22px 20px;position:relative;overflow:hidden}
-.card-deco1{position:absolute;top:-24px;right:-24px;width:100px;height:100px;border-radius:50%;background:rgba(201,168,76,.12)}
-.card-deco2{position:absolute;bottom:-36px;left:-20px;width:120px;height:120px;border-radius:50%;background:rgba(255,255,255,.05)}
-
-.card-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:18px;position:relative}
-.card-brand{font-size:9px;color:#9FE1CB;letter-spacing:.2em;font-weight:300;margin-bottom:4px}
-.card-title{font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--gold);font-weight:400}
-.card-emblem{font-size:26px;opacity:.9}
-
-.card-shop-label{font-size:10px;color:rgba(255,255,255,.5);margin-bottom:3px;letter-spacing:.08em}
-.card-shop-name{font-size:16px;font-weight:700;color:#fff;margin-bottom:18px;position:relative}
-
-.card-id-box{background:rgba(0,0,0,.28);border-radius:10px;padding:13px 15px;position:relative}
-.card-id-label{font-size:9px;color:#9FE1CB;letter-spacing:.16em;margin-bottom:6px}
-.card-id-number{font-size:16px;font-weight:500;color:var(--gold);letter-spacing:.1em;font-family:'Cormorant Garamond',serif}
-
-.card-date{text-align:right;margin-top:12px;font-size:10px;color:rgba(255,255,255,.4);position:relative}
-
-/* カード下部 */
-.card-bottom{background:var(--white);border:1px solid var(--border);border-top:none}
-
+.error-wrap{width:100%;max-width:360px;background:var(--white);border-radius:var(--r);padding:36px 24px;text-align:center;box-shadow:0 2px 20px rgba(0,0,0,.06)}
+.error-icon{font-size:44px;margin-bottom:14px}
+.error-title{font-size:17px;font-weight:700;margin-bottom:8px}
+.error-sub{font-size:13px;color:var(--text-s);line-height:1.7}
+.card-wrap{width:100%;max-width:380px;display:none;flex-direction:column;gap:12px}
+.member-card{width:100%;border-radius:var(--r);overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,.10)}
+.card-top{background:var(--green);padding:24px 24px 22px}
+.card-header-row{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:20px}
+.card-brand-label{font-size:11px;color:rgba(255,255,255,.65);letter-spacing:.06em;margin-bottom:3px}
+.card-brand-title{font-size:17px;font-weight:700;color:#fff;letter-spacing:.08em}
+.card-global-badge{background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.3);border-radius:20px;padding:4px 12px;font-size:11px;color:#fff;font-weight:500}
+.card-id-label{font-size:10px;color:rgba(255,255,255,.55);letter-spacing:.14em;margin-bottom:6px;font-family:'DM Mono',monospace}
+.card-id-number{font-size:22px;font-weight:500;color:#fff;font-family:'DM Mono',monospace;letter-spacing:.06em}
+.card-bottom{background:var(--white)}
 .card-stats{display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--border)}
-.stat{padding:16px;text-align:center}
+.stat{padding:20px 16px;text-align:center}
 .stat:first-child{border-right:1px solid var(--border)}
-.stat-num{font-size:28px;font-weight:700;color:var(--green-m);line-height:1;margin-bottom:4px}
-.stat-label{font-size:10px;color:var(--muted)}
-
-.card-global{padding:14px 18px;display:flex;align-items:center;gap:8px;border-bottom:1px solid var(--border)}
-.card-global-icon{font-size:16px}
-.card-global-text{font-size:11px;color:var(--green-m);font-weight:500;line-height:1.5}
-.card-global-sub{font-size:10px;color:var(--muted)}
-
-.card-actions{padding:14px 18px;display:flex;flex-direction:column;gap:8px}
-.btn{width:100%;padding:13px;border-radius:10px;font-size:13px;font-weight:700;font-family:inherit;cursor:pointer;border:none;transition:opacity .15s}
-.btn:active{opacity:.85}
-.btn-copy{background:var(--green-m);color:#fff}
-.btn-survey{background:var(--gold-l);color:#8B6914;border:1.5px solid var(--gold)}
-
-/* 履歴 */
-.history{width:100%;max-width:360px;margin-top:16px;background:var(--white);border-radius:14px;border:1px solid var(--border);overflow:hidden}
-.history-title{padding:14px 18px;font-size:12px;font-weight:700;color:var(--green);border-bottom:1px solid var(--border)}
-.history-empty{padding:20px;text-align:center;font-size:12px;color:var(--muted)}
-.history-item{padding:12px 18px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
+.stat-label{font-size:11px;color:var(--text-s);margin-bottom:6px}
+.stat-num{font-size:36px;font-weight:700;color:var(--green);line-height:1;margin-bottom:4px}
+.stat-unit{font-size:12px;color:var(--text-s)}
+.card-history{padding:16px 20px;border-bottom:1px solid var(--border)}
+.history-title{font-size:11px;color:var(--text-s);margin-bottom:12px}
+.history-item{display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--beige-d);font-size:13px}
 .history-item:last-child{border-bottom:none}
-.history-shop{font-size:13px;font-weight:500}
-.history-date{font-size:11px;color:var(--muted)}
-
-.powered{font-size:11px;color:#C5BFB5;text-align:center;margin-top:24px}
+.history-shop{display:flex;align-items:center;gap:8px;color:var(--text)}
+.history-dot{width:6px;height:6px;border-radius:50%;background:var(--green-m);flex-shrink:0}
+.history-date{color:var(--text-s);font-size:12px}
+.history-empty{text-align:center;font-size:13px;color:var(--text-s);padding:8px 0}
+.card-actions{padding:14px 16px;display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.action-btn{display:flex;flex-direction:column;align-items:center;gap:6px;padding:14px 8px;border-radius:12px;border:none;cursor:pointer;font-family:inherit;font-size:12px;font-weight:500;transition:opacity .15s;text-decoration:none}
+.action-btn:active{opacity:.8}
+.btn-primary{background:var(--green-l);color:var(--green-d)}
+.btn-secondary{background:var(--beige-d);color:var(--text)}
+.action-btn-icon{font-size:20px}
+.card-footer-date{text-align:center;font-size:11px;color:var(--text-s);padding:10px 0 14px;border-top:1px solid var(--border)}
+.powered{font-size:11px;color:#BEB8AC;margin-top:20px;text-align:center}
 </style>
 </head>
 <body>
-
-<div class="logo">もてログ980</div>
-
-<div class="loading" id="loading">
-  <div class="spinner"></div>
-  <span>会員証を読み込み中...</span>
-</div>
-
-<div id="errorBox" style="display:none"></div>
-<div id="cardBox" style="display:none;width:100%;max-width:360px;display:none;flex-direction:column;align-items:center;gap:0"></div>
-
+<div class="loading" id="loading"><div class="spinner"></div><span>会員証を読み込み中...</span></div>
+<div id="errorBox"></div>
+<div class="card-wrap" id="cardWrap"></div>
 <div class="powered">Powered by もてログ980</div>
-
 <script>
-const API_BASE = 'https://thelog-keeper-production.up.railway.app';
-const p = new URLSearchParams(location.search);
-const uid  = p.get('uid')  || '';
-const mid  = p.get('mid')  || '';  // 会員番号直接指定（バックアップ）
-
-async function loadMember() {
-  if (!uid && !mid) { showError('会員情報が見つかりません', 'LINEのメニューから会員証を開いてください。'); return; }
-
-  try {
-    const res = await fetch(`${API_BASE}/api/980/member?uid=${uid}&mid=${mid}`);
-    const data = await res.json();
-
-    if (!data.success || !data.member) {
-      showError('会員証が見つかりません', '会員登録が完了していない可能性があります。\nもてログ980のLINEを友だち追加してください。');
-      return;
-    }
-    renderCard(data.member);
-  } catch(e) {
-    showError('通信エラー', 'しばらく待ってから再度お試しください。');
-  }
+const API='https://thelog-keeper-production.up.railway.app';
+const p=new URLSearchParams(location.search);
+const uid=p.get('uid')||'';
+const mid=p.get('mid')||'';
+async function load(){
+  if(!uid&&!mid){showError('会員情報が見つかりません','LINEのメニューから会員証を開いてください。');return;}
+  try{
+    const res=await fetch(`${API}/api/980/member?uid=${encodeURIComponent(uid)}&mid=${encodeURIComponent(mid)}`);
+    const data=await res.json();
+    if(!data.success||!data.member){showError('会員証が見つかりません','もてログ980のLINEを友だち追加してください。');return;}
+    render(data.member);
+  }catch(e){showError('通信エラー','しばらく待ってから再度お試しください。');}
 }
-
-function renderCard(m) {
-  document.getElementById('loading').style.display = 'none';
-  const box = document.getElementById('cardBox');
-  box.style.display = 'flex';
-
-  // 登録日フォーマット
-  const regDate = m.registeredAt
-    ? new Date(m.registeredAt).toLocaleDateString('ja-JP', {year:'numeric',month:'long',day:'numeric'})
-    : m.registeredDate || '—';
-
-  box.innerHTML = `
-    <div class="member-card">
-      <div class="card-top">
-        <div class="card-deco1"></div>
-        <div class="card-deco2"></div>
-        <div class="card-header">
-          <div>
-            <div class="card-brand">MOTELOG MEMBER</div>
-            <div class="card-title">もてログ会員証</div>
-          </div>
-          <div class="card-emblem">🍽️</div>
-        </div>
-        <div class="card-shop-label">登録店舗</div>
-        <div class="card-shop-name">${m.shopName || 'もてログ980'}</div>
-        <div class="card-id-box">
-          <div class="card-id-label">MEMBER ID</div>
-          <div class="card-id-number">${m.memberId}</div>
-        </div>
-        <div class="card-date">${regDate} 登録</div>
-      </div>
-      <div class="card-bottom">
-        <div class="card-stats">
-          <div class="stat">
-            <div class="stat-num">${m.visitCount || 1}</div>
-            <div class="stat-label">累計来店回数</div>
-          </div>
-          <div class="stat">
-            <div class="stat-num">${m.shopCount || 1}</div>
-            <div class="stat-label">利用店舗数</div>
-          </div>
-        </div>
-        <div class="card-global">
-          <div class="card-global-icon">🌏</div>
-          <div>
-            <div class="card-global-text">全国のもてログ加盟店で使えます</div>
-            <div class="card-global-sub">旅先・出張先でもこの会員証を提示してください</div>
-          </div>
-        </div>
-        <div class="card-actions">
-          <button class="btn btn-copy" onclick="copyId('${m.memberId}')">📋 会員番号をコピー</button>
-          <button class="btn btn-survey" onclick="goSurvey()">📝 アンケートに答える（来店記録）</button>
-        </div>
-      </div>
-    </div>
-
-    ${renderHistory(m.history)}
-  `;
+function render(m){
+  document.getElementById('loading').style.display='none';
+  const wrap=document.getElementById('cardWrap');
+  wrap.style.display='flex';
+  const regDate=m.registeredAt?m.registeredAt.slice(0,10).replace(/-/g,'/'):'—';
+  const historyHTML=(m.history&&m.history.length)
+    ?m.history.slice(0,5).map(h=>`<div class="history-item"><div class="history-shop"><div class="history-dot"></div><span>${h.shopName||'—'}</span></div><span class="history-date">${h.date||''}</span></div>`).join('')
+    :'<div class="history-empty">来店記録はまだありません</div>';
+  const shopUrl='https://masayukitsumoto-cloud.github.io/motelog980/shops.html';
+  wrap.innerHTML=`<div class="member-card"><div class="card-top"><div class="card-header-row"><div><div class="card-brand-label">もてログ980</div><div class="card-brand-title">MEMBER CARD</div></div><div class="card-global-badge">全国共通</div></div><div class="card-id-label">MEMBER NO.</div><div class="card-id-number">${m.memberId||'—'}</div></div><div class="card-bottom"><div class="card-stats"><div class="stat"><div class="stat-label">累計来店</div><div class="stat-num">${m.visitCount||0}</div><div class="stat-unit">回</div></div><div class="stat"><div class="stat-label">利用店舗</div><div class="stat-num">${m.shopCount||1}</div><div class="stat-unit">店</div></div></div><div class="card-history"><div class="history-title">直近の来店</div>${historyHTML}</div><div class="card-actions"><a class="action-btn btn-primary" href="${shopUrl}" target="_blank"><span class="action-btn-icon">🏪</span><span>加盟店を探す</span></a><button class="action-btn btn-secondary" onclick="alert('テーブルのQRコードをスキャンしてアンケートに答えてください。')"><span class="action-btn-icon">📝</span><span>アンケートに答える</span></button></div><div class="card-footer-date">登録日 ${regDate}</div></div></div>`;
 }
-
-function renderHistory(history) {
-  if (!history || !history.length) {
-    return `<div class="history"><div class="history-title">📍 来店履歴</div><div class="history-empty">まだ来店記録がありません</div></div>`;
-  }
-  const items = history.slice(0, 10).map(h => `
-    <div class="history-item">
-      <div class="history-shop">${h.shopName}</div>
-      <div class="history-date">${h.date}</div>
-    </div>
-  `).join('');
-  return `<div class="history"><div class="history-title">📍 来店履歴（直近${Math.min(history.length,10)}件）</div>${items}</div>`;
+function showError(title,sub){
+  document.getElementById('loading').style.display='none';
+  document.getElementById('errorBox').innerHTML=`<div class="error-wrap"><div class="error-icon">🎫</div><div class="error-title">${title}</div><div class="error-sub">${sub}</div></div>`;
 }
-
-function showError(title, sub) {
-  document.getElementById('loading').style.display = 'none';
-  const box = document.getElementById('errorBox');
-  box.style.display = 'block';
-  box.innerHTML = `
-    <div class="error-box">
-      <div class="error-icon">🎫</div>
-      <div class="error-title">${title}</div>
-      <div class="error-sub">${sub}</div>
-    </div>
-  `;
-}
-
-async function copyId(id) {
-  try { await navigator.clipboard.writeText(id); }
-  catch { const t=document.createElement('textarea');t.value=id;document.body.appendChild(t);t.select();document.execCommand('copy');document.body.removeChild(t); }
-  const btn = document.querySelector('.btn-copy');
-  btn.textContent = '✅ コピーしました！';
-  setTimeout(() => { btn.textContent = '📋 会員番号をコピー'; }, 2500);
-}
-
-function goSurvey() {
-  // 店舗QRからアンケートに進む案内
-  alert('テーブルのQRコードをスキャンしてアンケートに答えてください。\n来店カウントが自動で記録されます。');
-}
-
-loadMember();
+load();
 </script>
 </body>
 </html>
