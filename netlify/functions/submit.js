@@ -54,6 +54,12 @@ async function saveToNotion(dbId, data) {
         'お客様コメント': { rich_text: [{ text: { content: data.shopComment || '' } }] },
         'Place ID':      { rich_text: [{ text: { content: data.placeId     || '' } }] },
         'AI返信文':      { rich_text: [{ text: { content: data.replyText  || '' } }] },
+        '料理の味★':     { number:    Number(data.food       || 0) },
+        'コスパ★':       { number:    Number(data.value      || 0) },
+        '印象の料理':     { rich_text: [{ text: { content: data.bestDish   || '' } }] },
+        '改善点':         { rich_text: [{ text: { content: data.improvement|| '' } }] },
+        '同行人数':       { rich_text: [{ text: { content: data.groupSize  || '' } }] },
+        '利用シーン':     { rich_text: [{ text: { content: data.scene      || '' } }] },
       },
     }),
   });
@@ -91,8 +97,12 @@ async function generateReview(data, settings) {
 【お客様の評価】
 接客: ${stars(data.service)}（${data.service}/5）
 雰囲気: ${stars(data.atmosphere)}（${data.atmosphere}/5）
+料理の味・品質: ${data.food > 0 ? stars(data.food)+'（'+data.food+'/5）' : '未回答'}
+コストパフォーマンス: ${data.value > 0 ? stars(data.value)+'（'+data.value+'/5）' : '未回答'}
 テンションが上がった瞬間: ${data.moment || 'とくになし'}
+一番印象に残った料理: ${data.bestDish || '未記入'}
 次回一緒に来たい人: ${data.nextVisit || '未回答'}
+利用シーン: ${data.scene || '未回答'}
 ${meoBlock}${ngBlock}
 
 【条件】

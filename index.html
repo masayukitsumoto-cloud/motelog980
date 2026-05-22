@@ -233,6 +233,18 @@ document.addEventListener('DOMContentLoaded', () => {
     </div>
     <div class="q-block">
       <div class="q-num">Q 3</div>
+      <div class="q-text"><span data-lang="ja">お料理の味・品質はいかがでしたか？</span><span data-lang="en">How was the food quality?</span><span data-lang="zh">餐食的口味和品质如何？</span><span data-lang="ko">음식의 맛과 품질은 어떠셨나요?</span></div>
+      <div class="stars" id="stars-food"><span class="star" data-v="1">★</span><span class="star" data-v="2">★</span><span class="star" data-v="3">★</span><span class="star" data-v="4">★</span><span class="star" data-v="5">★</span></div>
+      <div class="star-hint" id="hint-food"></div>
+    </div>
+    <div class="q-block">
+      <div class="q-num">Q 4</div>
+      <div class="q-text"><span data-lang="ja">コストパフォーマンスはいかがでしたか？</span><span data-lang="en">How was the value for money?</span><span data-lang="zh">性价比如何？</span><span data-lang="ko">가성비는 어떠셨나요?</span></div>
+      <div class="stars" id="stars-value"><span class="star" data-v="1">★</span><span class="star" data-v="2">★</span><span class="star" data-v="3">★</span><span class="star" data-v="4">★</span><span class="star" data-v="5">★</span></div>
+      <div class="star-hint" id="hint-value"></div>
+    </div>
+    <div class="q-block">
+      <div class="q-num">Q 5</div>
       <div class="q-text">
         <span data-lang="ja">テンションが上がった瞬間は？<br><small style="font-weight:400;font-size:12px;color:var(--muted);">複数OK・その他は下に自由記入</small></span>
         <span data-lang="en">What was the highlight?<br><small style="font-weight:400;font-size:12px;color:var(--muted);">Multiple OK・Write others below</small></span>
@@ -253,7 +265,19 @@ document.addEventListener('DOMContentLoaded', () => {
       </div>
     </div>
     <div class="q-block">
-      <div class="q-num">Q 4</div>
+      <div class="q-num">Q 6</div>
+      <div class="q-text"><span data-lang="ja">一番印象に残った料理を教えてください 🍴</span><span data-lang="en">What dish impressed you the most? 🍴</span><span data-lang="zh">最令您印象深刻的菜品是？🍴</span><span data-lang="ko">가장 인상 깊었던 요리를 알려주세요 🍴</span></div>
+      <textarea id="bestDish" rows="2" maxlength="80" placeholder="例：特製ラーメン / e.g. Special Ramen（任意）"></textarea>
+      <div class="char-count"><span id="bestDishLen">0</span>/80</div>
+    </div>
+    <div class="q-block">
+      <div class="q-num">Q 7</div>
+      <div class="q-text"><span data-lang="ja">改善してほしい点があればお聞かせください 💬</span><span data-lang="en">Any areas for improvement? 💬</span><span data-lang="zh">如有需要改进的地方，请告诉我们 💬</span><span data-lang="ko">개선했으면 하는 점이 있으시면 알려주세요 💬</span></div>
+      <textarea id="improvement" rows="2" maxlength="200" placeholder="例：待ち時間が長かった / e.g. Waiting time was long（任意）"></textarea>
+      <div class="char-count"><span id="improvementLen">0</span>/200</div>
+    </div>
+    <div class="q-block">
+      <div class="q-num">Q 9</div>
       <div class="q-text"><span data-lang="ja">次回は誰と来たいですか？</span><span data-lang="en">Who would you like to come with next time?</span><span data-lang="zh">下次您想和谁一起来？</span><span data-lang="ko">다음엔 누구와 오고 싶으신가요?</span></div>
       <div class="opts" id="nextOpts">
         <div class="opt" data-v="家族と"><span data-lang="ja">家族と 👨‍👩‍👧</span><span data-lang="en">With family 👨‍👩‍👧</span><span data-lang="zh">和家人 👨‍👩‍👧</span><span data-lang="ko">가족과 👨‍👩‍👧</span></div>
@@ -265,14 +289,14 @@ document.addEventListener('DOMContentLoaded', () => {
       </div>
     </div>
     <div class="q-block">
-      <div class="q-num">Q 5</div>
+      <div class="q-num">Q 8</div>
       <div class="q-text"><span data-lang="ja">お店への応援コメント・ご意見があればぜひ 💬</span><span data-lang="en">Any comments or suggestions? 💬</span><span data-lang="zh">请告诉我们您的意见或建议 💬</span><span data-lang="ko">가게에 대한 응원이나 의견을 알려주세요 💬</span></div>
       <textarea id="shopComment" rows="3" maxlength="200" placeholder="例：また来ます！/ e.g. I'll be back!"></textarea>
       <div class="char-count"><span id="commentLen">0</span>/200</div>
     </div>
     <div class="q-block">
-      <div class="q-num">Q 6</div>
-      <div class="q-text"><span data-lang="ja">お客様の年代を教えてください 🎂</span><span data-lang="en">What is your age group? 🎂</span><span data-lang="zh">请告诉我们您的年龄段 🎂</span><span data-lang="ko">연령대를 알려주세요 🎂</span></div>
+      <div class="q-num">Q 12</div>
+      <div class="q-text"><span data-lang="ja">年代と性別を教えてください 🎂</span><span data-lang="en">What is your age group? 🎂</span><span data-lang="zh">请告诉我们您的年龄段 🎂</span><span data-lang="ko">연령대를 알려주세요 🎂</span></div>
       <div class="opts" id="ageOpts">
         <div class="opt" data-v="10代"><span data-lang="ja">10代</span><span data-lang="en">Teens</span><span data-lang="zh">10多岁</span><span data-lang="ko">10대</span></div>
         <div class="opt" data-v="20代"><span data-lang="ja">20代</span><span data-lang="en">20s</span><span data-lang="zh">20多岁</span><span data-lang="ko">20대</span></div>
@@ -283,8 +307,8 @@ document.addEventListener('DOMContentLoaded', () => {
       </div>
     </div>
     <div class="q-block">
-      <div class="q-num">Q 7</div>
-      <div class="q-text"><span data-lang="ja">性別を教えてください</span><span data-lang="en">What is your gender?</span><span data-lang="zh">请告诉我们您的性别</span><span data-lang="ko">성별을 알려주세요</span></div>
+      <div class="q-num">Q 12-2</div>
+      <div class="q-text"><span data-lang="ja">性別</span><span data-lang="en">What is your gender?</span><span data-lang="zh">请告诉我们您的性别</span><span data-lang="ko">성별을 알려주세요</span></div>
       <div class="opts" id="genderOpts">
         <div class="opt" data-v="男性"><span data-lang="ja">男性</span><span data-lang="en">Male</span><span data-lang="zh">男</span><span data-lang="ko">남성</span></div>
         <div class="opt" data-v="女性"><span data-lang="ja">女性</span><span data-lang="en">Female</span><span data-lang="zh">女</span><span data-lang="ko">여성</span></div>
@@ -292,7 +316,7 @@ document.addEventListener('DOMContentLoaded', () => {
       </div>
     </div>
     <div class="q-block">
-      <div class="q-num">Q 8</div>
+      <div class="q-num">Q 10</div>
       <div class="q-text"><span data-lang="ja">何をきっかけにご来店されましたか？ 🔍</span><span data-lang="en">How did you find us? 🔍</span><span data-lang="zh">您是如何得知我们餐厅的？🔍</span><span data-lang="ko">어떻게 알고 오셨나요? 🔍</span></div>
       <div class="opts" id="visitReasonOpts">
         <div class="opt" data-v="Googleマップ">Google Maps</div>
@@ -306,7 +330,7 @@ document.addEventListener('DOMContentLoaded', () => {
       </div>
     </div>
     <div class="q-block">
-      <div class="q-num">Q 9</div>
+      <div class="q-num">Q 11</div>
       <div class="q-text"><span data-lang="ja">このお店を友人や家族に紹介したいですか？ 0〜10で 💌</span><span data-lang="en">How likely are you to recommend us? (0-10) 💌</span><span data-lang="zh">推荐此餐厅的可能性？(0-10) 💌</span><span data-lang="ko">가족이나 친구에게 추천하고 싶으신가요? (0-10) 💌</span></div>
       <div class="opts" id="npsOpts" style="justify-content:center;">
         <div class="opt" data-v="0">0</div><div class="opt" data-v="1">1</div><div class="opt" data-v="2">2</div>
@@ -319,7 +343,17 @@ document.addEventListener('DOMContentLoaded', () => {
       </div>
     </div>
     <div class="q-block">
-      <div class="q-num">Q 10</div>
+      <div class="q-num">Q 13</div>
+      <div class="q-text"><span data-lang="ja">本日は何名様でご来店されましたか？ 👥</span><span data-lang="en">How many people in your group today? 👥</span><span data-lang="zh">今天您们一行几位？👥</span><span data-lang="ko">오늘 몇 분이서 오셨나요? 👥</span></div>
+      <div class="opts" id="groupSizeOpts">
+        <div class="opt" data-v="1人"><span data-lang="ja">1人</span><span data-lang="en">Solo</span><span data-lang="zh">1位</span><span data-lang="ko">1명</span></div>
+        <div class="opt" data-v="2人"><span data-lang="ja">2人</span><span data-lang="en">2</span><span data-lang="zh">2位</span><span data-lang="ko">2명</span></div>
+        <div class="opt" data-v="3〜4人"><span data-lang="ja">3〜4人</span><span data-lang="en">3-4</span><span data-lang="zh">3-4位</span><span data-lang="ko">3-4명</span></div>
+        <div class="opt" data-v="5人以上"><span data-lang="ja">5人以上</span><span data-lang="en">5+</span><span data-lang="zh">5位以上</span><span data-lang="ko">5명 이상</span></div>
+      </div>
+    </div>
+        <div class="q-block">
+      <div class="q-num">Q 14</div>
       <div class="q-text"><span data-lang="ja">出身国を教えてください 🌏</span><span data-lang="en">What is your country of origin? 🌏</span><span data-lang="zh">请告诉我们您的国籍 🌏</span><span data-lang="ko">출신 국가를 알려주세요 🌏</span></div>
       <div class="opts" id="countryOpts">
         <div class="opt" data-v="日本">🇯🇵 日本</div><div class="opt" data-v="中国">🇨🇳 中国</div>
@@ -329,10 +363,22 @@ document.addEventListener('DOMContentLoaded', () => {
         <div class="opt" data-v="その他">🌍 Other</div>
       </div>
     </div>
+    <div class="q-block">
+      <div class="q-num">Q 15</div>
+      <div class="q-text"><span data-lang="ja">本日の利用シーンを教えてください 🎯</span><span data-lang="en">What is the occasion for today's visit? 🎯</span><span data-lang="zh">今天来访的场合是？🎯</span><span data-lang="ko">오늘 방문 목적을 알려주세요 🎯</span></div>
+      <div class="opts" id="sceneOpts">
+        <div class="opt" data-v="普段使い・日常"><span data-lang="ja">普段使い 🍱</span><span data-lang="en">Regular meal 🍱</span><span data-lang="zh">日常用餐 🍱</span><span data-lang="ko">일상 식사 🍱</span></div>
+        <div class="opt" data-v="デート・記念日"><span data-lang="ja">デート・記念日 💑</span><span data-lang="en">Date / Anniversary 💑</span><span data-lang="zh">约会·纪念日 💑</span><span data-lang="ko">데이트·기념일 💑</span></div>
+        <div class="opt" data-v="家族の食事"><span data-lang="ja">家族の食事 👨‍👩‍👧</span><span data-lang="en">Family meal 👨‍👩‍👧</span><span data-lang="zh">家庭聚餐 👨‍👩‍👧</span><span data-lang="ko">가족 식사 👨‍👩‍👧</span></div>
+        <div class="opt" data-v="接待・ビジネス"><span data-lang="ja">接待・ビジネス 👔</span><span data-lang="en">Business / Client 👔</span><span data-lang="zh">商务接待 👔</span><span data-lang="ko">접대·비즈니스 👔</span></div>
+        <div class="opt" data-v="観光・旅行"><span data-lang="ja">観光・旅行 ✈️</span><span data-lang="en">Sightseeing / Travel ✈️</span><span data-lang="zh">观光旅游 ✈️</span><span data-lang="ko">관광·여행 ✈️</span></div>
+        <div class="opt" data-v="お祝い・パーティー"><span data-lang="ja">お祝い 🎉</span><span data-lang="en">Celebration 🎉</span><span data-lang="zh">庆祝活动 🎉</span><span data-lang="ko">축하 행사 🎉</span></div>
+      </div>
+    </div>
   </div>
   <div class="loading" id="loading"><div class="spinner"></div><span>口コミ文を生成しています…</span></div>
   <button class="btn btn-green" id="submitBtn" disabled onclick="submitForm()">
-    <span data-lang="ja">送信して口コミ文を受け取る →</span>
+    <span data-lang="ja">送信して口コミ文を受け取る（15問）→</span>
     <span data-lang="en">Submit & Get Review Text →</span>
     <span data-lang="zh">提交并获取评价文本 →</span>
     <span data-lang="ko">제출하고 리뷰 텍스트 받기 →</span>
@@ -568,7 +614,7 @@ function showPhotoSuccess(surveyUrl, file) {
   }
 }
 
-const state = { service:0, atmosphere:0, moments:[], momentOther:'', nextVisit:'', shopComment:'', age:'', gender:'', visitReason:'', nps:'', country:'', lang:'ja' };
+const state = { service:0, atmosphere:0, food:0, value:0, moments:[], momentOther:'', bestDish:'', improvement:'', nextVisit:'', shopComment:'', age:'', gender:'', visitReason:'', nps:'', country:'', groupSize:'', scene:'', lang:'ja' };
 
 const urlLang = new URLSearchParams(location.search).get('lang');
 if (urlLang && ['ja','en','zh','ko'].includes(urlLang)) {
@@ -596,6 +642,8 @@ function initStars(groupId, key, hintId) {
 }
 initStars('stars-service', 'service', 'hint-service');
 initStars('stars-atmosphere', 'atmosphere', 'hint-atmosphere');
+initStars('stars-food', 'food', 'hint-food');
+initStars('stars-value', 'value', 'hint-value');
 
 document.querySelectorAll('#momentOpts .opt').forEach(opt => {
   opt.addEventListener('click', () => {
@@ -606,6 +654,10 @@ document.querySelectorAll('#momentOpts .opt').forEach(opt => {
 
 const otherEl = document.getElementById('momentOther');
 otherEl.addEventListener('input', () => { state.momentOther = otherEl.value; document.getElementById('otherLen').textContent = otherEl.value.length; });
+const bestDishEl = document.getElementById('bestDish');
+if(bestDishEl) bestDishEl.addEventListener('input', () => { state.bestDish = bestDishEl.value; document.getElementById('bestDishLen').textContent = bestDishEl.value.length; });
+const improvementEl = document.getElementById('improvement');
+if(improvementEl) improvementEl.addEventListener('input', () => { state.improvement = improvementEl.value; document.getElementById('improvementLen').textContent = improvementEl.value.length; });
 
 document.querySelectorAll('#nextOpts .opt').forEach(opt => {
   opt.addEventListener('click', () => {
@@ -619,7 +671,7 @@ commentEl.addEventListener('input', () => { state.shopComment = commentEl.value;
 
 function checkReady() { document.getElementById('submitBtn').disabled = !(state.service > 0 && state.atmosphere > 0); }
 
-const singleSelMap = { ageOpts:'age', genderOpts:'gender', visitReasonOpts:'visitReason', npsOpts:'nps', countryOpts:'country' };
+const singleSelMap = { ageOpts:'age', genderOpts:'gender', visitReasonOpts:'visitReason', npsOpts:'nps', countryOpts:'country', groupSizeOpts:'groupSize', sceneOpts:'scene' };
 Object.entries(singleSelMap).forEach(([id, key]) => {
   document.querySelectorAll('#' + id + ' .opt').forEach(opt => {
     opt.addEventListener('click', () => {
@@ -659,6 +711,12 @@ async function submitForm() {
     nps: state.nps, country: state.country, lang: currentLang,
     discount: DISCOUNT_MODE,
     lineUid: LINE_UID,
+    food: state.food,
+    value: state.value,
+    bestDish: state.bestDish,
+    improvement: state.improvement,
+    groupSize: state.groupSize,
+    scene: state.scene,
   };
   let reviewText = '';
   let googleUrl = PLACE_ID
