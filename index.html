@@ -78,6 +78,7 @@ const SHOP_NAME    = p.get('shop')  || 'お店';
 const PLACE_ID     = p.get('place') || '';
 const NOTION_DB_ID = p.get('db')    || '';
 const MODE         = p.get('mode')  || 'photo';
+const LINE_UID     = p.get('luid') || '';
 
 // discount=10   → LINE登録+アンケートで10%割引（デフォルト）
 // discount=5    → アンケートのみで5%割引
@@ -657,6 +658,7 @@ async function submitForm() {
     age: state.age, gender: state.gender, visitReason: state.visitReason,
     nps: state.nps, country: state.country, lang: currentLang,
     discount: DISCOUNT_MODE,
+    lineUid: LINE_UID,
   };
   let reviewText = '';
   let googleUrl = PLACE_ID
